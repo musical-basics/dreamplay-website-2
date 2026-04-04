@@ -345,7 +345,7 @@ export default function ProductionTimelinePage() {
                                 We are in the final stages of completing our production-ready prototype. With all premium components sourced and custom machinery fully calibrated, our manufacturing team is prepared to bring the DreamPlay One to life with its inaugural prototype units.
                             </p>
                             <p className="font-sans text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mb-10">
-                                We estimate our earliest backers will receive their keyboards in <strong className="text-white">August 2026</strong>. Reserve your spot today to be among the first to experience this groundbreaking instrument.
+                                We estimate our earliest backers will receive their keyboards in <strong className="text-white">October 2026</strong>. Reserve your spot today to be among the first to experience this groundbreaking instrument.
                             </p>
 
                             <Link href="/customize" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)]">

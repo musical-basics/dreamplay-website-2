@@ -6,11 +6,11 @@ const allTiers = [
     id: 'reservation',
     badge: null,
     title: "Lock My Spot",
-    subtitle: "Batch 1: August 2026",
+    subtitle: "Batch 1: October 2026",
     price: "$99",
     msrp: null,
     description:
-      "100% refundable reservation. Lock in Founder\u0027s pricing and secure your Batch 1 (August) delivery. Pay the remaining balance only when your piano is boxed and ready to ship.",
+      "100% refundable reservation. Lock in Founder\u0027s pricing and secure your Batch 1 (October) delivery. Pay the remaining balance only when your piano is boxed and ready to ship.",
     includes: ["Batch 1 Delivery Slot", "Founder\u0027s Price Lock", "Full Refund Anytime"],
     delivery: "Aug 2026",
     backers: 0,

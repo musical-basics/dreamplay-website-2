@@ -407,7 +407,7 @@ export default function NewsletterPopup() {
                                 {activePopup === "shipping"
                                     ? "Join our VIP list and get a Free Shipping Pass applied to your next reservation. Limited availability."
                                     : activePopup === "discount"
-                                        ? "Enter your email to secure early-adopter pricing for the DreamPlay One Founder's Batch, shipping August 2026."
+                                        ? "Enter your email to secure early-adopter pricing for the DreamPlay One Founder's Batch, shipping October 2026."
                                         : activePopup === "discount_44"
                                             ? "Enter your email now to unlock an exclusive 44% discount on the DreamPlay One. This offer won't last."
                                             : activePopup === "accessory_25"
