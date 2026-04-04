@@ -1,7 +1,6 @@
 {
     "ignore": {
         "useGitignore": true,
-        "useDefaultPatterns": true,
         "customPatterns": [
             "_static_source/**",
             "public/**",
@@ -25,10 +24,7 @@
             "**/*.xml",
             "**/*.backup.*",
             "**/*backup*",
-            "src/app/(website-pages)/old-customize/**",
-            "src/app/(website-pages)/old-homepage/**",
             "**/*.standalone.*",
-            "src/app/(website-pages)/customize/CustomizeClient.backup.tsx",
             "_backup_logic/**",
             "_backup_repos/**",
             "_backup_files/**",
@@ -40,7 +36,37 @@
             "supabase/**",
             "tsconfig.tsbuildinfo",
             "**/*.MOV",
-            "**/*.mov"
+            "**/*.mov",
+            "**/faq-data.ts",
+            "**/old-navbar.tsx",
+            "**/NewsletterPopup.tsx",
+            "**/SurveyPopup.tsx",
+            "**/OldTestimonialsSection.tsx",
+            "**/Navbar.standalone.tsx",
+            "**/about-us/**",
+            "**/accessories/**",
+            "**/activate/**",
+            "**/better-practice/**",
+            "**/buyers-guide/**",
+            "**/contact/**",
+            "**/faq/**",
+            "**/forgot-password/**",
+            "**/hidden-barrier/**",
+            "**/historical-facts/**",
+            "**/how-it-works/**",
+            "**/information-and-policies/**",
+            "**/learn/**",
+            "**/login/**",
+            "**/our-story/**",
+            "**/parents-guide/**",
+            "**/privacy/**",
+            "**/product-information/**",
+            "**/production-timeline/**",
+            "**/register/**",
+            "**/reset-password/**",
+            "**/terms/**",
+            "**/vip/**",
+            "**/why-narrow/**"
         ]
     }
 }

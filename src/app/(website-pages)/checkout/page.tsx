@@ -31,15 +31,15 @@ const PACKAGES = [
         id: "solo",
         title: "Keyboard Only",
         subtitle: "DreamPlay One",
-        price: 1099,
-        comparePrice: 1299,
+        price: 999,
+        comparePrice: 1499,
         badge: null
     },
     {
         id: "full",
-        title: "Complete Bundle",
+        title: "Premium Bundle",
         subtitle: "Keyboard, Stand, Bench, Pedal",
-        price: 1199,
+        price: 1099,
         comparePrice: 1499,
         badge: "Most Popular"
     }
