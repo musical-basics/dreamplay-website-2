@@ -123,7 +123,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                 )}
             >
                 {/* Countdown Banner */}
-                <CountdownBanner />
+
                 <div className={cn(
                     "w-full transition-all duration-300",
                     darkMode
