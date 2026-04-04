@@ -113,10 +113,10 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             badge: null as string | null,
             title: "Reserve (50%)",
             subtitle: "",
-            price: "$274",
+            price: "$499",
             retailPrice: null as string | null,
             originalPrice: null as string | null,
-            description: "Pay 50% now, the rest (50% + shipping/taxes) when ready to ship.",
+            description: "Pay 50% now ($499), the rest ($500 + shipping/taxes) when ready to ship.",
             includes: ["DreamPlay One Keyboard"],
             delivery: "Aug 2026",
             backers: 2,
@@ -129,8 +129,8 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             badge: null as string | null,
             title: "DreamPlay One",
             subtitle: "",
-            price: "$1,099",
-            retailPrice: null as string | null,
+            price: "$999",
+            retailPrice: "$1,499.00" as string | null,
             originalPrice: null as string | null,
             description: "The DreamPlay One Keyboard. Available in DS5.5 or DS6.0. Choose Midnight Black or Pearl White.",
             includes: ["DreamPlay One Keyboard"],
@@ -143,10 +143,10 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         full: {
             id: 'full',
             badge: "Most Popular",
-            title: "DreamPlay Bundle",
+            title: "DreamPlay Premium Bundle",
             subtitle: "",
-            price: "$1,199",
-            retailPrice: null as string | null,
+            price: "$1,099",
+            retailPrice: "$1,499.00" as string | null,
             originalPrice: null as string | null,
             description: "The complete DreamPlay experience. Keyboard, adjustable stand, responsive sustain pedal, and comfortable padded bench.",
             includes: ["DreamPlay One Keyboard", "Keyboard Stand", "Sustain Pedal", "Padded Bench"],
@@ -156,23 +156,6 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 250,
             highlight: true,
         },
-        signature: {
-            id: 'signature',
-            badge: "Founder's Circle",
-            title: "DreamPlay Signature",
-            subtitle: "",
-            price: "$999",
-            retailPrice: "$1,599.00",
-            originalPrice: null as string | null,
-            description: "Join the extremely limited Founder's Circle. Receive a keyboard with your personalized name engraved, plus Lifetime Access to Lionel Yu's entire Piano Masterclass ($700 value).",
-            includes: ["DreamPlay One Keyboard", "Keyboard Stand", "Sustain Pedal", "Padded Bench", "Personalized Name Engraving", "Lifetime Piano Masterclass Access"],
-            delivery: "Aug 2026",
-            backers: 3,
-            remaining: 7,
-            total: 10,
-            highlight: false,
-            savings: "$600",
-        }
     };
 
     // --- BUILD VISIBLE TIERS ---
@@ -193,7 +176,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             }).filter(Boolean);
         }
         // Fallback: use all products minus hiddenProducts
-        const defaultOrder = ['reservation', 'reserve50', 'solo', 'full', 'signature'];
+        const defaultOrder = ['reservation', 'reserve50', 'solo', 'full'];
         return defaultOrder
             .filter(id => !hiddenProducts.includes(id))
             .map(id => PRODUCT_CATALOG[id]);
@@ -386,7 +369,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const handleSelectTier = (tierId: string) => {
         setAppState(prev => ({ ...prev, selectedTier: tierId }));
 
-        if (['full', 'reservation', 'reserve50', 'solo', 'signature'].includes(tierId)) {
+        if (['full', 'reservation', 'reserve50', 'solo'].includes(tierId)) {
             const size = appState.size || 'DS6.0';
             const color = appState.color || 'Black';
 
@@ -425,7 +408,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                 else if (tierId === 'reservation') baseUrl = getCheckoutUrl(urls.reservation, "52213397291322");
                 else if (tierId === 'reserve50') baseUrl = getCheckoutUrl(urls.reservation, "");
                 else if (tierId === 'solo') baseUrl = getCheckoutUrl(urls.solo, "");
-                else if (tierId === 'signature') baseUrl = getCheckoutUrl((urls as any).signature, "");
+
 
                 if (baseUrl) {
                     const separator = baseUrl.includes('?') ? '&' : '?';
