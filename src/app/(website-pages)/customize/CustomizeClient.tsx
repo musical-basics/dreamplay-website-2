@@ -885,21 +885,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </div>
                     </div>
 
-                    {/* URGENCY BANNER */}
-                    <button
-                        onClick={() => setIsSaveModalOpen(true)}
-                        className="mb-16 w-full border border-amber-400/30 bg-amber-400/[0.06] px-8 py-6 md:py-8 rounded-2xl relative overflow-hidden text-center cursor-pointer transition-all hover:bg-amber-400/[0.10] hover:border-amber-400/50 group"
-                    >
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-amber-300 opacity-60"></div>
-                        <p className="font-sans text-sm md:text-base lg:text-lg font-bold uppercase tracking-widest text-white leading-relaxed">
-                            ONLY 48 HOURS LEFT TO RESERVE THE DREAMPLAY ONE BEFORE THE{' '}
-                            <span className="text-amber-400">DREAMPLAY PRO</span>{' '}
-                            LAUNCHES AT{' '}
-                            <span className="text-amber-400 underline underline-offset-4 decoration-amber-400/50 group-hover:decoration-amber-400 transition-colors">
-                                $1,899.
-                            </span>
-                        </p>
-                    </button>
+
 
                     <DynamicProductionTimeline />
 

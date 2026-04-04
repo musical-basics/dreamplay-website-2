@@ -74,10 +74,11 @@ export default function NewsletterPopup() {
                 console.log('[PopupDebug] getDiscountPopupStatus() threw error, proceeding anyway:', e);
             }
 
-            // Popup sequence: PDF guide at 20s, then VIP shipping at 4min
+            // Popup sequence: PDF guide at 20s, VIP shipping at 4min, survey 5% off at 8min
             const popups = [
                 { type: "pdf", delaySeconds: 20 },
                 { type: "shipping", delaySeconds: 240 },
+                { type: "survey_5off", delaySeconds: 480 },
             ];
 
             console.log('[PopupDebug] Scheduling', popups.length, 'popups:', JSON.stringify(popups));
