@@ -131,7 +131,7 @@ export default function LearnPage() {
                         </p>
                         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
                             <Link
-                                href="/intro-offer"
+                                href="/customize"
                                 className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200"
                             >
                                 Reserve Now
@@ -542,7 +542,7 @@ export default function LearnPage() {
                                 Start your piano journey today.
                             </p>
                             <Link
-                                href="/intro-offer"
+                                href="/customize"
                                 className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200"
                             >
                                 Reserve Now

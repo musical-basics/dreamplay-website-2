@@ -244,7 +244,7 @@ export default function HistoricalFactsPage() {
                         <p className="font-sans text-base md:text-lg text-white/60 mb-12 max-w-xl mx-auto">
                             Join the revolution of pianists escaping the constraints of the 19th-century standard. Experience the joy of possibility with DreamPlay One.
                         </p>
-                        <Link href="/reserve" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
+                        <Link href="/customize" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
                             Reserve Now
                             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Link>

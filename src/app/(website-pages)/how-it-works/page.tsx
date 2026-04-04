@@ -535,7 +535,7 @@ export default function HowItWorksPage() {
                 <section className="w-full bg-[#050505] text-white py-32 text-center border-t border-white/10">
                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">Get Started</p>
                     <h2 className="font-serif text-4xl md:text-5xl tracking-tight leading-tight mb-10 text-white">Ready to Play Pain-Free?</h2>
-                    <a href="/reserve" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
+                    <a href="/customize" className="group inline-flex items-center justify-center gap-2 border border-white bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90">
                         Reserve Now
                     </a>
                     <UrgencySubtext />

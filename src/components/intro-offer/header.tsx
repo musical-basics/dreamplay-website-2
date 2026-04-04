@@ -133,10 +133,10 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                     <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                         {/* Logo */}
                         <a
-                            href="/intro-offer"
+                            href="/customize"
                             onClick={(e) => {
                                 e.preventDefault()
-                                router.push("/intro-offer")
+                                router.push("/customize")
                             }}
                             className="flex items-center gap-2 cursor-pointer"
                         >
@@ -258,7 +258,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
                             <nav className="flex flex-col p-4">
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">DreamPlay Keyboards</div>
                                 <Link href="/premium-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Our Product</Link>
-                                <Link href="/intro-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Discover</Link>
+                                <Link href="/customize" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Discover</Link>
                                 <Link href="/extended-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Explore</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
