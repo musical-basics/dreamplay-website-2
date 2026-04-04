@@ -487,9 +487,11 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
     return (
         <div className="min-h-screen bg-white font-sans text-neutral-900 selection:bg-neutral-200">
-            {/* --- FIXED HEADERS WRAPPER --- */}
-            <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
-                <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
+            <SpecialOfferHeader forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
+
+            {/* --- FIXED FLOATING WIDGETS WRAPPER (below the header) --- */}
+            <div className="fixed top-16 left-0 right-0 z-50 flex flex-col pointer-events-none">
+                <div className="pointer-events-auto">
 
                 {/* DESKTOP URGENCY WIDGET */}
                 {authUser && showWidget && widgetTimeLeft > 0 && (
@@ -569,28 +571,30 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     );
                 })()}
 
-                {/* Steps Sub-Navbar */}
-                <header id="sticky-nav" className="w-full bg-[#050505]/95 backdrop-blur-md border-b border-white/5 shadow-sm">
-                    <div className="mx-auto max-w-7xl px-4 md:px-6">
-                        <div className="flex h-12 md:h-14 items-center justify-between">
-                            <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-medium text-white/40 mx-auto">
-                                {navSteps.map((label, i) => (
-                                    <React.Fragment key={i}>
-                                        <button onClick={() => scrollToSection(i)} className={`flex items-center gap-2 transition-colors cursor-pointer hover:text-white ${currentSection === i ? 'text-white font-bold' : ''}`}>
-                                            <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${currentSection === i ? 'border-white bg-white text-black' : 'border-white/20'}`}>{i + 1}</span>
-                                            <span>{label}</span>
-                                        </button>
-                                        {i < 4 && <div className={`h-px w-6 bg-white/10`}></div>}
-                                    </React.Fragment>
-                                ))}
-                            </div>
-                            <div className="md:hidden text-[10px] uppercase tracking-[0.2em] font-medium text-white mx-auto">
-                                Step {currentSection + 1} of 5
-                            </div>
+                </div>
+            </div>
+
+            {/* Steps Sub-Navbar — fixed flush below the 64px SpecialOfferHeader */}
+            <header id="sticky-nav" className="fixed top-16 left-0 right-0 z-[90] w-full bg-[#050505]/95 backdrop-blur-md border-b border-white/5 shadow-sm">
+                <div className="mx-auto max-w-7xl px-4 md:px-6">
+                    <div className="flex h-12 md:h-14 items-center justify-between">
+                        <div className="hidden md:flex items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-medium text-white/40 mx-auto">
+                            {navSteps.map((label, i) => (
+                                <React.Fragment key={i}>
+                                    <button onClick={() => scrollToSection(i)} className={`flex items-center gap-2 transition-colors cursor-pointer hover:text-white ${currentSection === i ? 'text-white font-bold' : ''}`}>
+                                        <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${currentSection === i ? 'border-white bg-white text-black' : 'border-white/20'}`}>{i + 1}</span>
+                                        <span>{label}</span>
+                                    </button>
+                                    {i < 4 && <div className={`h-px w-6 bg-white/10`}></div>}
+                                </React.Fragment>
+                            ))}
+                        </div>
+                        <div className="md:hidden text-[10px] uppercase tracking-[0.2em] font-medium text-white mx-auto">
+                            Step {currentSection + 1} of 5
                         </div>
                     </div>
-                </header>
-            </div>
+                </div>
+            </header>
 
 
             {/* SECTION 0: HERO (DARK MODE) */}
