@@ -27,8 +27,8 @@ const comparisonRows: ComparisonRow[] = [
     { feature: "Polyphony", dreamplay: "192 Notes", competitor: "192 Notes" },
     { feature: "LED Key Indicators", dreamplay: "check", competitor: "cross" },
     { feature: "App Integration", dreamplay: "check", competitor: "cross" },
-    { feature: "MSRP Price", dreamplay: "$1,099", competitor: "$699 (Yamaha P125)" },
-    { feature: "Bench & Stand", dreamplay: "Included", competitor: "Not Included" },
+    { feature: "MSRP Price", dreamplay: "$1,499", competitor: "$699 (Yamaha P125)" },
+    { feature: "Bench & Stand", dreamplay: "Available in Premium Bundle ($1,099)", competitor: "Not Included" },
 ]
 
 export function ComparisonTableSection() {

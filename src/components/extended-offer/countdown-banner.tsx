@@ -63,8 +63,8 @@ export function CountdownBanner() {
                     <span className="bg-amber-400/10 px-1.5 py-0.5 rounded">{pad(timeLeft.s)}s</span>
                 </span>
             )}
-            <span className="hidden md:inline text-white/50">| Reserve for $549 before $1,199 MSRP</span>
-            <span className="md:hidden text-white/50">| $549 → $1,199</span>
+            <span className="hidden md:inline text-white/50">| Reserve for $499 before $1,499 MSRP</span>
+            <span className="md:hidden text-white/50">| $499 → $1,499</span>
         </Link>
     )
 }
