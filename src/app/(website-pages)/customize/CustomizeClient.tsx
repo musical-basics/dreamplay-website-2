@@ -1251,7 +1251,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         Get Notified.
                                     </h2>
                                     <p className="text-white/60 font-sans text-sm leading-relaxed">
-                                        The DreamPlay Pro launches next week at $1,899. Enter your email to be the first to know when it becomes available.
+                                        Enter your email to be the first to know about our upcoming releases and promotions.
                                     </p>
                                 </div>
 
