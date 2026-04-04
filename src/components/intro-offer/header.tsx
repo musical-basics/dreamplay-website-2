@@ -69,7 +69,7 @@ export function SpecialOfferHeader({ forceOpaque = false, darkMode = false, clas
     const lastScrollY = useRef(0)
     const [user, setUser] = useState<any>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
-    const checkoutPath = useJourneyCheckout("/reserve")
+    const checkoutPath = useJourneyCheckout("/customize")
 
     useEffect(() => {
         const supabase = createClient()
