@@ -4,7 +4,7 @@ import { SpecialOfferHeader } from "@/components/intro-offer/header";
 import Footer from "@/components/Footer";
 import ReservationDecisionModule from "./ReservationDecisionModule";
 import ReservationPageClient from "./ReservationPageClient";
-import { getReservationDecision } from "@/actions/reservation-actions";
+import { getReservationDecision, isBuyer } from "@/actions/reservation-actions";
 
 export const metadata = {
     title: "My Reservation | DreamPlay Pianos",
@@ -18,6 +18,11 @@ export default async function MyReservationPage() {
 
     if (!user || error) {
         redirect("/login?next=/my-reservation");
+    }
+
+    // Non-buyers should not see this page — send them to the VIP page
+    if (!user.email || !(await isBuyer(user.email))) {
+        redirect("/vip");
     }
 
     // Fetch existing decision server-side

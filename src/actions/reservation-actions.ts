@@ -1,5 +1,11 @@
 'use server'
 
+/**
+ * reservation-actions.ts
+ * Server-side actions for buyer portal: decision persistence + buyer routing.
+ * All reads/writes use the service role key (server-side only).
+ */
+
 import { createClient } from '@supabase/supabase-js'
 
 // Service-role client — server-side only
@@ -9,6 +15,34 @@ const supabase = createClient(
 )
 
 export type ReservationDecision = 'refund_requested' | 'keep_reservation' | 'upgrade_to_pro'
+
+// ─── Buyer Allowlist ───
+
+/**
+ * Returns true if the given email is in the buyer_emails allowlist.
+ * Comparison is case-insensitive.
+ */
+export async function isBuyer(email: string): Promise<boolean> {
+    try {
+        const { data, error } = await supabase
+            .from('buyer_emails')
+            .select('email')
+            .eq('email', email.toLowerCase().trim())
+            .maybeSingle()
+
+        if (error) {
+            console.error('[reservation-actions] isBuyer error:', error)
+            return false
+        }
+
+        return !!data
+    } catch (err) {
+        console.error('[reservation-actions] isBuyer unexpected error:', err)
+        return false
+    }
+}
+
+// ─── Decision Records ───
 
 export interface DecisionRecord {
     id: string

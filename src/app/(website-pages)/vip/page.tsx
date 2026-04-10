@@ -4,6 +4,7 @@ import { SpecialOfferHeader } from "@/components/intro-offer/header";
 import Footer from "@/components/Footer";
 import VIPDashboardClient from "./VIPDashboardClient";
 import PromoCodeBox from "./PromoCodeBox";
+import { isBuyer } from "@/actions/reservation-actions";
 
 export default async function VIPPage() {
     const supabase = await createClient();
@@ -11,6 +12,11 @@ export default async function VIPPage() {
 
     if (!user || error) {
         redirect("/login");
+    }
+
+    // Buyers belong on /my-reservation — redirect them automatically
+    if (user.email && await isBuyer(user.email)) {
+        redirect("/my-reservation");
     }
 
     return (
