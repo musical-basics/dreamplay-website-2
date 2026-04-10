@@ -7,6 +7,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
 
 // Service-role client — server-side only
 const supabase = createClient(
@@ -16,6 +17,12 @@ const supabase = createClient(
 
 export type ReservationDecision = 'refund_requested' | 'keep_reservation' | 'upgrade_to_pro'
 
+const DECISION_LABELS: Record<ReservationDecision, string> = {
+    refund_requested: 'Request Full Refund',
+    keep_reservation: 'Keep My Reservation',
+    upgrade_to_pro: 'Upgrade to DreamPlay Pro',
+}
+
 // ─── Buyer Allowlist ───
 
 /**
@@ -24,36 +31,24 @@ export type ReservationDecision = 'refund_requested' | 'keep_reservation' | 'upg
  */
 export async function isBuyer(email: string): Promise<boolean> {
     const normalizedEmail = email.toLowerCase().trim()
-    console.log('[isBuyer] checking email:', normalizedEmail)
-    console.log('[isBuyer] SUPABASE_URL set:', !!process.env.NEXT_PUBLIC_SUPABASE_URL)
-    console.log('[isBuyer] SERVICE_ROLE_KEY set:', !!process.env.SUPABASE_SERVICE_ROLE_KEY)
-
     try {
-        const { data, error, status, statusText } = await supabase
+        const { data, error } = await supabase
             .from('buyer_emails')
             .select('email')
             .eq('email', normalizedEmail)
             .maybeSingle()
 
-        console.log('[isBuyer] query status:', status, statusText)
-        console.log('[isBuyer] data:', data)
-        console.log('[isBuyer] error:', error)
-
         if (error) {
-            console.error('[isBuyer] ERROR - code:', error.code, 'message:', error.message, 'details:', error.details, 'hint:', error.hint)
-            // If we can't reach the DB, fail open — show the page rather than bouncing the buyer
+            console.error('[isBuyer] DB error:', error.code, error.message)
             return false
         }
 
-        const result = !!data
-        console.log('[isBuyer] result:', result)
-        return result
+        return !!data
     } catch (err: any) {
-        console.error('[isBuyer] UNEXPECTED ERROR:', err?.message, err)
+        console.error('[isBuyer] Unexpected error:', err?.message)
         return false
     }
 }
-
 
 // ─── Decision Records ───
 
@@ -83,20 +78,19 @@ export async function getReservationDecision(userId: string): Promise<DecisionRe
             .maybeSingle()
 
         if (error) {
-            console.error('[reservation-actions] getReservationDecision error:', error)
+            console.error('[getReservationDecision] DB error:', error.message)
             return null
         }
 
         return data as DecisionRecord | null
     } catch (err) {
-        console.error('[reservation-actions] getReservationDecision unexpected error:', err)
+        console.error('[getReservationDecision] Unexpected error:', err)
         return null
     }
 }
 
 /**
- * Upsert a reservation decision for a user.
- * If a decision already exists, it is updated.
+ * Upsert a reservation decision for a user, then send a Resend notification email.
  * Returns { success: true } on success or { success: false, error: string } on failure.
  */
 export async function saveReservationDecision(
@@ -116,7 +110,6 @@ export async function saveReservationDecision(
         const now = new Date().toISOString()
 
         if (existing?.id) {
-            // Update existing row
             const { error } = await supabase
                 .from('reservation_decisions')
                 .update({
@@ -129,11 +122,10 @@ export async function saveReservationDecision(
                 .eq('id', existing.id)
 
             if (error) {
-                console.error('[reservation-actions] saveReservationDecision update error:', error)
+                console.error('[saveReservationDecision] Update error:', error.message)
                 return { success: false, error: error.message }
             }
         } else {
-            // Insert new row
             const { error } = await supabase
                 .from('reservation_decisions')
                 .insert({
@@ -147,14 +139,77 @@ export async function saveReservationDecision(
                 })
 
             if (error) {
-                console.error('[reservation-actions] saveReservationDecision insert error:', error)
+                console.error('[saveReservationDecision] Insert error:', error.message)
                 return { success: false, error: error.message }
             }
         }
 
+        // ─── Fire-and-forget Resend notification ───
+        sendDecisionNotification(email, decision, orderMetadata).catch((err) =>
+            console.error('[saveReservationDecision] Notification error (non-blocking):', err)
+        )
+
         return { success: true }
     } catch (err: any) {
-        console.error('[reservation-actions] saveReservationDecision unexpected error:', err)
+        console.error('[saveReservationDecision] Unexpected error:', err?.message)
         return { success: false, error: err?.message ?? 'Unknown error' }
     }
+}
+
+/**
+ * Internal: sends a notification email to the team when a buyer submits their decision.
+ * Non-blocking — failures do not affect the buyer's confirmation state.
+ */
+async function sendDecisionNotification(
+    buyerEmail: string | null,
+    decision: ReservationDecision,
+    metadata?: Record<string, any>
+): Promise<void> {
+    if (!process.env.RESEND_API_KEY) {
+        console.warn('[sendDecisionNotification] RESEND_API_KEY not set — skipping notification')
+        return
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    const label = DECISION_LABELS[decision]
+    const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })
+    const previousDecision = metadata?.previous_decision
+        ? ` (changed from: ${DECISION_LABELS[metadata.previous_decision as ReservationDecision]})`
+        : ''
+
+    const emojiMap: Record<ReservationDecision, string> = {
+        refund_requested: '🔴',
+        keep_reservation: '🟢',
+        upgrade_to_pro: '⭐',
+    }
+
+    await resend.emails.send({
+        from: 'DreamPlay Portal <portal@dreamplaypianos.com>',
+        to: ['lionel@musicalbasics.com'],
+        subject: `${emojiMap[decision]} Reservation Decision: ${label}`,
+        html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
+                <h2 style="margin: 0 0 16px;">Reservation Decision Submitted</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 8px 0; color: #666; width: 140px;">Buyer Email</td>
+                        <td style="padding: 8px 0; font-weight: bold;">${buyerEmail ?? 'Unknown'}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px 0; color: #666;">Decision</td>
+                        <td style="padding: 8px 0; font-weight: bold;">${emojiMap[decision]} ${label}${previousDecision}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px 0; color: #666;">Submitted At</td>
+                        <td style="padding: 8px 0;">${timestamp} PT</td>
+                    </tr>
+                </table>
+                <hr style="margin: 24px 0; border: none; border-top: 1px solid #eee;" />
+                <p style="color: #999; font-size: 12px; margin: 0;">
+                    View all decisions: 
+                    <a href="https://supabase.com/dashboard" style="color: #666;">Supabase → reservation_decisions</a>
+                </p>
+            </div>
+        `,
+    })
 }
