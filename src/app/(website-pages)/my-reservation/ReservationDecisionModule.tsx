@@ -47,11 +47,11 @@ const OPTIONS: {
     },
     {
         value: "upgrade_to_pro",
-        label: "Upgrade to DreamPlay Pro",
+        label: "Upgrade to DreamPlay One Pro",
         eyebrow: "Option 3 — Loyalty Upgrade",
         description:
-            "As an early supporter, you can upgrade to DreamPlay Pro for just $200 more than what you already paid. Pro features elevated finishes — Aztec Gold and Nightmare Black — and a more distinctive visual identity.",
-        cta: "Upgrade to DreamPlay Pro",
+            "As an early supporter, you can upgrade to DreamPlay One Pro for just $200 more than what you already paid. Pro features elevated finishes — Aztec Gold and Nightmare Black — and a more distinctive visual identity.",
+        cta: "Upgrade to DreamPlay One Pro",
         confirmationMessage:
             "Your Pro upgrade request has been received. Our team will reach out to confirm the details and process the $200 difference.",
         dark: false,
@@ -62,7 +62,7 @@ const OPTIONS: {
 const DECISION_DISPLAY: Record<ReservationDecision, string> = {
     refund_requested: "Full Refund Requested",
     keep_reservation: "Keeping My Reservation",
-    upgrade_to_pro: "Upgrading to DreamPlay Pro",
+    upgrade_to_pro: "Upgrading to DreamPlay One Pro",
 };
 
 export default function ReservationDecisionModule({
@@ -132,7 +132,7 @@ export default function ReservationDecisionModule({
                         <div className="relative aspect-[4/3] overflow-hidden border border-amber-500/20">
                             <Image
                                 src="/images/pro/aztec-gold-full.jpg"
-                                alt="DreamPlay Pro — Aztec Gold"
+                                alt="DreamPlay One Pro — Aztec Gold"
                                 fill
                                 className="object-cover"
                             />
@@ -145,7 +145,7 @@ export default function ReservationDecisionModule({
                         <div className="relative aspect-[4/3] overflow-hidden border border-white/10">
                             <Image
                                 src="/images/pro/nightmare-black-angled.jpg"
-                                alt="DreamPlay Pro — Nightmare Black"
+                                alt="DreamPlay One Pro — Nightmare Black"
                                 fill
                                 className="object-cover"
                             />
@@ -196,7 +196,7 @@ export default function ReservationDecisionModule({
                 </div>
                 <div className="border border-amber-500/30 bg-amber-500/5 p-6">
                     <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-amber-400/80 mb-2">
-                        DreamPlay Pro
+                        DreamPlay One Pro
                     </p>
                     <p className="font-serif text-3xl text-white mb-1">$1,899</p>
                     <p className="font-sans text-xs text-white/40">Aztec Gold · Nightmare Black</p>

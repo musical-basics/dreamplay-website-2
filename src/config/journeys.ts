@@ -35,7 +35,7 @@
  *   DS5.5 Black: 53081298501946  DS5.5 White: 53081298534714
  *   DS6.0 Black: 53081298567482  DS6.0 White: 53081298600250
  *   DS6.5 Black: 53081298633018  DS6.5 White: 53081298665786
- * DreamPlay Pro:
+ * DreamPlay One Pro:
  *   DS5.5 Black: 53111722082618  DS5.5 White: 53111722115386
  *   DS6.0 Black: 53111722148154  DS6.0 White: 53111722180922
  *   DS6.5 Black: 53111722213690  DS6.5 White: 53111722246458
@@ -94,7 +94,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
             },
             {
                 id: 'pro',
-                label: 'DreamPlay Pro',
+                label: 'DreamPlay One Pro',
                 price: '$1,899',
                 badge: 'Upgrade',
             },

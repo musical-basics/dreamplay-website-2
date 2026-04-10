@@ -29,7 +29,7 @@ export type ReservationDecision = 'refund_requested' | 'keep_reservation' | 'upg
 const DECISION_LABELS: Record<ReservationDecision, string> = {
     refund_requested: 'Request Full Refund',
     keep_reservation: 'Keep My Reservation',
-    upgrade_to_pro: 'Upgrade to DreamPlay Pro',
+    upgrade_to_pro: 'Upgrade to DreamPlay One Pro',
 }
 
 const DECISION_EMOJI: Record<ReservationDecision, string> = {
@@ -267,12 +267,12 @@ const CONFIRMATION_COPY: Record<ReservationDecision, { subject: string; headline
         nextStep: "We'll be in touch as production progresses.",
     },
     upgrade_to_pro: {
-        subject: 'Your DreamPlay Pro Upgrade Request: Received',
-        headline: "Welcome to DreamPlay Pro.",
+        subject: 'Your DreamPlay One Pro Upgrade Request: Received',
+        headline: "Welcome to DreamPlay One Pro.",
         body: `
             <p style="margin: 0 0 16px; color: #444; line-height: 1.6;">
                 As one of our earliest supporters, you've earned this. Your upgrade request to
-                <strong>DreamPlay Pro</strong> has been received.
+                <strong>DreamPlay One Pro</strong> has been received.
             </p>
             <p style="margin: 0 0 16px; color: #444; line-height: 1.6;">
                 Our team will reach out shortly to confirm your finish preference

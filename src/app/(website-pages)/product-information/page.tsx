@@ -45,7 +45,7 @@ const chassisData = [
 /* ── Hardware Spec Data (DreamPlay One vs Pro) ────────────────────────── */
 
 const keySpecs = [
-    { label: "Starting Price", one: "$1,099", pro: "$1,499" },
+    { label: "Starting Price", one: "$999", pro: "$1,899" },
     { label: "Keyboard Versions", one: "DS5.5 or DS6.0", pro: "DS5.5 or DS6.0" },
     { label: "Chassis Structure", one: "Identical across models", pro: "Identical across models" },
     { label: "Key Sensor Technology", one: "Dual-Sensor", pro: "Triple-Sensor (Pro Action)" },
@@ -94,7 +94,7 @@ const check = <span className="text-emerald-500 font-bold">✓ Yes</span>
 const cross = <span className="text-neutral-400 font-medium">✕ No</span>
 
 const p125Comparison = [
-    { feature: "Market Price", dreamplay: "$1,099", competitor: "$649" },
+    { feature: "Market Price", dreamplay: "$999", competitor: "$649" },
     { feature: "Key Width", dreamplay: "Ergonomic (DS5.5 / DS6.0)", competitor: "Standard Wide Only (DS6.5)" },
     { feature: "Speaker Power", dreamplay: "30W (2x15W)", competitor: "14W (2x7W)" },
     { feature: "LED Learning Lights", dreamplay: check, competitor: cross },
@@ -103,7 +103,7 @@ const p125Comparison = [
 ]
 
 const p525Comparison = [
-    { feature: "Market Price", dreamplay: "$1,499", competitor: "$1,599" },
+    { feature: "Market Price", dreamplay: "$1,899", competitor: "$1,599" },
     { feature: "Key Width", dreamplay: "Ergonomic (DS5.5 / DS6.0)", competitor: "Standard Wide Only (DS6.5)" },
     { feature: "LED Learning Lights", dreamplay: "✓ Yes (Above & Within Keys)", competitor: cross },
     { feature: "Key Sensors", dreamplay: "Triple-Sensor", competitor: "Triple-Sensor" },
@@ -112,7 +112,7 @@ const p525Comparison = [
 ]
 
 const genericComparison = [
-    { feature: "Market Price", one: "$1,099", pro: "$1,499", competitor: "$2,499+" },
+    { feature: "Market Price", one: "$999", pro: "$1,899", competitor: "$2,499+" },
     { feature: "Build Design", one: "Custom Narrow Tooling", pro: "Custom Narrow Tooling", competitor: "Retrofitted OEM Parts" },
     { feature: "Key Sensors", one: "Dual-Sensor", pro: "Triple-Sensor", competitor: "Dual-Sensor" },
     { feature: "Interactive LEDs", one: "✓ Above Keys", pro: "✓ Above & Within Keys", competitor: "✕ None" },
