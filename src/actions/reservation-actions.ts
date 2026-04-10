@@ -194,7 +194,7 @@ async function sendTeamNotification(
         : ''
 
     await resend.emails.send({
-        from: 'DreamPlay Portal <portal@dreamplaypianos.com>',
+        from: 'DreamPlay Pianos <support@dreamplaypianos.com>',
         to: ['lionel@musicalbasics.com'],
         subject: `${emoji} Reservation Decision: ${label}`,
         html: `
@@ -295,7 +295,7 @@ async function sendBuyerConfirmation(
     const emoji = DECISION_EMOJI[decision]
 
     await resend.emails.send({
-        from: 'Lionel at DreamPlay <lionel@dreamplaypianos.com>',
+        from: 'Lionel at DreamPlay <support@dreamplaypianos.com>',
         to: [buyerEmail],
         subject: copy.subject,
         html: `
