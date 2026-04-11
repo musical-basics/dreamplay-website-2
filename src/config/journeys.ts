@@ -54,7 +54,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         weight: 50,
         homepage: '/premium-offer',
         checkout: '/customize',
-        announcementText: 'Last chance at the current $599 price. The DreamPlay One doubles in price to $1,199 in April 2026.',
+        announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
         popups: [
             { type: 'pdf', delaySeconds: 12 },
             { type: 'discount', delaySeconds: 45 },
@@ -77,7 +77,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         weight: 50,
         homepage: '/intro-offer',
         checkout: '/customize',
-        announcementText: 'Last chance at the current $599 price. The DreamPlay One doubles in price to $1,199 in April 2026.',
+        announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
         popups: [
             { type: 'survey_5off', delaySeconds: 15 },
             { type: 'pdf', delaySeconds: 300 },
@@ -115,7 +115,7 @@ export const STANDARD_JOURNEY: JourneyConfig = {
     priceTier: 'standard',
     homepage: '/premium-offer',
     checkout: '/customize',
-    announcementText: 'Last chance at the current $599 price. The DreamPlay One doubles in price to $1,199 in April 2026.',
+    announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
     popups: [],           // No popups for bots
     products: [
         {
