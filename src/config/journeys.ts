@@ -59,17 +59,8 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
             { type: 'pdf', delaySeconds: 12 },
             { type: 'discount', delaySeconds: 45 },
         ],
-        products: [
-            {
-                id: 'full',
-                price: '$649',
-                badge: 'Most Popular',
-            },
-            {
-                id: 'solo',
-                price: '$599',
-            },
-        ],
+        // Note: product pricing is hardcoded in CustomizeClient.tsx (PRODUCT_CATALOG)
+        // and is not driven by journey config.
     },
     {
         id: 'journey_b',
@@ -82,23 +73,8 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
             { type: 'survey_5off', delaySeconds: 15 },
             { type: 'pdf', delaySeconds: 300 },
         ],
-        products: [
-            {
-                id: 'full',
-                price: '$649',
-                badge: 'Most Popular',
-            },
-            {
-                id: 'solo',
-                price: '$599',
-            },
-            {
-                id: 'pro',
-                label: 'DreamPlay One Pro',
-                price: '$1,899',
-                badge: 'Upgrade',
-            },
-        ],
+        // Note: product pricing is hardcoded in CustomizeClient.tsx (PRODUCT_CATALOG)
+        // and is not driven by journey config.
     },
 ]
 
@@ -117,15 +93,6 @@ export const STANDARD_JOURNEY: JourneyConfig = {
     checkout: '/customize',
     announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
     popups: [],           // No popups for bots
-    products: [
-        {
-            id: 'full',
-            price: '$649',
-            badge: 'Most Popular',
-        },
-        {
-            id: 'solo',
-            price: '$599',
-        },
-    ],
+    // Note: product pricing is hardcoded in CustomizeClient.tsx (PRODUCT_CATALOG)
+    // and is not driven by journey config.
 }

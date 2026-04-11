@@ -661,7 +661,7 @@ export type JourneyConfig = {
     homepage: string;    // e.g., "/premium-offer"
     checkout: string;    // e.g., "/customize"
     popups: JourneyPopup[]; // Ordered list of popups with timing (up to 10)
-    products: JourneyProduct[]; // Which products to show + at what price
+    products?: JourneyProduct[]; // Optional: was used by admin panel, now hardcoded in CustomizeClient.tsx
     announcementText?: string;  // Text shown in gold top banner (omit to hide)
     priceTier?: string;         // "standard" = served to bots only (SEO protection)
 };

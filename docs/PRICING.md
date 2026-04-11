@@ -15,8 +15,18 @@ The core instrument with standard key width.
 | Price Type | Value | Notes |
 |---|---|---|
 | MSRP | $1,499 | "Compare at" / full retail price |
-| Sale / Market Price | $999 | Active selling price on checkout and marketing |
-| 50% Deposit | ~$499.50 | Used in the current deposit checkout model |
+| Sale / Market Price | $999 | Total charged via 50% deposit model |
+| 50% Deposit (charged today) | $499 | Shown as the price on `/customize` |
+| Remaining at delivery | $500 | Charged when piano is boxed and ready |
+
+### DreamPlay Premium Bundle
+DreamPlay One + keyboard stand + sustain pedal + padded bench.
+
+| Price Type | Value | Notes |
+|---|---|---|
+| Bundle Retail Price | $1,099 | Total charged via 50% deposit model |
+| 50% Deposit (charged today) | $549 | Shown as the price on `/customize` |
+| Remaining at delivery | $550 | Charged when piano is boxed and ready |
 
 ### DreamPlay One Pro
 Premium tier with elevated finishes (Aztec Gold, Nightmare Black).
@@ -24,8 +34,8 @@ Premium tier with elevated finishes (Aztec Gold, Nightmare Black).
 | Price Type | Value | Notes |
 |---|---|---|
 | MSRP | $2,499 | "Compare at" / full retail price |
-| Sale / Market Price | $1,899 | Active selling price on checkout and marketing |
-| 50% Deposit | ~$949.50 | Used in the current deposit checkout model |
+| Sale / Market Price | $1,899 | Active selling price |
+| 50% Deposit | ~$950 | If/when deposit model is applied to Pro |
 | Founder's Upgrade Fee | $200 | Upgrade cost for existing One reservation holders |
 
 ---
