@@ -51,7 +51,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
     {
         id: 'journey_a',
         name: 'Premium Offer',
-        weight: 50,
+        weight: 100,
         homepage: '/premium-offer',
         checkout: '/customize',
         announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
@@ -65,7 +65,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
     {
         id: 'journey_b',
         name: 'Intro Offer',
-        weight: 50,
+        weight: 0,  // Disabled — all traffic on journey_a (premium-offer)
         homepage: '/intro-offer',
         checkout: '/customize',
         announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
