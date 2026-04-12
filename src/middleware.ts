@@ -114,6 +114,14 @@ export async function middleware(request: NextRequest) {
 
     let assignedJourney = activeJourneys.find((j: any) => j.id === assignedJourneyId);
 
+    // If the visitor's cookie points to a disabled journey (weight 0), clear it.
+    // This migrates existing cookie holders to an active journey automatically
+    // whenever a journey is turned off — no manual cookie clearing needed.
+    if (assignedJourney && assignedJourney.weight === 0 && !forcedJourney) {
+        assignedJourney = undefined;
+        assignedJourneyId = undefined;
+    }
+
     // ==========================================
     // 🛡️ SEO PROTECTION: THE BOT BYPASS
     // ==========================================
