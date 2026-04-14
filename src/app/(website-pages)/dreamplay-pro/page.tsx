@@ -117,8 +117,8 @@ export default function DreamPlayProPage() {
                 <section className="relative flex min-h-[92vh] flex-col justify-end overflow-hidden bg-neutral-950 px-6 pb-20 pt-24 md:px-16">
                     <div className="absolute inset-0 z-0">
                         <Image
-                            src="/images/pro/nightmare-black-angled.png"
-                            alt="DreamPlay One Pro in Nightmare Black, cinematic lighting"
+                            src="/images/pro/aztec-gold-full.jpg"
+                            alt="DreamPlay One Pro in Aztec Gold, cinematic lighting"
                             fill
                             priority
                             quality={95}
@@ -320,8 +320,8 @@ export default function DreamPlayProPage() {
 
                             <div className="relative aspect-square overflow-hidden border border-white/10 bg-neutral-950">
                                 <Image
-                                    src="/images/pro/aztec-gold-full.jpg"
-                                    alt="DreamPlay One Pro in Aztec Gold"
+                                    src="/images/pro/nightmare-black-angled.png"
+                                    alt="DreamPlay One Pro in Nightmare Black"
                                     fill
                                     quality={95}
                                     className="object-cover opacity-80"
