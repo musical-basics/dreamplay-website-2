@@ -199,16 +199,15 @@ export default function DreamPlayProPage() {
                         <div className="grid grid-cols-1 gap-0 lg:grid-cols-12">
                             <div className="mb-16 lg:col-span-4 lg:mb-0 lg:pr-16">
                                 <p className="mb-6 font-sans text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-500">
-                                    01. Architecture
+                                    01. Engineering
                                 </p>
                                 <h2 className="mb-6 font-serif text-4xl leading-tight md:text-5xl">
-                                    Engineered to
+                                    Built for
                                     <br />
-                                    <span className="italic text-neutral-500">disappear.</span>
+                                    <span className="italic text-neutral-500">the player.</span>
                                 </h2>
                                 <p className="mb-10 font-sans text-sm font-light leading-relaxed text-neutral-600">
-                                    The interface yields to the instrument. Every component has been rigorously machined
-                                    to serve the player, removing friction between intention and sound.
+                                    Every component is tuned to how the instrument feels and sounds. No cosmetic flourishes.
                                 </p>
                                 <div className="relative aspect-[4/5] overflow-hidden border border-black/10 bg-neutral-100">
                                     <Image
@@ -376,16 +375,15 @@ export default function DreamPlayProPage() {
                         <div className="flex flex-col gap-16 lg:flex-row">
                             <div className="lg:w-1/3">
                                 <p className="mb-6 font-sans text-[10px] font-semibold uppercase tracking-[0.3em] text-neutral-500">
-                                    04. Matrices
+                                    04. Specs
                                 </p>
                                 <h2 className="mb-6 font-serif text-4xl leading-tight">
-                                    Technical
+                                    Every spec,
                                     <br />
-                                    <span className="italic text-neutral-500">specifications.</span>
+                                    <span className="italic text-neutral-500">side by side.</span>
                                 </h2>
                                 <p className="font-sans text-sm font-light leading-relaxed text-neutral-600">
-                                    The architecture mapped. A strict comparison of capabilities to define the exact
-                                    apparatus required for your environment.
+                                    Compare the Pro to the original One, and see every variant in one place.
                                 </p>
                             </div>
 
