@@ -269,13 +269,12 @@ export default function DreamPlayProPage() {
                                     02. Ergonomics
                                 </p>
                                 <h2 className="mb-6 font-serif text-4xl leading-tight md:text-5xl">
-                                    Scale dictated by
+                                    Two sizes,
                                     <br />
-                                    <span className="italic text-[#c5a059]">human anatomy.</span>
+                                    <span className="italic text-[#c5a059]">one for your hands.</span>
                                 </h2>
                                 <p className="mb-12 max-w-md font-sans text-sm font-light leading-relaxed text-white/60">
-                                    One size does not dictate brilliance. The One Pro is available in two keyboard
-                                    scales, optimized to eliminate tension across the full range of hand spans.
+                                    The One Pro comes in two key widths so you can play without straining — whatever the span of your hand.
                                 </p>
 
                                 <div className="flex flex-col gap-5">
