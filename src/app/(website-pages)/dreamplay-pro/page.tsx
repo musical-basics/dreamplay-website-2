@@ -211,7 +211,7 @@ export default function DreamPlayProPage() {
                                 </p>
                                 <div className="relative aspect-[4/5] overflow-hidden border border-black/10 bg-neutral-100">
                                     <Image
-                                        src="/images/pro/nightmare-black-angled-2.png"
+                                        src="/images/pro/built-for-the-player.jpg"
                                         alt="DreamPlay One Pro key detail"
                                         fill
                                         quality={90}
