@@ -27,15 +27,15 @@ function InlineShippingCTA() {
             localStorage.setItem("dp_user_email", email);
             if (res.id) localStorage.setItem("dp_subscriber_id", res.id);
             setIsDone(true);
-        } catch (err: any) {
-            setError(err.message || "Something went wrong.");
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Something went wrong.");
         } finally {
             setIsLoading(false);
         }
     };
 
     return (
-        <section className="bg-[#0a0a0f] text-white py-20 border-y border-white/5">
+        <section id="waitlist-offer" className="bg-[#0a0a0f] text-white py-20 border-y border-white/5">
             <div className="max-w-2xl mx-auto px-6 text-center reveal-el opacity-0 translate-y-8 transition-all duration-700">
                 <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">DreamPlay Waitlist</p>
                 <h2 className="font-serif text-3xl md:text-4xl tracking-tight leading-tight text-white mb-4">

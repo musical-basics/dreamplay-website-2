@@ -3,6 +3,8 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ABTracker } from "@/components/features/analytics/ABTracker";
 import { EmailTracker } from "@/components/EmailTracker";
+import { AnnouncementBanner } from "@/components/AnnouncementBanner";
+import NewsletterPopup from "@/components/NewsletterPopup";
 import "./globals.css";
 
 const inter = Inter({
@@ -57,6 +59,8 @@ export default async function RootLayout({
         <ABTracker />
         <EmailTracker />
         {children}
+        <NewsletterPopup />
+        <AnnouncementBanner />
       </body>
     </html>
   );

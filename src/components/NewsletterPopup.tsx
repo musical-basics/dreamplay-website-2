@@ -2,23 +2,32 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { X, FileText, Package, DollarSign, CheckCircle2 } from "lucide-react";
+import { X, FileText, Package, DollarSign, CheckCircle2, Mail } from "lucide-react";
 import SurveyPopup from "@/components/SurveyPopup";
 
 
-import { getDiscountPopupStatus } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping" | "survey_5off" | "tips";
+type DreamPlayAnalyticsWindow = Window & {
+    dreamplay?: {
+        track?: (eventName: string, properties?: Record<string, unknown>) => void;
+    };
+};
 
 /** Safe analytics wrapper — won't crash if tracker is blocked or hasn't loaded */
 const trackPopup = (action: 'yes' | 'no', popupName: string) => {
-    if (typeof window !== 'undefined' && (window as any).dreamplay?.track) {
-        (window as any).dreamplay.track(`click_popup_${action}`, { popup: popupName });
+    if (typeof window !== 'undefined') {
+        const dreamplay = (window as DreamPlayAnalyticsWindow).dreamplay;
+        dreamplay?.track?.(`click_popup_${action}`, { popup: popupName });
     }
 };
+
+const getPopupSeenKey = (popupType: PopupType) => (
+    popupType === "shipping" ? "dp_v2_waitlist_credit_seen" : `dp_v2_${popupType}_seen`
+);
 
 export default function NewsletterPopup() {
     const [activePopup, setActivePopup] = useState<PopupType>("none");
@@ -26,7 +35,6 @@ export default function NewsletterPopup() {
     const [isSubmitted, setIsSubmitted] = useState<PopupType>("none");
     const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const popupTimersRef = useRef<NodeJS.Timeout[]>([]);
     const hasExitFired = useRef(false);
     const pathname = usePathname();
 
@@ -35,7 +43,9 @@ export default function NewsletterPopup() {
     const abBucketRef = useRef<string | null>(null);
 
     useEffect(() => {
-        const initPopups = async () => {
+        const popupTimers: ReturnType<typeof setTimeout>[] = [];
+
+        const initPopups = () => {
             console.log('[PopupDebug] initPopups() called');
 
             // Disable all popups on /customize — user is in checkout flow
@@ -64,22 +74,9 @@ export default function NewsletterPopup() {
                 return;
             }
 
-            try {
-                const status = await getDiscountPopupStatus();
-                console.log('[PopupDebug] getDiscountPopupStatus() returned:', status, '(type:', typeof status, ')');
-                if (String(status) !== 'true') {
-                    console.log('[PopupDebug] SKIPPED: discount popup status is not true');
-                    return;
-                }
-            } catch (e) {
-                console.log('[PopupDebug] getDiscountPopupStatus() threw error, proceeding anyway:', e);
-            }
-
-            // Popup sequence: PDF guide at 20s, VIP shipping at 4min, survey 5% off at 8min
+            // Sitewide waitlist popup for the current $100 credit offer.
             const popups = [
-                { type: "pdf", delaySeconds: 20 },
-                { type: "shipping", delaySeconds: 240 },
-                { type: "survey_5off", delaySeconds: 480 },
+                { type: "shipping", delaySeconds: 12 },
             ];
 
             console.log('[PopupDebug] Scheduling', popups.length, 'popups:', JSON.stringify(popups));
@@ -87,7 +84,7 @@ export default function NewsletterPopup() {
             // Schedule each popup with its delay
             popups.forEach((popup, index) => {
                 const popupType = popup.type as PopupType;
-                if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') {
+                if (localStorage.getItem(getPopupSeenKey(popupType)) === 'true') {
                     console.log(`[PopupDebug] SKIPPED popup ${index} (${popupType}): already seen`);
                     return;
                 }
@@ -99,7 +96,7 @@ export default function NewsletterPopup() {
                         console.log(`[PopupDebug] SKIPPED: user subscribed during wait`);
                         return;
                     }
-                    if (localStorage.getItem(`dp_v2_${popupType}_seen`) === 'true') {
+                    if (localStorage.getItem(getPopupSeenKey(popupType)) === 'true') {
                         console.log(`[PopupDebug] SKIPPED: popup ${popupType} marked seen during wait`);
                         return;
                     }
@@ -114,14 +111,14 @@ export default function NewsletterPopup() {
                     });
                 }, popup.delaySeconds * 1000);
 
-                popupTimersRef.current.push(timer);
+                popupTimers.push(timer);
             });
         };
 
         initPopups();
 
         return () => {
-            popupTimersRef.current.forEach(t => clearTimeout(t));
+            popupTimers.forEach(t => clearTimeout(t));
         };
     }, []);
 
@@ -139,8 +136,8 @@ export default function NewsletterPopup() {
 
             hasExitFired.current = true;
             console.log('[PopupDebug] Exit-intent fired');
-            // Exit-intent: show pdf if not seen, else shipping
-            setActivePopup((localStorage.getItem('dp_v2_pdf_seen') !== 'true' ? 'pdf' : 'shipping') as PopupType);
+            if (localStorage.getItem(getPopupSeenKey("shipping")) === 'true') return;
+            setActivePopup("shipping");
         };
 
         // Delay attaching exit-intent by 5s to prevent false triggers on page load/refresh
@@ -171,7 +168,7 @@ export default function NewsletterPopup() {
         const trackName = popupTrackNames[activePopup];
         if (trackName) {
             trackPopup('no', trackName);
-            localStorage.setItem(`dp_v2_${activePopup}_seen`, "true");
+            localStorage.setItem(getPopupSeenKey(activePopup), "true");
             setActivePopup("none");
             setIsSubmitted("none");
         } else {
@@ -225,7 +222,7 @@ export default function NewsletterPopup() {
             }
 
             localStorage.setItem("dp_v2_subscribed", "true");
-            localStorage.setItem("dp_v2_shipping_seen", "true");
+            localStorage.setItem(getPopupSeenKey("shipping"), "true");
             localStorage.setItem("dp_v2_pdf_seen", "true");
             localStorage.setItem("dp_v2_discount_seen", "true");
             localStorage.setItem("dp_user_email", email);
@@ -242,9 +239,9 @@ export default function NewsletterPopup() {
                     "_blank"
                 );
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(error);
-            setErrorMsg(error.message || "Something went wrong. Please try again.");
+            setErrorMsg(error instanceof Error ? error.message : "Something went wrong. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -368,7 +365,9 @@ export default function NewsletterPopup() {
                     <>
                         <div className="mb-8 text-center">
                             <div className="mx-auto bg-white/5 border border-white/10 w-14 h-14 rounded-none flex items-center justify-center mb-6">
-                                {activePopup === "shipping" || activePopup === "priority_shipping" ? (
+                                {activePopup === "shipping" ? (
+                                    <Mail className="text-white" size={24} strokeWidth={1.5} />
+                                ) : activePopup === "priority_shipping" ? (
                                     <Package className="text-white" size={24} strokeWidth={1.5} />
                                 ) : activePopup === "discount" || activePopup === "discount_44" ? (
                                     <DollarSign className="text-white" size={24} strokeWidth={1.5} />
