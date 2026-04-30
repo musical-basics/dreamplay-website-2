@@ -4,9 +4,9 @@ import { Navbar } from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
 export const metadata = {
-    title: "DreamPlay Pro - 88-Key Graded Hammer Digital Piano | DS5.5 & DS6.0",
+    title: "DreamPlay One Pro - 88-Key Graded Hammer Digital Piano | DS5.5 & DS6.0",
     description:
-        "The DreamPlay Pro features graded hammer action, triple-sensor keys, 256-note polyphony, 230 sounds, and an advanced LED learning system. Starting at $1,899.",
+        "The DreamPlay One Pro features graded hammer action, triple-sensor keys, 256-note polyphony, 230 sounds, and an advanced LED learning system. Starting at $1,899.",
     alternates: {
         canonical: "https://dreamplaypianos.com/dreamplay-pro",
     },
@@ -40,14 +40,14 @@ const engineeringPillars = [
 ]
 
 const variants = [
-    { name: "DreamPlay Pro - DS5.5 - Nightmare Black", size: "DS5.5", color: "Nightmare Black", package: "Keyboard Only", price: "$1,899" },
-    { name: "DreamPlay Pro - DS5.5 - Aztec Gold", size: "DS5.5", color: "Aztec Gold", package: "Keyboard Only", price: "$1,899" },
-    { name: "DreamPlay Pro - DS6.0 - Nightmare Black", size: "DS6.0", color: "Nightmare Black", package: "Keyboard Only", price: "$1,899" },
-    { name: "DreamPlay Pro - DS6.0 - Aztec Gold", size: "DS6.0", color: "Aztec Gold", package: "Keyboard Only", price: "$1,899" },
-    { name: "DreamPlay Pro Premium Bundle - DS5.5 - Nightmare Black", size: "DS5.5", color: "Nightmare Black", package: "Premium Bundle", price: "$1,999" },
-    { name: "DreamPlay Pro Premium Bundle - DS5.5 - Aztec Gold", size: "DS5.5", color: "Aztec Gold", package: "Premium Bundle", price: "$1,999" },
-    { name: "DreamPlay Pro Premium Bundle - DS6.0 - Nightmare Black", size: "DS6.0", color: "Nightmare Black", package: "Premium Bundle", price: "$1,999" },
-    { name: "DreamPlay Pro Premium Bundle - DS6.0 - Aztec Gold", size: "DS6.0", color: "Aztec Gold", package: "Premium Bundle", price: "$1,999" },
+    { name: "DreamPlay One Pro - DS5.5 - Nightmare Black", size: "DS5.5", color: "Nightmare Black", package: "Keyboard Only", price: "$1,899" },
+    { name: "DreamPlay One Pro - DS5.5 - Aztec Gold", size: "DS5.5", color: "Aztec Gold", package: "Keyboard Only", price: "$1,899" },
+    { name: "DreamPlay One Pro - DS6.0 - Nightmare Black", size: "DS6.0", color: "Nightmare Black", package: "Keyboard Only", price: "$1,899" },
+    { name: "DreamPlay One Pro - DS6.0 - Aztec Gold", size: "DS6.0", color: "Aztec Gold", package: "Keyboard Only", price: "$1,899" },
+    { name: "DreamPlay One Pro Premium Bundle - DS5.5 - Nightmare Black", size: "DS5.5", color: "Nightmare Black", package: "Premium Bundle", price: "$1,999" },
+    { name: "DreamPlay One Pro Premium Bundle - DS5.5 - Aztec Gold", size: "DS5.5", color: "Aztec Gold", package: "Premium Bundle", price: "$1,999" },
+    { name: "DreamPlay One Pro Premium Bundle - DS6.0 - Nightmare Black", size: "DS6.0", color: "Nightmare Black", package: "Premium Bundle", price: "$1,999" },
+    { name: "DreamPlay One Pro Premium Bundle - DS6.0 - Aztec Gold", size: "DS6.0", color: "Aztec Gold", package: "Premium Bundle", price: "$1,999" },
 ]
 
 const comparisonRows = [
@@ -64,14 +64,14 @@ const comparisonRows = [
 ]
 
 const keyboardOnlyIncludes = [
-    "DreamPlay Pro 88-key keyboard",
+    "DreamPlay One Pro 88-key keyboard",
     "Sustain pedal",
     "DreamPlay Learn app (lifetime access)",
     "Power adapter and USB-C cable",
 ]
 
 const premiumBundleIncludes = [
-    "DreamPlay Pro 88-key keyboard",
+    "DreamPlay One Pro 88-key keyboard",
     "Matched furniture stand",
     "Triple pedal unit (damper, sostenuto, soft)",
     "Padded bench",
@@ -82,9 +82,9 @@ export default function DreamPlayProPage() {
     const productJsonLd = {
         "@context": "https://schema.org",
         "@type": "Product",
-        name: "DreamPlay Pro",
+        name: "DreamPlay One Pro",
         description:
-            "DreamPlay Pro is an 88-key digital piano with graded hammer action, triple-sensor key detection, 256-note polyphony, and an advanced LED learning system.",
+            "DreamPlay One Pro is an 88-key digital piano with graded hammer action, triple-sensor key detection, 256-note polyphony, and an advanced LED learning system.",
         image: [
             "https://dreamplaypianos.com/images/pro/nightmare-black-angled.jpg",
             "https://dreamplaypianos.com/images/pro/aztec-gold-full.jpg",
@@ -115,7 +115,7 @@ export default function DreamPlayProPage() {
                     <div className="absolute inset-0 z-0">
                         <Image
                             src="/images/pro/aztec-gold-full.jpg"
-                            alt="DreamPlay Pro in Aztec Gold, cinematic lighting"
+                            alt="DreamPlay One Pro in Aztec Gold, cinematic lighting"
                             fill
                             priority
                             quality={95}
@@ -136,7 +136,7 @@ export default function DreamPlayProPage() {
                             <span className="italic text-white/70">standard.</span>
                         </h1>
                         <p className="mt-8 max-w-xl font-sans text-sm font-light leading-relaxed text-white/70 md:text-base">
-                            An uncompromising approach to touch, tone, and technology. DreamPlay Pro pairs pro-grade
+                            An uncompromising approach to touch, tone, and technology. DreamPlay One Pro pairs pro-grade
                             triple-sensor action and a 40W stereo array with severe, purposeful minimalism.
                         </p>
 
@@ -162,7 +162,7 @@ export default function DreamPlayProPage() {
                                     href="/customize?product=pro"
                                     className="bg-white px-7 py-4 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-[#c5a059] hover:text-neutral-950"
                                 >
-                                    Reserve DreamPlay Pro
+                                    Reserve DreamPlay One Pro
                                 </Link>
                                 <Link
                                     href="/how-it-works"
@@ -209,7 +209,7 @@ export default function DreamPlayProPage() {
                                 <div className="relative aspect-[4/5] overflow-hidden border border-black/10 bg-neutral-100">
                                     <Image
                                         src="/images/pro/built-for-the-player.jpg"
-                                        alt="DreamPlay Pro key detail"
+                                        alt="DreamPlay One Pro key detail"
                                         fill
                                         quality={90}
                                         className="object-cover grayscale"
@@ -271,7 +271,7 @@ export default function DreamPlayProPage() {
                                     <span className="italic text-[#c5a059]">one for your hands.</span>
                                 </h2>
                                 <p className="mb-12 max-w-md font-sans text-sm font-light leading-relaxed text-white/60">
-                                    DreamPlay Pro comes in two key widths so you can play without straining — whatever the span of your hand.
+                                    DreamPlay One Pro comes in two key widths so you can play without straining — whatever the span of your hand.
                                 </p>
 
                                 <div className="flex flex-col gap-5">
@@ -316,7 +316,7 @@ export default function DreamPlayProPage() {
                             <div className="relative aspect-square overflow-hidden border border-white/10 bg-neutral-950">
                                 <Image
                                     src="/images/pro/nightmare-black-angled.png"
-                                    alt="DreamPlay Pro in Nightmare Black"
+                                    alt="DreamPlay One Pro in Nightmare Black"
                                     fill
                                     quality={95}
                                     className="object-cover opacity-80"
@@ -348,7 +348,7 @@ export default function DreamPlayProPage() {
                             <span className="italic text-white/60">Infinite flow.</span>
                         </h2>
                         <p className="mx-auto mb-16 max-w-2xl font-sans text-sm font-light leading-relaxed text-white/55">
-                            Lifetime access to the DreamPlay Learn app is included with every DreamPlay Pro. Falling notes,
+                            Lifetime access to the DreamPlay Learn app is included with every DreamPlay One Pro. Falling notes,
                             sheet music mode, wait-for-correct, tempo control, and section looping — synced to the
                             keybed LEDs in real time.
                         </p>
@@ -398,7 +398,7 @@ export default function DreamPlayProPage() {
                                                     DreamPlay One
                                                 </th>
                                                 <th className="px-5 py-4 font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-[#a38241]">
-                                                    DreamPlay Pro
+                                                    DreamPlay One Pro
                                                 </th>
                                             </tr>
                                         </thead>
@@ -551,7 +551,7 @@ export default function DreamPlayProPage() {
                         </div>
 
                         <p className="mt-14 text-center font-sans text-[10px] uppercase tracking-[0.25em] text-white/35">
-                            DreamPlay Pro preorder handoff runs through Shopify checkout
+                            DreamPlay One Pro preorder handoff runs through Shopify checkout
                         </p>
                     </div>
                 </section>
@@ -563,7 +563,7 @@ export default function DreamPlayProPage() {
                             <p className="mb-3 font-sans text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c5a059]">
                                 Now reserving
                             </p>
-                            <h2 className="font-serif text-3xl md:text-4xl">DreamPlay Pro is available to preorder.</h2>
+                            <h2 className="font-serif text-3xl md:text-4xl">DreamPlay One Pro is available to preorder.</h2>
                             <p className="mt-3 max-w-2xl font-sans text-sm font-light text-white/60">
                                 Secure your size, finish, and package today.
                             </p>

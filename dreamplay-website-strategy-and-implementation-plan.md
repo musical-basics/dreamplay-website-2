@@ -10,11 +10,11 @@ Update the website to support two urgent needs:
    - logged-in buyers must be able to choose one of the 3 options:
      - full refund
      - keep reservation
-     - upgrade to DreamPlay Pro for $200 more
+     - upgrade to DreamPlay One Pro for $200 more
 
-2. **Public announcement of DreamPlay Pro**
-   - surface DreamPlay Pro on the homepage
-   - surface DreamPlay Pro on the customize page
+2. **Public announcement of DreamPlay One Pro**
+   - surface DreamPlay One Pro on the homepage
+   - surface DreamPlay One Pro on the customize page
    - make the product ladder clearer without making the homepage feel like it has abandoned DreamPlay One
 
 ---
@@ -24,10 +24,10 @@ Update the website to support two urgent needs:
 ### Positioning
 Use this framing consistently:
 - **DreamPlay One** = the core instrument
-- **DreamPlay Pro** = the premium expression
+- **DreamPlay One Pro** = the premium expression
 
 ### Product naming / visuals
-- DreamPlay Pro premium finishes:
+- DreamPlay One Pro premium finishes:
   - **Aztec Gold**
   - **Nightmare Black**
 - Nightmare Black uses black keys plus dark gray / black “white” keys
@@ -37,7 +37,7 @@ Use this framing consistently:
 The site should communicate:
 - DreamPlay is expanding upward, not replacing the original product
 - existing customers are protected and have clear choices
-- DreamPlay Pro is premium, aspirational, and clearly more elevated
+- DreamPlay One Pro is premium, aspirational, and clearly more elevated
 - DreamPlay One remains the core entry point
 
 ### What to avoid
@@ -66,7 +66,7 @@ Include:
 ### B. Updated pricing context
 Show clearly:
 - **DreamPlay One: $999**
-- **DreamPlay Pro: $1,899**
+- **DreamPlay One Pro: $1,899**
 
 Do **not** expose prior customer-specific historical pricing bands in a way that lets customers compare what others paid.
 
@@ -84,7 +84,7 @@ Copy should make clear:
 - DreamPlay One ships when ready
 - revised timeline is Q4 2026
 
-#### Option 3 — Upgrade to DreamPlay Pro for $200 more
+#### Option 3 — Upgrade to DreamPlay One Pro for $200 more
 Copy should make clear:
 - flat **$200 more than what the customer already paid**
 - keep wording simple even if historical customer payments vary
@@ -108,7 +108,7 @@ Use a 3-card decision layout:
 ### Recommended CTA labels
 - `Request Full Refund`
 - `Keep My Reservation`
-- `Upgrade to DreamPlay Pro`
+- `Upgrade to DreamPlay One Pro`
 
 ## Functional requirements
 
@@ -170,16 +170,16 @@ Confirm a buyer can:
 
 ---
 
-# Part 2 — Homepage: announce DreamPlay Pro
+# Part 2 — Homepage: announce DreamPlay One Pro
 
 ## Goal
-Add DreamPlay Pro to the homepage in a way that feels premium and additive, without overpowering the core DreamPlay One story.
+Add DreamPlay One Pro to the homepage in a way that feels premium and additive, without overpowering the core DreamPlay One story.
 
 ## Homepage strategy
 Do **not** rebuild the homepage around Pro.
 Instead:
 - keep the homepage anchored in the core DreamPlay mission
-- add a premium block introducing DreamPlay Pro
+- add a premium block introducing DreamPlay One Pro
 - let users click deeper
 
 ## Recommended homepage content block
@@ -187,17 +187,17 @@ Add a section below the core DreamPlay One story and before the final conversion
 
 ### Suggested section structure
 **Eyebrow:**
-- `Introducing DreamPlay Pro`
+- `Introducing DreamPlay One Pro`
 
 **Headline:**
 - `A more elevated expression of DreamPlay.`
 
 **Body copy:**
 Use something close to:
-> For pianists who want the most premium version of the DreamPlay vision, DreamPlay Pro introduces elevated finishes and a more distinctive visual identity — including Aztec Gold and Nightmare Black.
+> For pianists who want the most premium version of the DreamPlay vision, DreamPlay One Pro introduces elevated finishes and a more distinctive visual identity — including Aztec Gold and Nightmare Black.
 
 **CTA options:**
-- `Explore DreamPlay Pro`
+- `Explore DreamPlay One Pro`
 - `Customize Your DreamPlay`
 
 ## Visual recommendations
@@ -210,24 +210,24 @@ Best presentation:
 - or one hero image with smaller secondary image
 
 ## What homepage copy should accomplish
-- signal that DreamPlay Pro now exists
+- signal that DreamPlay One Pro now exists
 - make the product ladder feel more premium
 - increase aspiration and perceived brand value
 - avoid making DreamPlay One feel downgraded
 
 ---
 
-# Part 3 — Customize Page: clearly introduce DreamPlay Pro
+# Part 3 — Customize Page: clearly introduce DreamPlay One Pro
 
 ## Goal
-The customize page should make the DreamPlay One / DreamPlay Pro distinction obvious, because this is closer to conversion intent.
+The customize page should make the DreamPlay One / DreamPlay One Pro distinction obvious, because this is closer to conversion intent.
 
 ## Recommended page structure
 
 ### A. Product-tier selector early in the flow
 Near the top of the customize experience, add a clear tier choice:
 - DreamPlay One
-- DreamPlay Pro
+- DreamPlay One Pro
 
 This can be:
 - segmented control
@@ -243,7 +243,7 @@ Show a simple comparison:
 - standard black/white key appearance
 - primary model for most buyers
 
-#### DreamPlay Pro
+#### DreamPlay One Pro
 - $1,899
 - premium DreamPlay tier
 - premium finishes:
@@ -278,7 +278,7 @@ Add a field or UI state for:
 ### Task 3 — render tier selector
 Implement a clean tier-selection UI before downstream customization.
 
-### Task 4 — add DreamPlay Pro comparison copy
+### Task 4 — add DreamPlay One Pro comparison copy
 Add the minimal comparison block and pricing.
 
 ### Task 5 — add Pro finish cards
@@ -304,22 +304,22 @@ Confirm:
 
 ## Homepage block draft
 **Eyebrow:**
-Introducing DreamPlay Pro
+Introducing DreamPlay One Pro
 
 **Headline:**
 A more elevated expression of DreamPlay.
 
 **Body:**
-For pianists who want the most premium version of the DreamPlay vision, DreamPlay Pro introduces elevated finishes and a more distinctive visual identity, including Aztec Gold and Nightmare Black.
+For pianists who want the most premium version of the DreamPlay vision, DreamPlay One Pro introduces elevated finishes and a more distinctive visual identity, including Aztec Gold and Nightmare Black.
 
 **CTA:**
-Explore DreamPlay Pro
+Explore DreamPlay One Pro
 
 ## Customize page tier copy draft
 ### DreamPlay One
 The core DreamPlay instrument — designed for pianists who want a better-fitting keyboard and a clear path into the DreamPlay ecosystem.
 
-### DreamPlay Pro
+### DreamPlay One Pro
 Our premium DreamPlay tier — with elevated finishes, a more distinctive visual identity, and a more aspirational expression of the product.
 
 ---
@@ -341,8 +341,8 @@ Before considering this complete, verify:
 - logged-in buyers can see Q4 2026 update
 - logged-in buyers can choose 1 of 3 options
 - those choices persist correctly
-- DreamPlay Pro appears on homepage without overpowering DreamPlay One
-- DreamPlay Pro appears clearly on customize page
+- DreamPlay One Pro appears on homepage without overpowering DreamPlay One
+- DreamPlay One Pro appears clearly on customize page
 - One vs Pro pricing is correct
 - Aztec Gold and Nightmare Black visuals display correctly
 - no accidental regressions to the existing homepage/customize flow

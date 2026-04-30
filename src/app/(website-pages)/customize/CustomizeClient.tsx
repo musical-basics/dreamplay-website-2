@@ -205,13 +205,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         pro_solo: {
             id: 'pro_solo',
             badge: null as string | null,
-            title: "DreamPlay Pro",
+            title: "DreamPlay One Pro",
             subtitle: "Keyboard only",
             price: "$1,899",
             retailPrice: null as string | null,
             originalPrice: null as string | null,
-            description: "DreamPlay Pro keyboard in DS5.5 or DS6.0, available in Nightmare Black or Aztec Gold.",
-            includes: ["DreamPlay Pro 88-key keyboard", "Sustain pedal", "DreamPlay Learn app (lifetime access)", "Power adapter and USB-C cable"],
+            description: "DreamPlay One Pro keyboard in DS5.5 or DS6.0, available in Nightmare Black or Aztec Gold.",
+            includes: ["DreamPlay One Pro 88-key keyboard", "Sustain pedal", "DreamPlay Learn app (lifetime access)", "Power adapter and USB-C cable"],
             delivery: "Preorder",
             backers: null,
             remaining: null,
@@ -221,13 +221,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         pro_full: {
             id: 'pro_full',
             badge: "Flagship",
-            title: "DreamPlay Pro Premium Bundle",
+            title: "DreamPlay One Pro Premium Bundle",
             subtitle: "Keyboard · Stand · Triple pedal · Bench",
             price: "$1,999",
             retailPrice: null as string | null,
             originalPrice: null as string | null,
-            description: "DreamPlay Pro with the matched furniture stand, triple pedal unit, and padded bench.",
-            includes: ["DreamPlay Pro 88-key keyboard", "Matched furniture stand", "Triple pedal unit", "Padded bench", "DreamPlay Learn app (lifetime access)"],
+            description: "DreamPlay One Pro with the matched furniture stand, triple pedal unit, and padded bench.",
+            includes: ["DreamPlay One Pro 88-key keyboard", "Matched furniture stand", "Triple pedal unit", "Padded bench", "DreamPlay Learn app (lifetime access)"],
             delivery: "Preorder",
             backers: null,
             remaining: null,
@@ -280,7 +280,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         },
         {
             id: 'pro' as const,
-            title: 'DreamPlay Pro',
+            title: 'DreamPlay One Pro',
             subtitle: 'The flagship DreamPlay tier',
             detail: 'Nightmare Black or Aztec Gold',
         },
@@ -325,7 +325,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         ];
 
     const availableKeyboards = Object.entries(keyboards).filter(([key]) => appState.product === 'one' || key !== 'DS6.5');
-    const selectedProductName = appState.product === 'pro' ? 'DreamPlay Pro' : 'DreamPlay One';
+    const selectedProductName = appState.product === 'pro' ? 'DreamPlay One Pro' : 'DreamPlay One';
     const selectedFinishLabel = finishOptions.find(option => option.id === appState.color)?.title || '—';
 
     // --- EFFECTS ---
@@ -557,7 +557,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                 checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
 
             } else if (appState.product === 'pro') {
-                alert('This DreamPlay Pro configuration is not available for checkout yet. Please choose a listed Pro size and finish.');
+                alert('This DreamPlay One Pro configuration is not available for checkout yet. Please choose a listed Pro size and finish.');
                 return;
             } else {
                 // FALLBACK: Admin Panel URL variables
@@ -688,9 +688,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         ? {
             ...sizingResult,
             zone: 'B',
-            rangeText: `${sizingResult.rangeText}. DreamPlay Pro checkout currently offers DS6.0 as its largest size.`,
+            rangeText: `${sizingResult.rangeText}. DreamPlay One Pro checkout currently offers DS6.0 as its largest size.`,
             model: 'DS6.0',
-            desc: 'DreamPlay Pro checkout currently offers DS5.5 and DS6.0.',
+            desc: 'DreamPlay One Pro checkout currently offers DS5.5 and DS6.0.',
         }
         : sizingResult;
 
@@ -842,7 +842,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                 <div className="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6">
                     <div className="mb-6 inline-block border border-white/20 bg-white/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm md:mb-8">
                         <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white"></span>
-                        {appState.product === 'pro' ? 'DreamPlay Pro Preorder' : 'Final Units Remaining in Batch 1'}
+                        {appState.product === 'pro' ? 'DreamPlay One Pro Preorder' : 'Final Units Remaining in Batch 1'}
                     </div>
 
                     <h1 className="mb-8 font-serif text-5xl leading-tight text-white md:text-7xl lg:text-8xl">
@@ -987,7 +987,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     </p>
                     {appState.product === 'pro' && (
                         <p className="mt-2 text-center text-xs text-neutral-400">
-                            DreamPlay Pro checkout currently offers DS5.5 and DS6.0.
+                            DreamPlay One Pro checkout currently offers DS5.5 and DS6.0.
                         </p>
                     )}
                 </div>
@@ -1300,7 +1300,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </>
                     ) : (
                         <p className="text-center text-xs text-white/40 mt-10 max-w-xl mx-auto leading-relaxed font-sans">
-                            DreamPlay Pro pricing and package contents match the selected Shopify product. Taxes, shipping charges, and preorder terms are shown in checkout.
+                            DreamPlay One Pro pricing and package contents match the selected Shopify product. Taxes, shipping charges, and preorder terms are shown in checkout.
                         </p>
                     )}
 

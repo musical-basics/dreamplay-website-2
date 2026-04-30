@@ -4,8 +4,8 @@ Implement the following changes quickly and cleanly in the website repo.
 
 ## Priorities
 1. logged-in buyer portal update + 3-option selection flow
-2. customize page support for DreamPlay Pro
-3. homepage section announcing DreamPlay Pro
+2. customize page support for DreamPlay One Pro
+3. homepage section announcing DreamPlay One Pro
 
 Do not overbuild. Keep changes practical, premium, and easy to review.
 
@@ -20,14 +20,14 @@ Existing DreamPlay buyers need to log in and see:
 - their 3 options:
   1. full refund
   2. keep reservation
-  3. upgrade to DreamPlay Pro for **$200 more**
+  3. upgrade to DreamPlay One Pro for **$200 more**
 
 ### Important business rules
 - keep wording simple
 - do not reveal old customer price bands in a way that lets buyers compare what others paid
 - DreamPlay One price = **$999**
-- DreamPlay Pro price = **$1,899**
-- DreamPlay Pro finishes:
+- DreamPlay One Pro price = **$1,899**
+- DreamPlay One Pro finishes:
   - **Aztec Gold**
   - **Nightmare Black**
 - Nightmare Black uses dark gray/black “white” keys and black black keys
@@ -53,7 +53,7 @@ Also persist:
 ### CTA labels
 - `Request Full Refund`
 - `Keep My Reservation`
-- `Upgrade to DreamPlay Pro`
+- `Upgrade to DreamPlay One Pro`
 
 ### Deliverable
 A logged-in buyer can:
@@ -70,12 +70,12 @@ A logged-in buyer can:
 ### Goal
 The customize page should clearly support both:
 - **DreamPlay One**
-- **DreamPlay Pro**
+- **DreamPlay One Pro**
 
 ### Requirements
 Add a product-tier selector near the top of the customize flow:
 - DreamPlay One
-- DreamPlay Pro
+- DreamPlay One Pro
 
 When selected:
 - pricing updates correctly
@@ -88,7 +88,7 @@ When selected:
 - core DreamPlay instrument
 - normal black-and-white key appearance
 
-#### DreamPlay Pro
+#### DreamPlay One Pro
 - $1,899
 - premium DreamPlay tier
 - premium finishes:
@@ -116,34 +116,34 @@ A user can:
 ## Part 3 — Homepage
 
 ### Goal
-Announce DreamPlay Pro on the homepage without replacing the existing DreamPlay One story.
+Announce DreamPlay One Pro on the homepage without replacing the existing DreamPlay One story.
 
 ### Requirements
-Add a premium section to the homepage introducing DreamPlay Pro.
+Add a premium section to the homepage introducing DreamPlay One Pro.
 Do not rebuild the homepage around Pro.
 
 ### Suggested copy direction
 **Eyebrow:**
-Introducing DreamPlay Pro
+Introducing DreamPlay One Pro
 
 **Headline:**
 A more elevated expression of DreamPlay.
 
 **Body:**
-For pianists who want the most premium version of the DreamPlay vision, DreamPlay Pro introduces elevated finishes and a more distinctive visual identity, including Aztec Gold and Nightmare Black.
+For pianists who want the most premium version of the DreamPlay vision, DreamPlay One Pro introduces elevated finishes and a more distinctive visual identity, including Aztec Gold and Nightmare Black.
 
 ### Visuals
-Use premium DreamPlay Pro imagery:
+Use premium DreamPlay One Pro imagery:
 - Aztec Gold
 - Nightmare Black
 
 ### CTA
 Use something like:
-- `Explore DreamPlay Pro`
+- `Explore DreamPlay One Pro`
 - or `Customize Your DreamPlay`
 
 ### Deliverable
-Homepage now clearly signals that DreamPlay Pro exists, but DreamPlay One remains the core story.
+Homepage now clearly signals that DreamPlay One Pro exists, but DreamPlay One remains the core story.
 
 ---
 
@@ -155,14 +155,14 @@ Homepage now clearly signals that DreamPlay Pro exists, but DreamPlay One remain
 3. add logged-in buyer update UI
 4. inspect customize flow structure
 5. add tier selector + pricing + imagery handling
-6. add homepage DreamPlay Pro section
+6. add homepage DreamPlay One Pro section
 7. verify all flows end-to-end
 
 ### Verification checklist
 - buyer can log in and choose 1 of 3 options
 - selected option persists correctly
 - DreamPlay One = $999
-- DreamPlay Pro = $1,899
+- DreamPlay One Pro = $1,899
 - Pro finishes displayed correctly
 - customize flow works for both One and Pro
 - homepage announces Pro cleanly

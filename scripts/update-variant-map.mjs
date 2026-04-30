@@ -113,8 +113,8 @@ const tierDescriptions = {
     solo: 'Keyboard Only',
     reservation: 'Lock My Spot ($99)',
     reserve50: 'Reserve (50%)',
-    pro_solo: 'DreamPlay Pro Keyboard',
-    pro_full: 'DreamPlay Pro Premium Bundle',
+    pro_solo: 'DreamPlay One Pro Keyboard',
+    pro_full: 'DreamPlay One Pro Premium Bundle',
 };
 
 const lines = [

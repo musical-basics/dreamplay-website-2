@@ -5,12 +5,13 @@ import { ArrowRight, Menu, X, User, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { getHomepage, syncHomepageAB } from "@/lib/homepage-ab"
+import { syncHomepageAB } from "@/lib/homepage-ab"
 import { useABAnalytics } from "@/hooks/use-ab-analytics"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import { RegisterModal } from "./RegisterModal"
 import { useJourneyCheckout } from "@/hooks/use-journey-checkout"
+import type { User as SupabaseUser } from "@supabase/supabase-js"
 
 interface NavbarProps {
     forceOpaque?: boolean;
@@ -66,7 +67,7 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [hideNav, setHideNav] = useState(false)
     const lastScrollY = useRef(0)
-    const [user, setUser] = useState<any>(null)
+    const [user, setUser] = useState<SupabaseUser | null>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
     const checkoutPath = useJourneyCheckout("/customize")
 
@@ -153,7 +154,7 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
                                 useDarkText={useDarkText}
                                 items={[
                                     { label: "Our Product", href: "/premium-offer" },
-                                    { label: "DreamPlay Pro", href: "/dreamplay-pro" },
+                                    { label: "DreamPlay One Pro", href: "/dreamplay-pro" },
                                     { label: "Discover", href: "/intro-offer" },
                                     { label: "Explore", href: "/extended-offer" },
                                 ]}
@@ -258,7 +259,7 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
                             <nav className="flex flex-col p-4">
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">DreamPlay Keyboards</div>
                                 <Link href="/premium-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Our Product</Link>
-                                <Link href="/dreamplay-pro" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>DreamPlay Pro</Link>
+                                <Link href="/dreamplay-pro" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>DreamPlay One Pro</Link>
                                 <Link href="/customize" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Discover</Link>
                                 <Link href="/extended-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Explore</Link>
 

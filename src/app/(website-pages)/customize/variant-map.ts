@@ -28,12 +28,12 @@ export const VARIANT_MAP: Record<string, Record<string, Record<string, string>>>
         'DS6.0': { 'Black': '', 'White': '' },
         'DS6.5': { 'Black': '', 'White': '' },
     },
-    pro_solo: { // DreamPlay Pro Keyboard
+    pro_solo: { // DreamPlay One Pro Keyboard
         'DS5.5': { 'Nightmare Black': '53111722082618', 'Aztec Gold': '53111722115386' },
         'DS6.0': { 'Nightmare Black': '53111722148154', 'Aztec Gold': '53111722180922' },
         'DS6.5': { 'Nightmare Black': '53111722213690', 'Aztec Gold': '53111722246458' },
     },
-    pro_full: { // DreamPlay Pro Premium Bundle
+    pro_full: { // DreamPlay One Pro Premium Bundle
         'DS5.5': { 'Nightmare Black': '53386873176378', 'Aztec Gold': '53386873209146' },
         'DS6.0': { 'Nightmare Black': '53386873241914', 'Aztec Gold': '53386873274682' },
         'DS6.5': { 'Nightmare Black': '', 'Aztec Gold': '' },
