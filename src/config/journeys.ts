@@ -35,10 +35,13 @@
  *   DS5.5 Black: 53081298501946  DS5.5 White: 53081298534714
  *   DS6.0 Black: 53081298567482  DS6.0 White: 53081298600250
  *   DS6.5 Black: 53081298633018  DS6.5 White: 53081298665786
- * DreamPlay One Pro:
- *   DS5.5 Black: 53111722082618  DS5.5 White: 53111722115386
- *   DS6.0 Black: 53111722148154  DS6.0 White: 53111722180922
- *   DS6.5 Black: 53111722213690  DS6.5 White: 53111722246458
+ * DreamPlay Pro Keyboard:
+ *   DS5.5 Nightmare Black: 53111722082618  DS5.5 Aztec Gold: 53111722115386
+ *   DS6.0 Nightmare Black: 53111722148154  DS6.0 Aztec Gold: 53111722180922
+ *   DS6.5 Nightmare Black: 53111722213690  DS6.5 Aztec Gold: 53111722246458
+ * DreamPlay Pro Premium Bundle:
+ *   DS5.5 Nightmare Black: 53386873176378  DS5.5 Aztec Gold: 53386873209146
+ *   DS6.0 Nightmare Black: 53386873241914  DS6.0 Aztec Gold: 53386873274682
  * ============================================================
  */
 

@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { getCountdownDate } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
@@ -23,16 +22,78 @@ interface CustomizeClientProps {
     hiddenProducts: string[]
 }
 
+type HandSizeId = 'small' | 'medium' | 'large';
+
+interface ProductTier {
+    id: string;
+    badge: string | null;
+    title: string;
+    subtitle: string;
+    price: string;
+    retailPrice: string | null;
+    originalPrice: string | null;
+    description: string;
+    includes: string[];
+    delivery: string;
+    backers: number | null;
+    remaining: number | null;
+    total: number | null;
+    highlight: boolean;
+}
+
+type AuthUser = {
+    email?: string;
+    user_metadata?: {
+        full_name?: string;
+    };
+};
+
+function TierPaymentInfo({ tier, isSelected }: { tier: ProductTier; isSelected: boolean }) {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <div className="mt-3">
+            <button
+                onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
+                className={`flex items-center gap-1.5 text-[10px] uppercase tracking-widest transition-colors cursor-pointer ${isSelected ? 'text-black/40 hover:text-black/60' : 'text-white/40 hover:text-white/60'}`}
+            >
+                <span className={`flex h-3.5 w-3.5 items-center justify-center rounded-full border text-[8px] ${isSelected ? 'border-black/30' : 'border-white/30'}`}>?</span>
+                How does this work?
+            </button>
+            {open && (
+                <div className={`mt-3 p-4 border text-xs leading-relaxed ${isSelected ? 'border-black/10 bg-black/[0.03] text-black/60' : 'border-white/10 bg-white/[0.04] text-white/60'}`}>
+                    <div className="flex flex-col gap-2.5">
+                        <div className="flex gap-2.5">
+                            <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>1</span>
+                            <span>Pay <strong>{tier.price}</strong> today to lock in your Founder&apos;s price and secure your Batch 1 slot.</span>
+                        </div>
+                        <div className="flex gap-2.5">
+                            <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>2</span>
+                            <span>We&apos;ll email you before your piano ships to collect the remaining balance.</span>
+                        </div>
+                        <div className="flex gap-2.5">
+                            <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>3</span>
+                            <span>Full refund available anytime before your piano ships — no questions asked.</span>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
 export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClientProps) {
+    const searchParams = useSearchParams();
+
     // --- STATE ---
     const [appState, setAppState] = useState({
+        product: 'one' as 'one' | 'pro',
         handSpan: null as string | null,
         size: null as string | null,
         color: null as string | null,
         selectedTier: null as string | null,
     });
 
-    const searchParams = useSearchParams();
     const [discountCode, setDiscountCode] = useState<string | null>(null);
     const [discountDismissed, setDiscountDismissed] = useState(false);
 
@@ -66,7 +127,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const [countDownDate, setCountDownDate] = useState<number | null>(null);
 
     // Auth & Urgency Widget State
-    const [authUser, setAuthUser] = useState<any>(null);
+    const [authUser, setAuthUser] = useState<AuthUser | null>(null);
     const [authChecked, setAuthChecked] = useState(false);
     const [showRegisterGate, setShowRegisterGate] = useState(false);
     const [widgetTimeLeft, setWidgetTimeLeft] = useState(12 * 60);
@@ -76,7 +137,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
     // --- PRODUCT CATALOG (static data, shared across all journeys) ---
-    const PRODUCT_CATALOG: Record<string, any> = {
+    const PRODUCT_CATALOG: Record<string, ProductTier> = {
         reservation: {
             id: 'reservation',
             badge: null as string | null,
@@ -141,14 +202,48 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             total: 250,
             highlight: true,
         },
+        pro_solo: {
+            id: 'pro_solo',
+            badge: null as string | null,
+            title: "DreamPlay Pro",
+            subtitle: "Keyboard only",
+            price: "$1,899",
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
+            description: "DreamPlay Pro keyboard in DS5.5 or DS6.0, available in Nightmare Black or Aztec Gold.",
+            includes: ["DreamPlay Pro 88-key keyboard", "Sustain pedal", "DreamPlay Learn app (lifetime access)", "Power adapter and USB-C cable"],
+            delivery: "Preorder",
+            backers: null,
+            remaining: null,
+            total: null,
+            highlight: false,
+        },
+        pro_full: {
+            id: 'pro_full',
+            badge: "Flagship",
+            title: "DreamPlay Pro Premium Bundle",
+            subtitle: "Keyboard · Stand · Triple pedal · Bench",
+            price: "$1,999",
+            retailPrice: null as string | null,
+            originalPrice: null as string | null,
+            description: "DreamPlay Pro with the matched furniture stand, triple pedal unit, and padded bench.",
+            includes: ["DreamPlay Pro 88-key keyboard", "Matched furniture stand", "Triple pedal unit", "Padded bench", "DreamPlay Learn app (lifetime access)"],
+            delivery: "Preorder",
+            backers: null,
+            remaining: null,
+            total: null,
+            highlight: true,
+        },
     };
 
     // --- BUILD VISIBLE TIERS ---
     // Always use static PRODUCT_CATALOG filtered by hiddenProducts
     const tiers = (() => {
-        const defaultOrder = ['reservation', 'reserve50', 'solo', 'full'];
+        const defaultOrder = appState.product === 'pro'
+            ? ['pro_solo', 'pro_full']
+            : ['reservation', 'reserve50', 'solo', 'full'];
         return defaultOrder
-            .filter(id => !hiddenProducts.includes(id))
+            .filter(id => appState.product === 'pro' || !hiddenProducts.includes(id))
             .map(id => PRODUCT_CATALOG[id]);
     })();
 
@@ -176,7 +271,87 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         }
     };
 
+    const productOptions = [
+        {
+            id: 'one' as const,
+            title: 'DreamPlay One',
+            subtitle: 'The core ergonomic instrument',
+            detail: 'Midnight Black or Pearl White',
+        },
+        {
+            id: 'pro' as const,
+            title: 'DreamPlay Pro',
+            subtitle: 'The flagship DreamPlay tier',
+            detail: 'Nightmare Black or Aztec Gold',
+        },
+    ];
+
+    const finishOptions = appState.product === 'pro'
+        ? [
+            {
+                id: 'Nightmare Black',
+                title: 'Nightmare Black',
+                description: 'The dark flagship Pro finish.',
+                swatch: '#0a0a0a',
+                image: '/images/pro/nightmare-black-angled.png',
+                background: '#111111',
+            },
+            {
+                id: 'Aztec Gold',
+                title: 'Aztec Gold',
+                description: 'The gold-toned flagship Pro finish.',
+                swatch: '#c5a059',
+                image: '/images/pro/aztec-gold.jpg',
+                background: '#f2eee4',
+            },
+        ]
+        : [
+            {
+                id: 'Black',
+                title: 'Midnight Black',
+                description: 'Classic elegance with a sophisticated matte finish. Commands presence on any stage.',
+                swatch: '#000000',
+                image: '/images/keyboards/ds65-black-standard-digital-piano.png',
+                background: '#e5e5e5',
+            },
+            {
+                id: 'White',
+                title: 'Pearl White',
+                description: 'Modern aesthetic with a pristine glossy finish. A striking centerpiece for any studio.',
+                swatch: '#ffffff',
+                image: '/images/keyboards/ds55-white-narrow-keys-alt.png',
+                background: '#ffffff',
+            },
+        ];
+
+    const availableKeyboards = Object.entries(keyboards).filter(([key]) => appState.product === 'one' || key !== 'DS6.5');
+    const selectedProductName = appState.product === 'pro' ? 'DreamPlay Pro' : 'DreamPlay One';
+    const selectedFinishLabel = finishOptions.find(option => option.id === appState.color)?.title || '—';
+
     // --- EFFECTS ---
+    useEffect(() => {
+        const productParam = searchParams.get("product");
+        const packageParam = searchParams.get("package");
+
+        if (productParam !== 'pro') return;
+
+        setAppState(prev => {
+            const packageId = packageParam === 'pro_full' || packageParam === 'pro_solo'
+                ? packageParam
+                : prev.selectedTier?.startsWith('pro_')
+                    ? prev.selectedTier
+                    : null;
+
+            return {
+                ...prev,
+                product: 'pro',
+                size: prev.size === 'DS6.5' ? 'DS6.0' : prev.size,
+                color: prev.color === 'Nightmare Black' || prev.color === 'Aztec Gold' ? prev.color : 'Nightmare Black',
+                selectedTier: packageId,
+            };
+        });
+    }, [searchParams]);
+
     useEffect(() => {
         const handleScroll = () => {
             const scrollPos = window.scrollY + window.innerHeight / 2;
@@ -320,8 +495,29 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     };
 
     // --- ACTIONS ---
+    const handleSelectProduct = (product: 'one' | 'pro') => {
+        setAppState(prev => {
+            const isPro = product === 'pro';
+            const colorIsValid = isPro
+                ? prev.color === 'Nightmare Black' || prev.color === 'Aztec Gold'
+                : prev.color === 'Black' || prev.color === 'White';
+
+            return {
+                ...prev,
+                product,
+                size: isPro && prev.size === 'DS6.5' ? 'DS6.0' : prev.size,
+                color: colorIsValid ? prev.color : isPro ? 'Nightmare Black' : 'Black',
+                selectedTier: null,
+            };
+        });
+    };
+
     const handleSelectHandSize = (size: 'small' | 'medium' | 'large') => {
-        const sizeMap = { small: 'DS5.5', medium: 'DS6.0', large: 'DS6.5' };
+        const sizeMap = {
+            small: 'DS5.5',
+            medium: 'DS6.0',
+            large: appState.product === 'pro' ? 'DS6.0' : 'DS6.5',
+        };
         setAppState(prev => ({ ...prev, handSpan: size, size: sizeMap[size] }));
         setTimeout(() => scrollToSection(2), 300);
     };
@@ -339,9 +535,11 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const handleSelectTier = (tierId: string) => {
         setAppState(prev => ({ ...prev, selectedTier: tierId }));
 
-        if (['full', 'reservation', 'reserve50', 'solo'].includes(tierId)) {
-            const size = appState.size || 'DS6.0';
-            const color = appState.color || 'Black';
+        if (['full', 'reservation', 'reserve50', 'solo', 'pro_solo', 'pro_full'].includes(tierId)) {
+            const size = appState.product === 'pro' && appState.size === 'DS6.5'
+                ? 'DS6.0'
+                : appState.size || 'DS6.0';
+            const color = appState.color || (appState.product === 'pro' ? 'Nightmare Black' : 'Black');
 
             // Variant lookup: journey product variantId > VARIANT_MAP[tier][size][color]
             const exactVariantId = VARIANT_MAP[tierId]?.[size]?.[color] || "";
@@ -358,6 +556,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                 checkoutUrl = `https://dreamplay-pianos.myshopify.com/cart/clear?return_to=${encodeURIComponent(permalink)}`;
 
+            } else if (appState.product === 'pro') {
+                alert('This DreamPlay Pro configuration is not available for checkout yet. Please choose a listed Pro size and finish.');
+                return;
             } else {
                 // FALLBACK: Admin Panel URL variables
                 const sizeParam = encodeURIComponent(size);
@@ -420,9 +621,10 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             localStorage.setItem("dp_user_email", saveEmail);
             if (res.id) localStorage.setItem("dp_subscriber_id", res.id);
             setSaveSuccess(true);
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
             console.error(error);
-            setSaveError(error.message || "Something went wrong. Please try again.");
+            setSaveError(message);
         } finally {
             setSaveLoading(false);
         }
@@ -482,8 +684,33 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
     const realVal = getRealValue(sliderValue);
     const sizingResult = getSizingResult(realVal);
     const cmVal = (realVal * 2.54).toFixed(1);
+    const displayedSizingResult = appState.product === 'pro' && sizingResult.model === 'DS6.5'
+        ? {
+            ...sizingResult,
+            zone: 'B',
+            rangeText: `${sizingResult.rangeText}. DreamPlay Pro checkout currently offers DS6.0 as its largest size.`,
+            model: 'DS6.0',
+            desc: 'DreamPlay Pro checkout currently offers DS5.5 and DS6.0.',
+        }
+        : sizingResult;
 
     const navSteps = ['Start', 'Measure', 'Size', 'Color', 'Reserve'];
+    const handSizeOptions: Array<{
+        id: HandSizeId;
+        label: string;
+        desc: string;
+        range: string;
+        fullZone: string;
+        zoneDesc: string;
+        emoji: string;
+        dark?: boolean;
+    }> = [
+        { id: 'small', label: 'Smaller Hands', desc: 'Ideal for women and children', range: '< 7.6 inches', fullZone: 'Zone A', zoneDesc: 'Narrowest Keys · 88 keys', emoji: '🤚', dark: true },
+        { id: 'medium', label: 'Average Hands', desc: 'Perfect for most men and women', range: '7.6–8.5 inches', fullZone: 'Zone B', zoneDesc: 'Narrow Keys · 88 keys', emoji: '✋' },
+        appState.product === 'pro'
+            ? { id: 'large', label: 'Larger Hands', desc: 'Shows the largest Pro size available for checkout', range: '8.5+ inches', fullZone: 'Zone B', zoneDesc: 'Largest Pro size available · 88 keys', emoji: '🖐️', dark: true }
+            : { id: 'large', label: 'Larger Hands', desc: 'For the small percentage with larger hands', range: '8.5+ inches', fullZone: 'Zone C', zoneDesc: 'Standard Keys · 88 keys', emoji: '🖐️', dark: true },
+    ];
 
     return (
         <div className="min-h-screen bg-white font-sans text-neutral-900 selection:bg-neutral-200">
@@ -506,7 +733,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                     Welcome back, {authUser.user_metadata?.full_name?.split(' ')[0] || authUser.email?.split('@')[0]}
                                 </h4>
                                 <p className="font-sans text-xs text-white/70 leading-relaxed mb-1">
-                                    Your free shipping offer has been activated for this purchase. Lock in your DreamPlay One within the next <strong className="text-green-400 font-mono tracking-tight">{formatWidgetTime(widgetTimeLeft)}</strong> to enjoy free shipping.
+                                    Your offer has been activated for this purchase. Complete your {selectedProductName} order within the next <strong className="text-green-400 font-mono tracking-tight">{formatWidgetTime(widgetTimeLeft)}</strong>.
                                 </p>
                             </div>
                         </div>
@@ -518,6 +745,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     <div className={`absolute right-4 md:right-8 ${authUser && showWidget && widgetTimeLeft > 0 ? 'top-[290px]' : 'top-[140px]'} z-[60] bg-[#050505] border border-white/10 p-5 shadow-2xl max-w-sm hidden md:block transition-all`}>
                         <h4 className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/40 mb-3">Your Build So Far</h4>
                         <div className="flex flex-col gap-2">
+                            <div className="flex items-center justify-between">
+                                <span className="font-sans text-xs text-white/50">Product</span>
+                                <span className="font-sans text-xs text-white font-medium">
+                                    {selectedProductName}
+                                </span>
+                            </div>
+                            <div className="h-px bg-white/5" />
                             <div className="flex items-center justify-between">
                                 <span className="font-sans text-xs text-white/50">Hand Size</span>
                                 <span className={`font-sans text-xs ${appState.handSpan ? 'text-white font-medium' : 'text-white/20'}`}>
@@ -535,7 +769,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                             <div className="flex items-center justify-between">
                                 <span className="font-sans text-xs text-white/50">Finish</span>
                                 <span className={`font-sans text-xs ${appState.color ? 'text-white font-medium' : 'text-white/20'}`}>
-                                    {appState.color === 'Black' ? 'Midnight Black' : appState.color === 'White' ? 'Pearl White' : '—'}
+                                    {selectedFinishLabel}
                                 </span>
                             </div>
                         </div>
@@ -608,17 +842,37 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                 <div className="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-6">
                     <div className="mb-6 inline-block border border-white/20 bg-white/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm md:mb-8">
                         <span className="mr-2 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white"></span>
-                        Final Units Remaining in Batch 1
+                        {appState.product === 'pro' ? 'DreamPlay Pro Preorder' : 'Final Units Remaining in Batch 1'}
                     </div>
 
                     <h1 className="mb-8 font-serif text-5xl leading-tight text-white md:text-7xl lg:text-8xl">
                         Build your<br />
-                        <span className="italic text-white/90">DreamPlay One.</span>
+                        <span className="italic text-white/90">{selectedProductName}.</span>
                     </h1>
 
                     <p className="mx-auto mb-12 max-w-xl font-sans text-sm leading-relaxed text-white/60 md:text-base">
-                        In just a few steps, we'll help you discover the ideal keyboard size and finish for your musical journey.
+                        In just a few steps, we&apos;ll help you discover the ideal keyboard size and finish for your musical journey.
                     </p>
+
+                    <div className="mx-auto mb-10 grid max-w-3xl gap-3 md:grid-cols-2">
+                        {productOptions.map(product => {
+                            const isSelected = appState.product === product.id;
+                            return (
+                                <button
+                                    key={product.id}
+                                    onClick={() => handleSelectProduct(product.id)}
+                                    className={`border p-5 text-left transition-all ${isSelected ? 'border-white bg-white text-black' : 'border-white/15 bg-white/[0.04] text-white hover:border-white/40 hover:bg-white/[0.08]'}`}
+                                >
+                                    <div className="mb-2 flex items-center justify-between gap-4">
+                                        <span className="font-serif text-xl">{product.title}</span>
+                                        {isSelected && <Check className="h-4 w-4" />}
+                                    </div>
+                                    <p className={`font-sans text-xs uppercase tracking-[0.18em] ${isSelected ? 'text-black/50' : 'text-white/45'}`}>{product.subtitle}</p>
+                                    <p className={`mt-2 font-sans text-sm ${isSelected ? 'text-black/65' : 'text-white/60'}`}>{product.detail}</p>
+                                </button>
+                            );
+                        })}
+                    </div>
 
                     <button
                         onClick={() => scrollToSection(1)}
@@ -662,17 +916,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     </div>
 
                     <div className="grid gap-6 lg:grid-cols-3">
-                        {[
-                            { id: 'small', label: 'Smaller Hands', desc: 'Ideal for women and children', range: '< 7.6 inches', fullZone: 'Zone A', zoneDesc: 'Narrowest Keys · 88 keys', emoji: '🤚', dark: true },
-                            { id: 'medium', label: 'Average Hands', desc: 'Perfect for most men and women', range: '7.6–8.5 inches', fullZone: 'Zone B', zoneDesc: 'Narrow Keys · 88 keys', emoji: '✋' },
-                            { id: 'large', label: 'Larger Hands', desc: 'For the small percentage with larger hands', range: '8.5+ inches', fullZone: 'Zone C', zoneDesc: 'Standard Keys · 88 keys', emoji: '🖐️', dark: true }
-                        ].map((btn) => {
+                        {handSizeOptions.map((btn) => {
                             const isSelected = appState.handSpan === btn.id;
                             const isDark = 'dark' in btn && btn.dark;
                             return (
                                 <button
                                     key={btn.id}
-                                    onClick={() => handleSelectHandSize(btn.id as any)}
+                                    onClick={() => handleSelectHandSize(btn.id)}
                                     className={`group relative flex flex-col border p-8 text-center transition-all duration-300 md:p-10 cursor-pointer ${isDark
                                         ? isSelected
                                             ? 'border-white/30 bg-[#050505] shadow-xl z-10'
@@ -735,6 +985,11 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     <p className="mt-6 text-center text-sm text-neutral-400">
                         We recommend the {appState.size || '...'} for your hand size.
                     </p>
+                    {appState.product === 'pro' && (
+                        <p className="mt-2 text-center text-xs text-neutral-400">
+                            DreamPlay Pro checkout currently offers DS5.5 and DS6.0.
+                        </p>
+                    )}
                 </div>
             </section>
 
@@ -753,8 +1008,8 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </p>
                     </div>
 
-                    <div className="grid gap-6 lg:grid-cols-3">
-                        {Object.entries(keyboards).map(([key, kb]) => {
+                    <div className={`grid gap-6 ${appState.product === 'pro' ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
+                        {availableKeyboards.map(([key, kb]) => {
                             const isSelected = key === appState.size;
                             const isRecommended = key === appState.size;
                             const isLight = key === 'DS5.5' || key === 'DS6.5';
@@ -838,12 +1093,12 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     </div>
 
                     <div className="grid gap-6 lg:grid-cols-2">
-                        {['Black', 'White'].map(color => {
-                            const isSelected = appState.color === color;
+                        {finishOptions.map(finish => {
+                            const isSelected = appState.color === finish.id;
                             return (
                                 <button
-                                    key={color}
-                                    onClick={() => handleSelectColor(color)}
+                                    key={finish.id}
+                                    onClick={() => handleSelectColor(finish.id)}
                                     className={`group relative flex flex-col overflow-hidden border text-left transition-all duration-300 ${isSelected ? 'border-black bg-white z-10 scale-105 shadow-xl' : 'border-black/10 bg-white shadow-lg hover:border-black/30 hover:shadow-xl'
                                         }`}
                                 >
@@ -852,15 +1107,15 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                             <Check className="h-4 w-4" />
                                         </div>
                                     )}
-                                    <div className={`relative flex h-72 w-full items-center justify-center border-b p-8 transition-colors duration-500 ${isSelected ? 'border-black/20' : 'border-black/10'}`} style={{ backgroundColor: color === 'Black' ? '#e5e5e5' : '#ffffff' }}>
-                                        <Image src={color === 'Black' ? "/images/keyboards/ds65-black-standard-digital-piano.png" : "/images/keyboards/ds55-white-narrow-keys-alt.png"} alt={color} width={800} height={500} className="h-auto w-full max-h-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
+                                    <div className={`relative flex h-72 w-full items-center justify-center border-b p-8 transition-colors duration-500 ${isSelected ? 'border-black/20' : 'border-black/10'}`} style={{ backgroundColor: finish.background }}>
+                                        <Image src={finish.image} alt={finish.title} width={800} height={500} className="h-auto w-full max-h-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="flex w-full flex-1 flex-col p-8 md:p-10">
                                         <div className="mb-4 flex items-center gap-4">
-                                            <div className={`h-6 w-6 rounded-full border ${isSelected ? 'border-black/50' : 'border-black/20'}`} style={{ backgroundColor: color === 'Black' ? '#000' : '#fff' }}></div>
-                                            <h3 className="font-serif text-2xl text-black">{color === 'Black' ? 'Midnight Black' : 'Pearl White'}</h3>
+                                            <div className={`h-6 w-6 rounded-full border ${isSelected ? 'border-black/50' : 'border-black/20'}`} style={{ backgroundColor: finish.swatch }}></div>
+                                            <h3 className="font-serif text-2xl text-black">{finish.title}</h3>
                                         </div>
-                                        <p className="mb-8 flex-1 font-sans text-sm leading-relaxed text-black/70">{color === 'Black' ? 'Classic elegance with a sophisticated matte finish. Commands presence on any stage.' : 'Modern aesthetic with a pristine glossy finish. A striking centerpiece for any studio.'}</p>
+                                        <p className="mb-8 flex-1 font-sans text-sm leading-relaxed text-black/70">{finish.description}</p>
 
                                         <div className={`mt-auto w-full border py-4 text-center font-sans text-xs uppercase tracking-widest transition-colors ${isSelected ? 'border-black bg-black text-white' : 'border-black/30 text-black group-hover:border-black group-hover:bg-black/10'
                                             }`}>
@@ -883,20 +1138,26 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                     <div className="mb-16 max-w-2xl text-left">
                         <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.3em] text-white/50">Final Step</p>
-                        <h2 className="mb-4 font-serif text-4xl leading-tight text-white md:text-5xl lg:text-6xl text-balance">Reserve your DreamPlay One.</h2>
+                        <h2 className="mb-4 font-serif text-4xl leading-tight text-white md:text-5xl lg:text-6xl text-balance">Reserve your {selectedProductName}.</h2>
                         <div className="flex items-center gap-2 font-sans text-sm text-white/60">
-                            <ShieldCheck className="h-4 w-4" /> Ships worldwide. Choose the size and color that suits you.
+                            <ShieldCheck className="h-4 w-4" /> {appState.product === 'pro' ? 'Choose the Pro size, finish, and package that suits you.' : 'Ships worldwide. Choose the size and color that suits you.'}
                         </div>
                     </div>
 
 
 
-                    <DynamicProductionTimeline />
+                    {appState.product === 'one' && <DynamicProductionTimeline />}
 
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <div className={`grid gap-6 md:grid-cols-2 ${appState.product === 'pro' ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
                         {tiers.map(tier => {
                             const isSelected = appState.selectedTier === tier.id;
                             const isHighlight = tier.highlight;
+                            const showProgress =
+                                typeof tier.backers === 'number' &&
+                                typeof tier.remaining === 'number' &&
+                                typeof tier.total === 'number' &&
+                                tier.total > 0;
+                            const progressPercent = showProgress ? ((tier.total! - tier.remaining!) / tier.total!) * 100 : 0;
 
                             return (
                                 <div
@@ -942,38 +1203,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         )}
 
                                         {/* 50% info pill */}
-                                        {tier.subtitle?.includes('50%') && (() => {
-                                            const [open, setOpen] = React.useState(false);
-                                            return (
-                                                <div className="mt-3">
-                                                    <button
-                                                        onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
-                                                        className={`flex items-center gap-1.5 text-[10px] uppercase tracking-widest transition-colors cursor-pointer ${isSelected ? 'text-black/40 hover:text-black/60' : 'text-white/40 hover:text-white/60'}`}
-                                                    >
-                                                        <span className={`flex h-3.5 w-3.5 items-center justify-center rounded-full border text-[8px] ${isSelected ? 'border-black/30' : 'border-white/30'}`}>?</span>
-                                                        How does this work?
-                                                    </button>
-                                                    {open && (
-                                                        <div className={`mt-3 p-4 border text-xs leading-relaxed ${isSelected ? 'border-black/10 bg-black/[0.03] text-black/60' : 'border-white/10 bg-white/[0.04] text-white/60'}`}>
-                                                            <div className="flex flex-col gap-2.5">
-                                                                <div className="flex gap-2.5">
-                                                                    <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>1</span>
-                                                                    <span>Pay <strong>{tier.price}</strong> today to lock in your Founder&apos;s price and secure your Batch 1 slot.</span>
-                                                                </div>
-                                                                <div className="flex gap-2.5">
-                                                                    <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>2</span>
-                                                                    <span>We&apos;ll email you before your piano ships to collect the remaining balance.</span>
-                                                                </div>
-                                                                <div className="flex gap-2.5">
-                                                                    <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${isSelected ? 'bg-black text-white' : 'bg-white text-black'}`}>3</span>
-                                                                    <span>Full refund available anytime before your piano ships — no questions asked.</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            );
-                                        })()}
+                                        {tier.subtitle?.includes('50%') && <TierPaymentInfo tier={tier} isSelected={isSelected} />}
                                     </div>
 
                                     <p className={`mt-6 min-h-[80px] w-full flex-grow font-sans text-sm leading-relaxed ${isSelected ? 'text-black/60' : 'text-white/70'}`}>
@@ -1000,24 +1230,32 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                                     {/* Meta */}
                                     <div className="mt-8 flex w-full items-center gap-4 md:gap-6">
-                                        <div>
+                                        {tier.delivery && (
+                                            <div>
                                             <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>Delivery</p>
                                             <p className={`mt-1 font-sans text-xs ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{tier.delivery}</p>
-                                        </div>
-                                        <div className={`h-6 w-px ${isSelected ? 'bg-black/10' : 'bg-white/10'}`} />
-                                        <div>
-                                            <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>Backers</p>
-                                            <p className={`mt-1 font-sans text-xs ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{tier.backers}</p>
-                                        </div>
-                                        <div className={`h-6 w-px ${isSelected ? 'bg-black/10' : 'bg-white/10'}`} />
-                                        <div>
-                                            <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>Left</p>
-                                            <p className={`mt-1 font-sans text-xs ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{tier.remaining} of {tier.total}</p>
-                                        </div>
+                                            </div>
+                                        )}
+                                        {tier.delivery && showProgress && <div className={`h-6 w-px ${isSelected ? 'bg-black/10' : 'bg-white/10'}`} />}
+                                        {showProgress && (
+                                            <>
+                                                <div>
+                                                    <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>Backers</p>
+                                                    <p className={`mt-1 font-sans text-xs ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{tier.backers}</p>
+                                                </div>
+                                                <div className={`h-6 w-px ${isSelected ? 'bg-black/10' : 'bg-white/10'}`} />
+                                                <div>
+                                                    <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>Left</p>
+                                                    <p className={`mt-1 font-sans text-xs ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{tier.remaining} of {tier.total}</p>
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
-                                    <div className={`mt-3 h-px w-full ${isSelected ? 'bg-black/10' : 'bg-white/10'}`}>
-                                        <div className={`h-full transition-all ${isSelected ? 'bg-black/40' : 'bg-white/40'}`} style={{ width: `${((tier.total - tier.remaining) / tier.total) * 100}%` }} />
-                                    </div>
+                                    {showProgress && (
+                                        <div className={`mt-3 h-px w-full ${isSelected ? 'bg-black/10' : 'bg-white/10'}`}>
+                                            <div className={`h-full transition-all ${isSelected ? 'bg-black/40' : 'bg-white/40'}`} style={{ width: `${progressPercent}%` }} />
+                                        </div>
+                                    )}
 
                                     {/* CTA Button */}
                                     <div className="mt-8 w-full pt-4">
@@ -1037,26 +1275,34 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         })}
                     </div>
 
-                    {/* Trust Badges */}
-                    <div className="grid grid-cols-3 gap-4 mt-10 max-w-xl mx-auto">
-                        <div className="flex flex-col items-center justify-center text-center gap-2">
-                            <ShieldCheck size={28} strokeWidth={1.5} className="text-white/70" />
-                            <span className="text-[11px] font-bold text-white/70">90-Day Trial</span>
-                        </div>
-                        <div className="flex flex-col items-center justify-center text-center gap-2">
-                            <Undo2 size={28} strokeWidth={1.5} className="text-white/70" />
-                            <span className="text-[11px] font-bold text-white/70">Easy Returns</span>
-                        </div>
-                        <div className="flex flex-col items-center justify-center text-center gap-2">
-                            <Truck size={28} strokeWidth={1.5} className="text-white/70" />
-                            <span className="text-[11px] font-bold text-white/70">Free Shipping</span>
-                        </div>
-                    </div>
+                    {appState.product === 'one' ? (
+                        <>
+                            {/* Trust Badges */}
+                            <div className="grid grid-cols-3 gap-4 mt-10 max-w-xl mx-auto">
+                                <div className="flex flex-col items-center justify-center text-center gap-2">
+                                    <ShieldCheck size={28} strokeWidth={1.5} className="text-white/70" />
+                                    <span className="text-[11px] font-bold text-white/70">90-Day Trial</span>
+                                </div>
+                                <div className="flex flex-col items-center justify-center text-center gap-2">
+                                    <Undo2 size={28} strokeWidth={1.5} className="text-white/70" />
+                                    <span className="text-[11px] font-bold text-white/70">Easy Returns</span>
+                                </div>
+                                <div className="flex flex-col items-center justify-center text-center gap-2">
+                                    <Truck size={28} strokeWidth={1.5} className="text-white/70" />
+                                    <span className="text-[11px] font-bold text-white/70">Free Shipping</span>
+                                </div>
+                            </div>
 
-                    {/* Pricing footnote */}
-                    <p className="text-center text-xs text-white/40 mt-10 max-w-xl mx-auto leading-relaxed font-sans">
-                        * All prices shown are the official retail MSRP. Shipping and applicable taxes will be calculated before dispatch.
-                    </p>
+                            {/* Pricing footnote */}
+                            <p className="text-center text-xs text-white/40 mt-10 max-w-xl mx-auto leading-relaxed font-sans">
+                                * All prices shown are the official retail MSRP. Shipping and applicable taxes will be calculated before dispatch.
+                            </p>
+                        </>
+                    ) : (
+                        <p className="text-center text-xs text-white/40 mt-10 max-w-xl mx-auto leading-relaxed font-sans">
+                            DreamPlay Pro pricing and package contents match the selected Shopify product. Taxes, shipping charges, and preorder terms are shown in checkout.
+                        </p>
+                    )}
 
                     {/* Save My Build CTA */}
                     <div className="text-center mt-6">
@@ -1068,45 +1314,46 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </button>
                     </div>
 
-                    {/* Pre-Order Logistics Box */}
-                    <div className="mt-12 mx-auto max-w-2xl border border-white/15 bg-white/[0.04] backdrop-blur-md p-8 md:p-10">
-                        <h4 className="font-serif text-xl text-white mb-6 text-center md:text-2xl">Pre-Order Logistics</h4>
-                        <div className="flex flex-col gap-5">
-                            <div className="flex items-start gap-4">
-                                <span className="text-xl shrink-0 mt-0.5">🚚</span>
-                                <div>
-                                    <p className="font-sans text-sm font-semibold text-white/90 mb-1">Update your address anytime</p>
-                                    <p className="font-sans text-sm text-white/55 leading-relaxed">We will email you 3 weeks before shipping to confirm your final address.</p>
+                    {appState.product === 'one' && (
+                        <div className="mt-12 mx-auto max-w-2xl border border-white/15 bg-white/[0.04] backdrop-blur-md p-8 md:p-10">
+                            <h4 className="font-serif text-xl text-white mb-6 text-center md:text-2xl">Pre-Order Logistics</h4>
+                            <div className="flex flex-col gap-5">
+                                <div className="flex items-start gap-4">
+                                    <span className="text-xl shrink-0 mt-0.5">🚚</span>
+                                    <div>
+                                        <p className="font-sans text-sm font-semibold text-white/90 mb-1">Update your address anytime</p>
+                                        <p className="font-sans text-sm text-white/55 leading-relaxed">We will email you 3 weeks before shipping to confirm your final address.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="h-px bg-white/10" />
-                            <div className="flex items-start gap-4">
-                                <span className="text-xl shrink-0 mt-0.5">🛡️</span>
-                                <div>
-                                    <p className="font-sans text-sm font-semibold text-white/90 mb-1">Escrow Protection</p>
-                                    <p className="font-sans text-sm text-white/55 leading-relaxed">Your funds are held securely. 100% refundable at any time before it ships. No questions asked.</p>
+                                <div className="h-px bg-white/10" />
+                                <div className="flex items-start gap-4">
+                                    <span className="text-xl shrink-0 mt-0.5">🛡️</span>
+                                    <div>
+                                        <p className="font-sans text-sm font-semibold text-white/90 mb-1">Escrow Protection</p>
+                                        <p className="font-sans text-sm text-white/55 leading-relaxed">Your funds are held securely. 100% refundable at any time before it ships. No questions asked.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="h-px bg-white/10" />
-                            <div className="flex items-start gap-4">
-                                <span className="text-xl shrink-0 mt-0.5">📦</span>
-                                <div>
-                                    <p className="font-sans text-sm font-semibold text-white/90 mb-1">Custom Foam Packaging</p>
-                                    <p className="font-sans text-sm text-white/55 leading-relaxed">Fully insured against damage in transit.</p>
+                                <div className="h-px bg-white/10" />
+                                <div className="flex items-start gap-4">
+                                    <span className="text-xl shrink-0 mt-0.5">📦</span>
+                                    <div>
+                                        <p className="font-sans text-sm font-semibold text-white/90 mb-1">Custom Foam Packaging</p>
+                                        <p className="font-sans text-sm text-white/55 leading-relaxed">Fully insured against damage in transit.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="h-px bg-white/10" />
-                            <div className="flex items-start gap-4">
-                                <span className="text-xl shrink-0 mt-0.5">⚖️</span>
-                                <div>
-                                    <p className="font-sans text-sm font-semibold text-white/90 mb-1">Duties & Taxes</p>
-                                    <p className="font-sans text-sm text-white/55 leading-relaxed">
-                                        We ship Delivered Duty Paid (DDP). All import duties and taxes will be calculated transparently at final checkout. If shipping costs exceed your budget, you can cancel your order for a 100% full refund before it ships.
-                                    </p>
+                                <div className="h-px bg-white/10" />
+                                <div className="flex items-start gap-4">
+                                    <span className="text-xl shrink-0 mt-0.5">⚖️</span>
+                                    <div>
+                                        <p className="font-sans text-sm font-semibold text-white/90 mb-1">Duties & Taxes</p>
+                                        <p className="font-sans text-sm text-white/55 leading-relaxed">
+                                            We ship Delivered Duty Paid (DDP). All import duties and taxes will be calculated transparently at final checkout. If shipping costs exceed your budget, you can cancel your order for a 100% full refund before it ships.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </section>
 
@@ -1120,7 +1367,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         <CheckCircle2 className="text-green-400 w-5 h-5 shrink-0 mt-0.5" />
                         <div>
                             <h4 className="font-serif text-white text-sm font-bold mb-1">
-                                Free Shipping Activated
+                                Offer Activated
                             </h4>
                             <p className="font-sans text-xs text-white/70 leading-relaxed">
                                 Lock in your order within <strong className="text-green-400 font-mono tracking-tight">{formatWidgetTime(widgetTimeLeft)}</strong>.
@@ -1136,9 +1383,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                     <h4 className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2">Your Build So Far</h4>
                     <div className="flex items-center justify-between gap-4">
                         <div className="text-center flex-1">
-                            <div className="font-sans text-[10px] text-white/40 mb-0.5">Zone</div>
-                            <div className={`font-sans text-xs ${appState.handSpan ? 'text-white font-medium' : 'text-white/20'}`}>
-                                {appState.handSpan === 'small' ? 'A' : appState.handSpan === 'medium' ? 'B' : appState.handSpan === 'large' ? 'C' : '—'}
+                            <div className="font-sans text-[10px] text-white/40 mb-0.5">Product</div>
+                            <div className="font-sans text-xs text-white font-medium">
+                                {appState.product === 'pro' ? 'Pro' : 'One'}
                             </div>
                         </div>
                         <div className="h-6 w-px bg-white/10" />
@@ -1152,7 +1399,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         <div className="text-center flex-1">
                             <div className="font-sans text-[10px] text-white/40 mb-0.5">Finish</div>
                             <div className={`font-sans text-xs ${appState.color ? 'text-white font-medium' : 'text-white/20'}`}>
-                                {appState.color === 'Black' ? 'Black' : appState.color === 'White' ? 'White' : '—'}
+                                {selectedFinishLabel}
                             </div>
                         </div>
                     </div>
@@ -1169,7 +1416,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
                         <div className="mb-16 text-center">
                             <h2 className="mb-4 font-serif text-3xl text-white md:text-5xl">A Keyboard That Fits You.</h2>
-                            <p className="mx-auto max-w-xl font-sans text-sm text-white/50">DreamPlay's DS Standard keyboards come in different sizes to match your biology.</p>
+                            <p className="mx-auto max-w-xl font-sans text-sm text-white/50">DreamPlay&apos;s DS Standard keyboards come in different sizes to match your biology.</p>
                         </div>
 
                         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
@@ -1179,7 +1426,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                     <div className="mb-4 flex items-end justify-between border-b border-white/20 pb-4">
                                         <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/50">Your Span</span>
                                         <div className="font-serif text-4xl text-white">
-                                            {getRealValue(sliderValue).toFixed(1)}" <span className="font-sans text-lg font-normal text-white/40">/ {(getRealValue(sliderValue) * 2.54).toFixed(1)} cm</span>
+                                            {getRealValue(sliderValue).toFixed(1)}&quot; <span className="font-sans text-lg font-normal text-white/40">/ {(getRealValue(sliderValue) * 2.54).toFixed(1)} cm</span>
                                         </div>
                                     </div>
 
@@ -1224,20 +1471,20 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                             {/* CARD 2: RESULT */}
                             <div className="flex flex-col justify-center border border-white/10 bg-transparent p-10">
                                 <div className="mb-2 font-sans text-[10px] uppercase tracking-[0.2em] text-white/40">Your match</div>
-                                <div className="mb-2 font-serif text-5xl text-white">Zone {getSizingResult(getRealValue(sliderValue)).zone}</div>
-                                <div className="mb-10 border-b border-white/10 pb-6 font-sans text-sm text-white/50">{getSizingResult(getRealValue(sliderValue)).rangeText}</div>
+                                <div className="mb-2 font-serif text-5xl text-white">Zone {displayedSizingResult.zone}</div>
+                                <div className="mb-10 border-b border-white/10 pb-6 font-sans text-sm text-white/50">{displayedSizingResult.rangeText}</div>
 
-                                <div className="mb-2 font-serif text-3xl text-white">{getSizingResult(getRealValue(sliderValue)).model}</div>
+                                <div className="mb-2 font-serif text-3xl text-white">{displayedSizingResult.model}</div>
                                 <div className="mb-6 font-sans text-[10px] uppercase tracking-widest text-white/50">Recommended Model</div>
 
                                 <p className="mb-10 min-h-[60px] border-l border-white/20 pl-4 font-sans text-sm leading-relaxed text-white/60">
-                                    {getSizingResult(getRealValue(sliderValue)).desc}
+                                    {displayedSizingResult.desc}
                                 </p>
 
                                 <button
                                     onClick={() => {
-                                        const zoneMap: any = { A: 'small', B: 'medium', C: 'large' };
-                                        handleSelectHandSize(zoneMap[getSizingResult(getRealValue(sliderValue)).zone]);
+                                        const zoneMap: Record<string, HandSizeId> = { A: 'small', B: 'medium', C: 'large' };
+                                        handleSelectHandSize(zoneMap[displayedSizingResult.zone] ?? 'medium');
                                         setIsSizingModalOpen(false);
                                     }}
                                     className="group mt-auto flex w-full items-center justify-center gap-2 border border-white bg-white py-4 font-sans text-xs uppercase tracking-widest text-black transition-colors hover:bg-white/90"

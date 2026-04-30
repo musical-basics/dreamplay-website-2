@@ -14,6 +14,8 @@
  * {
  *   "full":  { "DS5.5": { "Black": "...", "White": "..." }, "DS6.0": {...}, "DS6.5": {...} },
  *   "solo":  { "DS5.5": { "Black": "...", "White": "..." }, "DS6.0": {...}, "DS6.5": {...} },
+ *   "pro_solo": { "DS5.5": { "Nightmare Black": "...", "Aztec Gold": "..." }, "DS6.0": {...}, "DS6.5": {...} },
+ *   "pro_full": { ... },
  *   "reservation": { ... },   // optional
  *   "reserve50":   { ... }    // optional
  * }
@@ -47,9 +49,18 @@ try {
     process.exit(1);
 }
 
-const TIERS = ['full', 'solo', 'reservation', 'reserve50'];
+const TIERS = ['full', 'solo', 'reservation', 'reserve50', 'pro_solo', 'pro_full'];
 const SIZES = ['DS5.5', 'DS6.0', 'DS6.5'];
-const COLORS = ['Black', 'White'];
+const COLORS_BY_TIER = {
+    full: ['Black', 'White'],
+    solo: ['Black', 'White'],
+    reservation: ['Black', 'White'],
+    reserve50: ['Black', 'White'],
+    pro_solo: ['Nightmare Black', 'Aztec Gold'],
+    pro_full: ['Nightmare Black', 'Aztec Gold'],
+};
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 // --- Merge with existing defaults (read current file for fallback values) ---
 // Only full/solo have real variant IDs — reservation/reserve50 are always empty
@@ -57,13 +68,13 @@ let existing = {};
 for (const tier of TIERS) {
     existing[tier] = {};
     for (const size of SIZES) {
-        existing[tier][size] = { Black: '', White: '' };
+        existing[tier][size] = Object.fromEntries(COLORS_BY_TIER[tier].map((color) => [color, '']));
     }
 }
 try {
     const currentContent = fs.readFileSync(OUTPUT, 'utf8');
     // Find patterns like: 'DS6.0': { 'Black': '12345', 'White': '67890' }
-    for (const tier of ['full', 'solo']) {
+    for (const tier of TIERS) {
         const tierBlock = currentContent.match(
             new RegExp(`${tier}:[^{]*\\{([^}]*(?:\\{[^}]*\\}[^}]*)*)\\}`, 's')
         )?.[1] ?? '';
@@ -71,9 +82,10 @@ try {
             const sizeBlock = tierBlock.match(
                 new RegExp(`'${size.replace('.', '\\.')}':\\s*\\{([^}]*)\\}`)
             )?.[1] ?? '';
-            const black = sizeBlock.match(/'Black':\s*'([^']*)'/)?.[1] ?? '';
-            const white = sizeBlock.match(/'White':\s*'([^']*)'/)?.[1] ?? '';
-            existing[tier][size] = { Black: black, White: white };
+            for (const color of COLORS_BY_TIER[tier]) {
+                existing[tier][size][color] =
+                    sizeBlock.match(new RegExp(`'${escapeRegExp(color)}':\\s*'([^']*)'`))?.[1] ?? '';
+            }
         }
     }
 } catch {
@@ -86,7 +98,7 @@ for (const tier of TIERS) {
     merged[tier] = {};
     for (const size of SIZES) {
         merged[tier][size] = {};
-        for (const color of COLORS) {
+        for (const color of COLORS_BY_TIER[tier]) {
             merged[tier][size][color] =
                 input[tier]?.[size]?.[color] ??
                 existing[tier]?.[size]?.[color] ??
@@ -101,6 +113,8 @@ const tierDescriptions = {
     solo: 'Keyboard Only',
     reservation: 'Lock My Spot ($99)',
     reserve50: 'Reserve (50%)',
+    pro_solo: 'DreamPlay Pro Keyboard',
+    pro_full: 'DreamPlay Pro Premium Bundle',
 };
 
 const lines = [
@@ -119,9 +133,10 @@ const lines = [
 for (const tier of TIERS) {
     lines.push(`    ${tier}: { // ${tierDescriptions[tier]}`);
     for (const size of SIZES) {
-        const black = merged[tier][size]['Black'];
-        const white = merged[tier][size]['White'];
-        lines.push(`        '${size}': { 'Black': '${black}', 'White': '${white}' },`);
+        const colorEntries = COLORS_BY_TIER[tier]
+            .map((color) => `'${color}': '${merged[tier][size][color]}'`)
+            .join(', ');
+        lines.push(`        '${size}': { ${colorEntries} },`);
     }
     lines.push(`    },`);
 }
@@ -134,6 +149,9 @@ console.log(`\nCurrent map:`);
 for (const tier of TIERS) {
     console.log(`\n  [${tier}]`);
     for (const size of SIZES) {
-        console.log(`    ${size} → Black: ${merged[tier][size]['Black'] || '(empty)'}  |  White: ${merged[tier][size]['White'] || '(empty)'}`);
+        const values = COLORS_BY_TIER[tier]
+            .map((color) => `${color}: ${merged[tier][size][color] || '(empty)'}`)
+            .join('  |  ');
+        console.log(`    ${size} → ${values}`);
     }
 }
