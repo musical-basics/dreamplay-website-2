@@ -2,6 +2,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import { formatOneProTargetDeliveryDate } from "@/lib/one-pro-delivery"
+
+export const dynamic = "force-dynamic"
 
 export const metadata = {
     title: "DreamPlay One Pro - 88-Key Graded Hammer Digital Piano | DS5.5 & DS6.0",
@@ -79,6 +82,7 @@ const premiumBundleIncludes = [
 ]
 
 export default function DreamPlayProPage() {
+    const targetDeliveryDate = formatOneProTargetDeliveryDate()
     const productJsonLd = {
         "@context": "https://schema.org",
         "@type": "Product",
@@ -176,14 +180,14 @@ export default function DreamPlayProPage() {
                         <div className="mt-16 flex items-center gap-8 font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
                             <span>From $1,899</span>
                             <span className="h-px w-8 bg-white/20" />
-                            <span>Preorder open</span>
+                            <span>Target delivery {targetDeliveryDate}</span>
                         </div>
                     </div>
                 </section>
 
                 {/* Reassurance bar */}
                 <div className="flex flex-col items-center justify-between gap-3 border-y border-white/10 bg-neutral-900 px-6 py-5 font-sans text-[10px] uppercase tracking-[0.25em] text-white/55 md:flex-row md:px-16">
-                    <span>Preorder open</span>
+                    <span>Target delivery {targetDeliveryDate}</span>
                     <span className="hidden h-px w-10 bg-white/10 md:block" />
                     <span>DS5.5 and DS6.0</span>
                     <span className="hidden h-px w-10 bg-white/10 md:block" />
@@ -490,7 +494,7 @@ export default function DreamPlayProPage() {
                                         <span className="ml-2 font-sans text-sm italic tracking-normal text-white/35">USD</span>
                                     </div>
                                     <p className="mb-10 font-sans text-xs text-white/45">
-                                        Preorder configured through Shopify checkout.
+                                        Target delivery: {targetDeliveryDate}. Preorder configured through Shopify checkout.
                                     </p>
 
                                     <ul className="mb-12 space-y-3 font-sans text-sm font-light text-white/70">
@@ -528,7 +532,7 @@ export default function DreamPlayProPage() {
                                         <span className="ml-2 font-sans text-sm italic tracking-normal text-white/35">USD</span>
                                     </div>
                                     <p className="mb-10 font-sans text-xs text-white/45">
-                                        Preorder configured through Shopify checkout.
+                                        Target delivery: {targetDeliveryDate}. Preorder configured through Shopify checkout.
                                     </p>
 
                                     <ul className="mb-12 space-y-3 font-sans text-sm font-light text-white/80">
@@ -565,7 +569,7 @@ export default function DreamPlayProPage() {
                             </p>
                             <h2 className="font-serif text-3xl md:text-4xl">DreamPlay One Pro is available to preorder.</h2>
                             <p className="mt-3 max-w-2xl font-sans text-sm font-light text-white/60">
-                                Secure your size, finish, and package today.
+                                Secure your size, finish, and package today. Target delivery is {targetDeliveryDate}.
                             </p>
                         </div>
 

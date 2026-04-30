@@ -12,6 +12,7 @@ import { createClient } from "@/lib/supabase/client";
 import { VARIANT_MAP } from "./variant-map";
 import { DynamicProductionTimeline } from "@/components/customize/DynamicProductionTimeline";
 import { RegisterModal } from "@/components/RegisterModal";
+import { formatOneProTargetDeliveryDate } from "@/lib/one-pro-delivery";
 
 interface CustomizeClientProps {
     urls: {
@@ -135,6 +136,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
 
 
     const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+    const oneProTargetDeliveryDate = formatOneProTargetDeliveryDate();
 
     // --- PRODUCT CATALOG (static data, shared across all journeys) ---
     const PRODUCT_CATALOG: Record<string, ProductTier> = {
@@ -212,7 +214,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             originalPrice: null as string | null,
             description: "DreamPlay One Pro keyboard in DS5.5 or DS6.0, available in Nightmare Black or Aztec Gold.",
             includes: ["DreamPlay One Pro 88-key keyboard", "Sustain pedal", "DreamPlay Learn app (lifetime access)", "Power adapter and USB-C cable"],
-            delivery: "Preorder",
+            delivery: oneProTargetDeliveryDate,
             backers: null,
             remaining: null,
             total: null,
@@ -228,7 +230,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             originalPrice: null as string | null,
             description: "DreamPlay One Pro with the matched furniture stand, triple pedal unit, and padded bench.",
             includes: ["DreamPlay One Pro 88-key keyboard", "Matched furniture stand", "Triple pedal unit", "Padded bench", "DreamPlay Learn app (lifetime access)"],
-            delivery: "Preorder",
+            delivery: oneProTargetDeliveryDate,
             backers: null,
             remaining: null,
             total: null,
@@ -547,7 +549,11 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             let checkoutUrl = "";
 
             if (exactVariantId && exactVariantId.trim() !== '') {
-                let permalink = `/cart/${exactVariantId}:1?note=checkout_source:customize`;
+                const noteParts = ['checkout_source:customize'];
+                if (appState.product === 'pro') {
+                    noteParts.push(`target_delivery:${oneProTargetDeliveryDate}`);
+                }
+                let permalink = `/cart/${exactVariantId}:1?note=${encodeURIComponent(noteParts.join(' | '))}`;
 
                 // Append discount code from URL params or sessionStorage (email links)
                 if (discountCode) {
@@ -1152,6 +1158,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         {tiers.map(tier => {
                             const isSelected = appState.selectedTier === tier.id;
                             const isHighlight = tier.highlight;
+                            const isOneProTier = tier.id.startsWith('pro_');
                             const showProgress =
                                 typeof tier.backers === 'number' &&
                                 typeof tier.remaining === 'number' &&
@@ -1232,7 +1239,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                     <div className="mt-8 flex w-full items-center gap-4 md:gap-6">
                                         {tier.delivery && (
                                             <div>
-                                            <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>Delivery</p>
+                                            <p className={`font-sans text-[10px] uppercase tracking-widest ${isSelected ? 'text-black/40' : 'text-white/40'}`}>{isOneProTier ? 'Target Delivery' : 'Delivery'}</p>
                                             <p className={`mt-1 font-sans text-xs ${isSelected ? 'text-black/70' : 'text-white/80'}`}>{tier.delivery}</p>
                                             </div>
                                         )}
@@ -1300,7 +1307,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </>
                     ) : (
                         <p className="text-center text-xs text-white/40 mt-10 max-w-xl mx-auto leading-relaxed font-sans">
-                            DreamPlay One Pro pricing and package contents match the selected Shopify product. Taxes, shipping charges, and preorder terms are shown in checkout.
+                            DreamPlay One Pro pricing and package contents match the selected Shopify product. Target delivery is {oneProTargetDeliveryDate}. Taxes, shipping charges, and preorder terms are shown in checkout.
                         </p>
                     )}
 
