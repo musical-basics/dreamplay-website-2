@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://dreamplaypianos.com'),
   title: {
     template: '%s | DreamPlay Pianos',
-    default: 'DreamPlay One | The Best Piano for Small Hands',
+    default: 'DreamPlay One | A Piano That Fits Your Hands',
   },
   description: 'Discover the DreamPlay One, a premium digital piano with narrow keys designed specifically for small hands, children, and preventing hand injury.',
   openGraph: {
-    title: 'DreamPlay Pianos | The Piano for Small Hands',
+    title: 'DreamPlay One | A Piano That Fits Your Hands',
     description: 'A premium digital piano featuring ergonomically narrower keys designed to eliminate strain, prevent injury, and let you play freely.',
     url: 'https://dreamplaypianos.com',
     siteName: 'DreamPlay Pianos',
