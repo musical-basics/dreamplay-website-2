@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import VIPDashboardClient from "./VIPDashboardClient";
 import PromoCodeBox from "./PromoCodeBox";
 import { isBuyer } from "@/actions/reservation-actions";
+import { WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 export default async function VIPPage() {
     const supabase = await createClient();
@@ -34,8 +35,9 @@ export default async function VIPPage() {
                         </h1>
                         <p className="font-sans text-base text-green-400 font-medium mb-3 flex items-center gap-2">
                             <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Your account officially qualifies for free shipping.
+                            Your account officially qualifies for the DreamPlay Waitlist credit.
                         </p>
+                        <p className="mb-3 max-w-2xl font-sans text-xs leading-relaxed text-white/35">{WAITLIST_OFFER_TERMS}</p>
                         <p className="font-sans text-sm text-white/40">{user.email}</p>
                     </div>
 

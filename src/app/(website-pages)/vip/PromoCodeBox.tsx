@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 export default function PromoCodeBox() {
-    const [promoCode, setPromoCode] = useState("VIP-SHIP-FREE");
+    const [promoCode, setPromoCode] = useState("");
     const [isCustom, setIsCustom] = useState(false);
 
     useEffect(() => {
@@ -18,16 +19,19 @@ export default function PromoCodeBox() {
 
     return (
         <div className="border border-white/10 bg-white/[0.03] p-8 md:p-10">
-            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">Your Exclusive Code</p>
+            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">{isCustom ? "Your Exclusive Code" : "Your Waitlist Credit"}</p>
             <div className="bg-white/5 border border-white/10 p-6 mb-6 text-center">
-                <p className="text-white/50 text-[10px] uppercase tracking-[0.2em] mb-2">Promo Code</p>
-                <p className="text-3xl font-mono text-white tracking-widest font-bold">{promoCode}</p>
+                <p className="text-white/50 text-[10px] uppercase tracking-[0.2em] mb-2">{isCustom ? "Promo Code" : "Credit Status"}</p>
+                <p className="text-3xl font-mono text-white tracking-widest font-bold">{isCustom ? promoCode : "$100"}</p>
             </div>
             <p className="text-white/50 font-sans text-sm leading-relaxed mb-8">
                 {isCustom
-                    ? "Use this code at checkout to apply your Waitlist Credit AND waive all global shipping fees."
-                    : "Use this code at checkout to waive all global shipping fees on your DreamPlay One order."}
+                    ? "Use this code at checkout to apply your DreamPlay promotion where eligible."
+                    : "Your $100 waitlist credit is attached to this account. We'll email credit details when checkout or preorder opens."}
             </p>
+            {!isCustom && (
+                <p className="mb-8 font-sans text-[10px] leading-relaxed text-white/35">{WAITLIST_OFFER_TERMS}</p>
+            )}
             <Link
                 href="/customize"
                 className="group inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 font-sans text-xs uppercase tracking-widest font-bold w-full transition-colors hover:bg-white/90"

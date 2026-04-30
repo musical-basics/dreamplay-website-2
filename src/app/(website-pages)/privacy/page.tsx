@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
                         <h2 className="text-white text-lg font-semibold mb-3">2. Information We Collect</h2>
                         <p className="mb-3">We may collect the following types of information:</p>
                         <ul className="list-disc pl-6 space-y-2">
-                            <li><strong className="text-white/90">Personal Information:</strong> Name, email address, shipping address, and payment details when you place an order or subscribe to our newsletter.</li>
+                            <li><strong className="text-white/90">Personal Information:</strong> Name, email address, shipping address, and payment details when you place an order, join a waitlist, or opt into marketing updates.</li>
                             <li><strong className="text-white/90">Usage Data:</strong> Pages visited, time spent on site, browser type, device type, and referring URL.</li>
                             <li><strong className="text-white/90">Cookies &amp; Analytics:</strong> We use first-party cookies and analytics tools to understand how visitors interact with our site.</li>
                         </ul>

@@ -76,7 +76,7 @@ export default function TermsOfServicePage() {
                             <li>We ship worldwide. Shipping costs and estimated delivery times will be communicated before shipment.</li>
                             <li>Risk of loss transfers to you upon delivery to the carrier.</li>
                             <li>DreamPlay Pianos is not responsible for delays caused by customs, weather, or other circumstances beyond our control.</li>
-                            <li>Free shipping promotions, when offered, apply only to qualifying orders and regions as specified.</li>
+                            <li>Promotional credits, when offered, apply only to qualifying orders and products as specified.</li>
                         </ul>
                     </section>
 

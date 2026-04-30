@@ -4,6 +4,7 @@ import { useState } from "react"
 import { ShieldCheck, ArrowRight, X, CheckCircle2, Mail } from "lucide-react"
 import { subscribeToNewsletter } from "@/actions/email-actions"
 import { logEvent } from "@/lib/analytics"
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer"
 
 export function GuaranteeSection() {
   const [showModal, setShowModal] = useState(false)
@@ -25,7 +26,7 @@ export function GuaranteeSection() {
       const res = await subscribeToNewsletter({
         email,
         first_name: "",
-        tags: ["Website Waitlist"],
+        tags: WAITLIST_OFFER_TAGS,
         temp_session_id: tempSession,
       })
 
@@ -129,14 +130,13 @@ export function GuaranteeSection() {
                     <Mail className="text-white" size={24} strokeWidth={1.5} />
                   </div>
                   <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">
-                    Stay in the Loop
+                    DreamPlay Waitlist
                   </p>
                   <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
-                    Join the Waitlist
+                    {WAITLIST_OFFER_HEADLINE}
                   </h2>
                   <p className="text-white/60 font-sans text-sm leading-relaxed">
-                    Enter your email to stay updated on DreamPlay availability,
-                    exclusive early-bird offers, and production milestones.
+                    {WAITLIST_OFFER_BODY}
                   </p>
                 </div>
 
@@ -166,6 +166,9 @@ export function GuaranteeSection() {
                   <p className="text-[10px] text-center text-white/40 uppercase tracking-widest mt-2">
                     No spam. Unsubscribe anytime.
                   </p>
+                  <p className="text-[10px] text-center text-white/35 leading-relaxed mt-3">
+                    {WAITLIST_OFFER_TERMS}
+                  </p>
                 </form>
               </>
             ) : (
@@ -177,8 +180,8 @@ export function GuaranteeSection() {
                   You&apos;re on the list!
                 </h3>
                 <p className="text-white/60 font-sans text-sm mb-8 max-w-xs mx-auto leading-relaxed">
-                  We&apos;ll keep you updated on DreamPlay availability and
-                  exclusive offers. Stay tuned!
+                  We&apos;ll email your $100 credit details with production updates,
+                  preorder availability, and launch details.
                 </p>
                 <button
                   onClick={handleClose}

@@ -13,6 +13,7 @@ import { VARIANT_MAP } from "./variant-map";
 import { DynamicProductionTimeline } from "@/components/customize/DynamicProductionTimeline";
 import { RegisterModal } from "@/components/RegisterModal";
 import { formatOneProTargetDeliveryDate } from "@/lib/one-pro-delivery";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 interface CustomizeClientProps {
     urls: {
@@ -616,7 +617,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
             const res = await subscribeToNewsletter({
                 email: saveEmail,
                 first_name: "",
-                tags: ["Free Shipping Lead"],
+                tags: ["Saved Build", ...WAITLIST_OFFER_TAGS],
             });
 
             if (!res.success) {
@@ -1296,7 +1297,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                 </div>
                                 <div className="flex flex-col items-center justify-center text-center gap-2">
                                     <Truck size={28} strokeWidth={1.5} className="text-white/70" />
-                                    <span className="text-[11px] font-bold text-white/70">Free Shipping</span>
+                                    <span className="text-[11px] font-bold text-white/70">Shipping Updates</span>
                                 </div>
                             </div>
 
@@ -1317,7 +1318,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                             onClick={() => setIsSaveModalOpen(true)}
                             className="font-sans text-sm text-white/50 hover:text-white underline underline-offset-4 transition-colors cursor-pointer"
                         >
-                            Not ready to reserve today? Save this configuration to your inbox.
+                            Not ready to reserve today? Join the waitlist and save this build.
                         </button>
                     </div>
 
@@ -1538,13 +1539,13 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                         <ShieldCheck className="text-white" size={24} strokeWidth={1.5} />
                                     </div>
                                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-3">
-                                        Stay Updated
+                                        DreamPlay Waitlist
                                     </p>
                                     <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
-                                        Get Notified.
+                                        {WAITLIST_OFFER_HEADLINE}
                                     </h2>
                                     <p className="text-white/60 font-sans text-sm leading-relaxed">
-                                        Enter your email to be the first to know about our upcoming releases and promotions.
+                                        {WAITLIST_OFFER_BODY}
                                     </p>
                                 </div>
 
@@ -1582,6 +1583,9 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                     <p className="text-[10px] text-center text-white/40 uppercase tracking-widest mt-2">
                                         No spam. Unsubscribe anytime.
                                     </p>
+                                    <p className="text-[10px] text-center text-white/35 leading-relaxed mt-3">
+                                        {WAITLIST_OFFER_TERMS}
+                                    </p>
                                 </form>
                             </>
                         ) : (
@@ -1591,7 +1595,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                 </div>
                                 <h3 className="text-2xl font-serif text-white mb-3">Build saved. Check your inbox.</h3>
                                 <p className="text-white/60 font-sans text-sm mb-8 max-w-xs mx-auto leading-relaxed">
-                                    We just sent you a Magic Link to set up your VIP profile. Your Free Shipping pass will be waiting inside.
+                                    You&apos;re on the DreamPlay Waitlist. We&apos;ll send your $100 credit details with production updates and preorder availability.
                                 </p>
                                 <button
                                     onClick={() => { setIsSaveModalOpen(false); setSaveSuccess(false); setSaveEmail(""); }}

@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { Resend } from 'resend';
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 interface SubscribePayload {
     email: string;
@@ -66,11 +67,11 @@ export async function subscribeToNewsletter(payload: SubscribePayload): Promise<
             try {
                 const resend = new Resend(resendApiKey);
 
-                const isShippingLead = apiPayload.tags?.includes("Free Shipping Lead");
+                const isShippingLead = apiPayload.tags?.includes("$100 Credit Lead");
                 const isDiscountLead = apiPayload.tags?.includes("$300 Off Lead");
 
                 const emailSubject = isShippingLead
-                    ? "Lock in your Free Shipping Pass 🎹"
+                    ? "Your DreamPlay Waitlist credit is reserved 🎹"
                     : isDiscountLead
                         ? "Your $300 discount code is here 🎹"
                         : "Here is your Hand-Measuring Guide 🎹";
@@ -112,18 +113,19 @@ export async function subscribeToNewsletter(payload: SubscribePayload): Promise<
                 const emailHtml = isShippingLead
                     ? `
                         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #111;">
-                            <h1 style="font-family: serif; font-size: 28px;">Lock in your VIP Free Shipping Pass.</h1>
-                            <p style="color: #444; line-height: 1.6;">You're one step away from free worldwide shipping on the DreamPlay One (saves $150+).</p>
-                            <p style="color: #444; line-height: 1.6;">Create your account by setting up a password and your VIP promo code will be waiting for you inside your personal dashboard.</p>
+                            <h1 style="font-family: serif; font-size: 28px;">${WAITLIST_OFFER_HEADLINE}</h1>
+                            <p style="color: #444; line-height: 1.6;">${WAITLIST_OFFER_BODY}</p>
+                            <p style="color: #444; line-height: 1.6;">Create your account by setting up a password and your waitlist credit will be connected to your profile.</p>
                             
                             <div style="text-align: center; margin: 35px 0;">
                                 <a href="${activateUrl}" 
                                    style="background-color: #050505; color: white; padding: 16px 32px; text-decoration: none; font-weight: bold; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; display: inline-block;">
-                                   Create My VIP Account
+                                   Create My Account
                                 </a>
                             </div>
 
                             <p style="color: #999; font-size: 13px;">This takes less than 30 seconds.</p>
+                            <p style="color: #999; font-size: 12px; line-height: 1.5;">${WAITLIST_OFFER_TERMS}</p>
                             
                             <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
                             <p style="font-size: 12px; color: #999;">Best,<br>Lionel & the DreamPlay team</p>
@@ -150,13 +152,13 @@ export async function subscribeToNewsletter(payload: SubscribePayload): Promise<
 
                             <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
 
-                            <p style="color: #444; line-height: 1.6;"><strong>Want free worldwide shipping too?</strong></p>
-                            <p style="color: #444; line-height: 1.6;">Create a VIP account and stack a free shipping pass on top of your $300 discount (saves another $150+).</p>
+                            <p style="color: #444; line-height: 1.6;"><strong>Want your DreamPlay Waitlist credit too?</strong></p>
+                            <p style="color: #444; line-height: 1.6;">Create an account to keep your $100 waitlist credit connected to your profile.</p>
                             
                             <div style="text-align: center; margin: 25px 0;">
                                 <a href="${activateUrl}" 
                                    style="background-color: transparent; color: #050505; border: 2px solid #050505; padding: 14px 28px; text-decoration: none; font-weight: bold; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; display: inline-block;">
-                                   Create VIP Account for Free Shipping
+                                   Create Account for Waitlist Credit
                                 </a>
                             </div>
 
@@ -177,8 +179,8 @@ export async function subscribeToNewsletter(payload: SubscribePayload): Promise<
                                 </a>
                             </div>
 
-                            <p style="color: #444; line-height: 1.6;"><strong>Want free worldwide shipping too?</strong></p>
-                            <p style="color: #444; line-height: 1.6;">Create a VIP account and get a free shipping pass (saves $150+) for your DreamPlay One reservation.</p>
+                            <p style="color: #444; line-height: 1.6;"><strong>Want your DreamPlay Waitlist credit too?</strong></p>
+                            <p style="color: #444; line-height: 1.6;">Create an account and keep your $100 credit connected for DreamPlay One or DreamPlay One Pro.</p>
 
                             <div style="text-align: center; margin: 25px 0;">
                                 <a href="${activateUrl}" 

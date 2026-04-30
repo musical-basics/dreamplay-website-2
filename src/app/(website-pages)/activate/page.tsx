@@ -6,6 +6,7 @@ import { subscribeToNewsletter } from "@/actions/email-actions";
 import { Eye, EyeOff, CheckCircle2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 function ActivateForm() {
     const searchParams = useSearchParams();
@@ -69,7 +70,7 @@ function ActivateForm() {
                 }
             }
 
-            // Tag them as VIP Account in our mailing list
+            // Tag them as a VIP account in the CRM
             try {
                 await subscribeToNewsletter({
                     email,
@@ -100,9 +101,12 @@ function ActivateForm() {
                         <img src="/images/logos/DreamPlay Logo White.png" alt="DreamPlay" className="h-6 mx-auto" />
                     </a>
                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">Founder&apos;s Club</p>
-                    <h1 className="font-serif text-3xl text-white tracking-tight mb-3">Lock in your Free Shipping.</h1>
+                    <h1 className="font-serif text-3xl text-white tracking-tight mb-3">{WAITLIST_OFFER_HEADLINE}</h1>
                     <p className="font-sans text-sm text-white/40 leading-relaxed">
-                        Set a password to create your VIP account. Your free shipping code will be waiting inside.
+                        {WAITLIST_OFFER_BODY} Set a password to keep your waitlist credit connected.
+                    </p>
+                    <p className="mt-3 font-sans text-[10px] leading-relaxed text-white/30">
+                        {WAITLIST_OFFER_TERMS}
                     </p>
                 </div>
 
@@ -154,7 +158,7 @@ function ActivateForm() {
                         disabled={isLoading}
                         className="w-full bg-white text-black font-sans text-xs uppercase tracking-widest font-bold py-4 rounded-none hover:bg-white/90 transition-colors disabled:opacity-70 cursor-pointer mt-2"
                     >
-                        {isLoading ? "Creating Account..." : "Create VIP Account & Unlock Free Shipping"}
+                        {isLoading ? "Creating Account..." : "Create Account & Keep My Credit"}
                     </button>
                 </form>
 

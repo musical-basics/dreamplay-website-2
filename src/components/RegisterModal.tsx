@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 import { X, CheckCircle2, ChevronRight, Loader2, Mail } from "lucide-react";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 interface RegisterModalProps {
     isOpen: boolean;
@@ -76,7 +77,7 @@ export function RegisterModal({ isOpen, onClose, discountCode, onSuccess }: Regi
             const res = await subscribeToNewsletter({
                 email,
                 first_name: name.split(" ")[0],
-                tags: ["VIP Account", "Free Shipping Lead", `Reason: ${reason}`, ...discountTag].filter(Boolean)
+                tags: ["VIP Account", ...WAITLIST_OFFER_TAGS, `Reason: ${reason}`, ...discountTag].filter(Boolean)
             });
 
             // 3. Save to LocalStorage for analytics/forms
@@ -129,13 +130,18 @@ export function RegisterModal({ isOpen, onClose, discountCode, onSuccess }: Regi
                     <div className="space-y-4">
                         <div className="text-center mb-6">
                             <h2 className="text-2xl font-serif text-white tracking-tight mb-2">
-                                {discountCode ? "Register to Claim Your Discount" : "Activate Free Shipping"}
+                                {discountCode ? "Register to Claim Your Discount" : WAITLIST_OFFER_HEADLINE}
                             </h2>
                             <p className="text-white/60 text-sm font-sans">
                                 {discountCode
                                     ? "Create a VIP account to use your exclusive discount code."
-                                    : "Create a VIP account to unlock free global shipping on your order."}
+                                    : WAITLIST_OFFER_BODY}
                             </p>
+                            {!discountCode && (
+                                <p className="mt-3 text-[10px] leading-relaxed text-white/35">
+                                    {WAITLIST_OFFER_TERMS}
+                                </p>
+                            )}
                         </div>
                         <form onSubmit={handleNext}>
                             <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">Email Address</label>
@@ -188,7 +194,7 @@ export function RegisterModal({ isOpen, onClose, discountCode, onSuccess }: Regi
                     <form onSubmit={handleRegister} className="space-y-4">
                         <div className="text-center mb-6">
                             <h2 className="text-2xl font-serif text-white tracking-tight mb-2">Create a Password</h2>
-                            <p className="text-white/60 text-sm font-sans">Secure your VIP account to access your shipping pass.</p>
+                            <p className="text-white/60 text-sm font-sans">Secure your account to keep your waitlist credit connected.</p>
                         </div>
                         <div>
                             <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">Password</label>

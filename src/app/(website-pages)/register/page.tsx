@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
 import { CheckCircle2, ChevronRight, Loader2, Mail } from "lucide-react";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 export default function RegisterPage() {
     return (
@@ -81,7 +82,7 @@ function RegisterContent() {
             const baseTags = ["VIP Account", `Reason: ${reason}`].filter(Boolean);
             const offerTags = isCrowdfunding
                 ? ["$300 Off Lead", ...baseTags]
-                : ["Free Shipping Lead", ...baseTags];
+                : [...WAITLIST_OFFER_TAGS, ...baseTags];
 
             const res = await subscribeToNewsletter({
                 email,
@@ -136,13 +137,18 @@ function RegisterContent() {
                     <div className="space-y-4">
                         <div className="text-center mb-6">
                             <h1 className="text-2xl font-serif text-white tracking-tight mb-2">
-                                {isCrowdfunding ? "Register to Unlock Your $300 Discount" : "Activate Free Shipping"}
+                                {isCrowdfunding ? "Register to Unlock Your $300 Discount" : WAITLIST_OFFER_HEADLINE}
                             </h1>
                             <p className="text-white/60 text-sm font-sans">
                                 {isCrowdfunding
                                     ? "Create an account and we\u2019ll send your exclusive $300 off coupon code."
-                                    : "Create a VIP account to unlock free global shipping on your order."}
+                                    : WAITLIST_OFFER_BODY}
                             </p>
+                            {!isCrowdfunding && (
+                                <p className="mt-3 text-[10px] leading-relaxed text-white/35">
+                                    {WAITLIST_OFFER_TERMS}
+                                </p>
+                            )}
                         </div>
                         <form onSubmit={handleNext}>
                             <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">Email Address</label>
@@ -195,7 +201,7 @@ function RegisterContent() {
                     <form onSubmit={handleRegister} className="space-y-4">
                         <div className="text-center mb-6">
                             <h2 className="text-2xl font-serif text-white tracking-tight mb-2">Create a Password</h2>
-                            <p className="text-white/60 text-sm font-sans">Secure your VIP account to access your shipping pass.</p>
+                            <p className="text-white/60 text-sm font-sans">Secure your account to keep your waitlist credit connected.</p>
                         </div>
                         <div>
                             <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">Password</label>

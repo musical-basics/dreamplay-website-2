@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import Link from "next/link";
 import Image from "next/image";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 function InlineShippingCTA() {
     const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ function InlineShippingCTA() {
             const res = await subscribeToNewsletter({
                 email,
                 first_name: "",
-                tags: ["Free Shipping Lead"],
+                tags: WAITLIST_OFFER_TAGS,
             });
             if (!res.success) throw new Error(res.error || "Failed");
             localStorage.setItem("dp_user_email", email);
@@ -36,12 +37,12 @@ function InlineShippingCTA() {
     return (
         <section className="bg-[#0a0a0f] text-white py-20 border-y border-white/5">
             <div className="max-w-2xl mx-auto px-6 text-center reveal-el opacity-0 translate-y-8 transition-all duration-700">
-                <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">Limited Time VIP Offer</p>
+                <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">DreamPlay Waitlist</p>
                 <h2 className="font-serif text-3xl md:text-4xl tracking-tight leading-tight text-white mb-4">
-                    Waive your Global Shipping Fees.
+                    {WAITLIST_OFFER_HEADLINE}
                 </h2>
                 <p className="font-sans text-base text-white/50 leading-relaxed mb-10 max-w-lg mx-auto">
-                    Join the Founder&apos;s Club to unlock a VIP pass that covers 100% of your shipping costs.
+                    {WAITLIST_OFFER_BODY}
                 </p>
 
                 {!isDone ? (
@@ -65,16 +66,16 @@ function InlineShippingCTA() {
                                 disabled={isLoading}
                                 className="bg-white text-black font-sans text-xs uppercase tracking-widest font-bold px-6 py-4 rounded-none hover:bg-white/90 transition-colors disabled:opacity-70 cursor-pointer whitespace-nowrap"
                             >
-                                {isLoading ? "..." : "Get VIP Pass"}
+                                {isLoading ? "..." : "Join Waitlist"}
                             </button>
                         </form>
                         <p className="text-[10px] text-white/30 uppercase tracking-widest mt-4">No spam. Unsubscribe anytime.</p>
-                        <p className="text-[10px] text-white/30 tracking-wide mt-3">* Offer applies to Main &amp; Extended shipping countries.</p>
+                        <p className="text-[10px] text-white/30 leading-relaxed mt-3">{WAITLIST_OFFER_TERMS}</p>
                     </>
                 ) : (
                     <div className="py-4">
                         <p className="text-lg font-serif text-white mb-2">Check your inbox.</p>
-                        <p className="text-sm text-white/50">We sent you instructions to lock in your free shipping pass.</p>
+                        <p className="text-sm text-white/50">You&apos;re on the DreamPlay Waitlist. We&apos;ll email your $100 credit details.</p>
                     </div>
                 )}
             </div>

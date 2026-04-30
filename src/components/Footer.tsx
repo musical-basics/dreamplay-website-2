@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { subscribeToNewsletter } from "@/actions/email-actions";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 export default function Footer() {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ export default function Footer() {
       const res = await subscribeToNewsletter({
         email: email,
         first_name: fname,
-        tags: ["Footer Form", "General Newsletter"]
+        tags: ["Footer Form", ...WAITLIST_OFFER_TAGS]
       });
 
       if (!res.success) {
@@ -44,7 +45,7 @@ export default function Footer() {
       setSuccess(true);
       localStorage.setItem("dp_user_email", email);
       if (res.id) localStorage.setItem("dp_subscriber_id", res.id);
-      alert('Thanks for subscribing!');
+      alert("You're on the DreamPlay Waitlist. Your $100 credit details will be sent by email.");
 
     } catch (error) {
       console.error("Subscription failed", error);
@@ -124,25 +125,25 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Newsletter Glass Card */}
+          {/* Column 3: Waitlist Glass Card */}
           <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] p-10 transition-colors duration-300 hover:border-white/[0.15]">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-normal mt-0 mb-4">Stay Connected</p>
-            <p className="text-[13px] leading-[1.7] text-white/[0.4] mb-0">
-              Stay up to date about the latest developments in the narrow piano keys world.
-            </p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-normal mt-0 mb-4">DreamPlay Waitlist</p>
+            <h2 className="font-serif text-2xl leading-tight text-white mb-4">{WAITLIST_OFFER_HEADLINE}</h2>
+            <p className="text-[13px] leading-[1.7] text-white/[0.45] mb-0">{WAITLIST_OFFER_BODY}</p>
             <form onSubmit={handleSubscribe}>
               <div className="mt-5">
                 <input type="text" name="FNAME" id="footer-fname" placeholder="First Name" required
                   className="w-full py-3.5 px-4 bg-white/[0.04] border border-white/[0.08] text-white text-[13px] placeholder-white/20 outline-none transition-colors duration-300 focus:border-white/30" style={{ fontFamily: "'Manrope', sans-serif" }} />
               </div>
-              <div className="relative mt-3">
+              <div className="relative mt-3 flex flex-col gap-3 sm:block">
                 <input type="email" name="EMAIL" id="footer-email" placeholder="email@address.com" required
-                  className="w-full py-3.5 px-4 pr-[110px] bg-white/[0.04] border border-white/[0.08] text-white text-[13px] placeholder-white/20 outline-none transition-colors duration-300 focus:border-white/30" style={{ fontFamily: "'Manrope', sans-serif" }} />
+                  className="w-full py-3.5 px-4 sm:pr-[138px] bg-white/[0.04] border border-white/[0.08] text-white text-[13px] placeholder-white/20 outline-none transition-colors duration-300 focus:border-white/30" style={{ fontFamily: "'Manrope', sans-serif" }} />
                 <button type="submit" id="footer-submit-btn" disabled={loading}
-                  className="absolute right-1 top-1 bottom-1 px-5 bg-white text-black border-none font-bold text-[10px] tracking-[0.15em] uppercase cursor-pointer transition-all duration-300 hover:bg-white/90" style={{ fontFamily: "'Manrope', sans-serif" }}>
-                  {loading ? "..." : success ? "✓" : "Subscribe"}
+                  className="w-full bg-white px-5 py-3.5 text-black border-none font-bold text-[10px] tracking-[0.15em] uppercase cursor-pointer transition-all duration-300 hover:bg-white/90 sm:absolute sm:right-1 sm:top-1 sm:bottom-1 sm:w-auto sm:py-0" style={{ fontFamily: "'Manrope', sans-serif" }}>
+                  {loading ? "..." : success ? "✓" : "Join Waitlist"}
                 </button>
               </div>
+              <p className="mt-4 text-[10px] leading-relaxed text-white/30">{WAITLIST_OFFER_TERMS}</p>
             </form>
           </div>
         </div>

@@ -1016,7 +1016,7 @@ export default function IntroOfferPage() {
                             <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">Cancel Anytime</span>
                             <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">90 Day Trial</span>
                             <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">No Risk</span>
-                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">Free Shipping</span>
+                            <span className="px-4 py-2 border border-black/20 font-sans text-sm text-black">Shipping Updates</span>
                         </div>
                         <div className="bg-neutral-100 p-8 md:p-12">
                             <p className="font-serif text-lg md:text-xl text-black leading-relaxed">

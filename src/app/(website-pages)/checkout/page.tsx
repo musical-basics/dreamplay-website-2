@@ -289,7 +289,7 @@ function CheckoutContent() {
                             </div>
                             <div className="flex flex-col items-center justify-center text-center gap-2">
                                 <Truck size={28} strokeWidth={1.5} className="text-neutral-800" />
-                                <span className="text-[11px] font-bold text-neutral-800">Free Shipping</span>
+                                <span className="text-[11px] font-bold text-neutral-800">Shipping Updates</span>
                             </div>
                         </div>
 

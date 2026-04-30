@@ -9,6 +9,7 @@ import SurveyPopup from "@/components/SurveyPopup";
 import { getDiscountPopupStatus } from "@/actions/admin-actions";
 import { subscribeToNewsletter } from "@/actions/email-actions";
 import { trackEmailConversion } from "@/components/EmailTracker";
+import { WAITLIST_OFFER_BODY, WAITLIST_OFFER_HEADLINE, WAITLIST_OFFER_TAGS, WAITLIST_OFFER_TERMS } from "@/lib/waitlist-offer";
 
 type PopupType = "none" | "shipping" | "pdf" | "discount" | "discount_44" | "accessory_25" | "store_credit_25" | "priority_shipping" | "survey_5off" | "tips";
 
@@ -157,7 +158,7 @@ export default function NewsletterPopup() {
     const handleClose = () => {
         setErrorMsg("");
         const popupTrackNames: Record<string, string> = {
-            shipping: 'free_shipping',
+            shipping: 'waitlist_100_credit',
             pdf: 'hand_size',
             discount: 'discount_300',
             discount_44: 'discount_44',
@@ -188,20 +189,21 @@ export default function NewsletterPopup() {
 
         try {
             const tagMap: Record<string, string> = {
-                shipping: "Free Shipping Lead",
                 discount: "$300 Off Lead",
                 discount_44: "44% Off Lead",
                 accessory_25: "25% Accessory Lead",
                 pdf: "Hand Guide Download",
                 tips: "Piano Tips Subscriber",
             };
-            const tag = tagMap[currentOffer] || "Hand Guide Download";
+            const tags = currentOffer === "shipping"
+                ? WAITLIST_OFFER_TAGS
+                : [tagMap[currentOffer] || "Hand Guide Download"];
             const tempSession = localStorage.getItem("dp_temp_session") || undefined;
 
             const res = await subscribeToNewsletter({
                 email,
                 first_name: "",
-                tags: [tag],
+                tags,
                 temp_session_id: tempSession,
             });
 
@@ -231,7 +233,7 @@ export default function NewsletterPopup() {
 
             setIsSubmitted(currentOffer);
             trackEmailConversion('conversion_t1', window.location.pathname);
-            trackPopup('yes', currentOffer === 'shipping' ? 'free_shipping' : currentOffer === 'discount' ? 'discount_300' : 'hand_size');
+            trackPopup('yes', currentOffer === 'shipping' ? 'waitlist_100_credit' : currentOffer === 'discount' ? 'discount_300' : 'hand_size');
 
             // Auto-open PDF for pdf offer
             if (currentOffer === "pdf") {
@@ -389,7 +391,7 @@ export default function NewsletterPopup() {
 
                             <h2 className="text-2xl md:text-3xl font-serif text-white tracking-tight leading-tight mb-4">
                                 {activePopup === "shipping"
-                                    ? "Unlock Free Global Shipping."
+                                    ? WAITLIST_OFFER_HEADLINE
                                     : activePopup === "discount"
                                         ? "Lock in Founder's Pricing."
                                         : activePopup === "discount_44"
@@ -405,7 +407,7 @@ export default function NewsletterPopup() {
 
                             <p className="text-white/60 font-sans text-sm leading-relaxed">
                                 {activePopup === "shipping"
-                                    ? "Join our VIP list and get a Free Shipping Pass applied to your next reservation. Limited availability."
+                                    ? WAITLIST_OFFER_BODY
                                     : activePopup === "discount"
                                         ? "Enter your email to secure early-adopter pricing for the DreamPlay One Founder's Batch, shipping October 2026."
                                         : activePopup === "discount_44"
@@ -444,7 +446,7 @@ export default function NewsletterPopup() {
                                 {isLoading
                                     ? "Processing..."
                                     : activePopup === "shipping"
-                                        ? "Get Free Shipping Pass"
+                                        ? "Join Waitlist"
                                         : activePopup === "discount"
                                             ? "Secure My Spot"
                                             : activePopup === "discount_44"
@@ -468,6 +470,11 @@ export default function NewsletterPopup() {
                             <p className="text-[10px] text-center text-white/40 uppercase tracking-widest mt-2">
                                 No spam. Unsubscribe anytime.
                             </p>
+                            {activePopup === "shipping" && (
+                                <p className="text-[10px] text-center text-white/35 leading-relaxed mt-3">
+                                    {WAITLIST_OFFER_TERMS}
+                                </p>
+                            )}
                         </form>
                     </>
                 ) : isSubmitted === "shipping" || isSubmitted === "discount" || isSubmitted === "discount_44" || isSubmitted === "accessory_25" || isSubmitted === "store_credit_25" || isSubmitted === "priority_shipping" ? (
@@ -488,7 +495,7 @@ export default function NewsletterPopup() {
                                             ? "Your $25 store credit has been reserved. We'll send the details to your email."
                                             : isSubmitted === "priority_shipping"
                                                 ? "You're on the priority list for early shipping. We'll keep you updated."
-                                                : "We just sent you an email with instructions to unlock your VIP Free Shipping Pass. Create your account to claim it."
+                                                : "You're on the DreamPlay Waitlist. We'll email your $100 credit details with production updates and preorder availability."
                             }
                         </p>
                         <button
