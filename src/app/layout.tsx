@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: '%s | DreamPlay Pianos',
     default: 'DreamPlay One | A Piano That Fits Your Hands',
   },
-  description: 'Discover the DreamPlay One, a premium digital piano with narrow keys designed specifically for small hands, children, and preventing hand injury.',
+  description: 'The DreamPlay One is a premium digital piano with narrower keys designed to fit your hands — reducing strain, preventing injury, and unlocking pieces a standard keyboard puts out of reach.',
   openGraph: {
     title: 'DreamPlay One | A Piano That Fits Your Hands',
     description: 'A premium digital piano featuring ergonomically narrower keys designed to eliminate strain, prevent injury, and let you play freely.',
