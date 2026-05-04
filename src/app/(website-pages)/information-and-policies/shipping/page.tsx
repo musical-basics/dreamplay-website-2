@@ -75,7 +75,7 @@ function InlineShippingCTA() {
                 ) : (
                     <div className="py-4">
                         <p className="text-lg font-serif text-white mb-2">Check your inbox.</p>
-                        <p className="text-sm text-white/50">You&apos;re on the DreamPlay Waitlist. We&apos;ll email your $100 credit details.</p>
+                        <p className="text-sm text-white/50">You&apos;re on the DreamPlay Waitlist. We&apos;ll email production updates and launch details.</p>
                     </div>
                 )}
             </div>

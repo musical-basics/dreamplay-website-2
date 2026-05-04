@@ -19,15 +19,15 @@ export default function PromoCodeBox() {
 
     return (
         <div className="border border-white/10 bg-white/[0.03] p-8 md:p-10">
-            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">{isCustom ? "Your Exclusive Code" : "Your Waitlist Credit"}</p>
+            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">{isCustom ? "Your Exclusive Code" : "Your Waitlist Status"}</p>
             <div className="bg-white/5 border border-white/10 p-6 mb-6 text-center">
-                <p className="text-white/50 text-[10px] uppercase tracking-[0.2em] mb-2">{isCustom ? "Promo Code" : "Credit Status"}</p>
-                <p className="text-3xl font-mono text-white tracking-widest font-bold">{isCustom ? promoCode : "$100"}</p>
+                <p className="text-white/50 text-[10px] uppercase tracking-[0.2em] mb-2">{isCustom ? "Promo Code" : "Status"}</p>
+                <p className="text-3xl font-mono text-white tracking-widest font-bold">{isCustom ? promoCode : "Active"}</p>
             </div>
             <p className="text-white/50 font-sans text-sm leading-relaxed mb-8">
                 {isCustom
                     ? "Use this code at checkout to apply your DreamPlay promotion where eligible."
-                    : "Your $100 waitlist credit is attached to this account. We'll email credit details when checkout or preorder opens."}
+                    : "Your waitlist profile is attached to this account. We'll email updates when checkout or preorder opens."}
             </p>
             {!isCustom && (
                 <p className="mb-8 font-sans text-[10px] leading-relaxed text-white/35">{WAITLIST_OFFER_TERMS}</p>

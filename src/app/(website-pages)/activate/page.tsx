@@ -103,7 +103,7 @@ function ActivateForm() {
                     <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">Founder&apos;s Club</p>
                     <h1 className="font-serif text-3xl text-white tracking-tight mb-3">{WAITLIST_OFFER_HEADLINE}</h1>
                     <p className="font-sans text-sm text-white/40 leading-relaxed">
-                        {WAITLIST_OFFER_BODY} Set a password to keep your waitlist credit connected.
+                        {WAITLIST_OFFER_BODY} Set a password to keep your waitlist profile connected.
                     </p>
                     <p className="mt-3 font-sans text-[10px] leading-relaxed text-white/30">
                         {WAITLIST_OFFER_TERMS}

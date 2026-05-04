@@ -20,6 +20,8 @@ const HIDDEN_ROUTES = [
     "/my-reservation",
 ];
 
+const WAITLIST_ANNOUNCEMENT_ENABLED = false;
+
 const subscribeToDismissedState = (onStoreChange: () => void) => {
     if (typeof window === "undefined") {
         return () => {};
@@ -50,7 +52,7 @@ export function AnnouncementBanner() {
 
     const isHiddenRoute = HIDDEN_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
 
-    if (isDismissed || isHiddenRoute) {
+    if (!WAITLIST_ANNOUNCEMENT_ENABLED || isDismissed || isHiddenRoute) {
         return null;
     }
 

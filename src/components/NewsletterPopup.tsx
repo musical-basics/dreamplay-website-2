@@ -29,6 +29,9 @@ const getPopupSeenKey = (popupType: PopupType) => (
     popupType === "shipping" ? "dp_v2_waitlist_credit_seen" : `dp_v2_${popupType}_seen`
 );
 
+const HAND_SIZE_GUIDE_POPUP_ENABLED = true;
+const WAITLIST_CREDIT_POPUP_ENABLED = false;
+
 export default function NewsletterPopup() {
     const [activePopup, setActivePopup] = useState<PopupType>("none");
     const [email, setEmail] = useState("");
@@ -74,9 +77,9 @@ export default function NewsletterPopup() {
                 return;
             }
 
-            // Sitewide waitlist popup for the current $100 credit offer.
-            const popups = [
-                { type: "shipping", delaySeconds: 12 },
+            const popups: Array<{ type: PopupType; delaySeconds: number }> = [
+                ...(HAND_SIZE_GUIDE_POPUP_ENABLED ? [{ type: "pdf" as const, delaySeconds: 35 }] : []),
+                ...(WAITLIST_CREDIT_POPUP_ENABLED ? [{ type: "shipping" as const, delaySeconds: 35 }] : []),
             ];
 
             console.log('[PopupDebug] Scheduling', popups.length, 'popups:', JSON.stringify(popups));
@@ -125,6 +128,7 @@ export default function NewsletterPopup() {
     // --- EXIT-INTENT POPUP ---
     useEffect(() => {
         const excludedPaths = ["/vip", "/login", "/register", "/activate", "/forgot-password", "/reset-password"];
+        if (!WAITLIST_CREDIT_POPUP_ENABLED) return;
         if (excludedPaths.includes(pathname)) return;
 
         const handleMouseLeave = (e: MouseEvent) => {
@@ -494,7 +498,7 @@ export default function NewsletterPopup() {
                                             ? "Your $25 store credit has been reserved. We'll send the details to your email."
                                             : isSubmitted === "priority_shipping"
                                                 ? "You're on the priority list for early shipping. We'll keep you updated."
-                                                : "You're on the DreamPlay Waitlist. We'll email your $100 credit details with production updates and preorder availability."
+                                                : "You're on the DreamPlay Waitlist. We'll email production updates and preorder availability."
                             }
                         </p>
                         <button

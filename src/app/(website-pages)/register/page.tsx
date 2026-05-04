@@ -201,7 +201,7 @@ function RegisterContent() {
                     <form onSubmit={handleRegister} className="space-y-4">
                         <div className="text-center mb-6">
                             <h2 className="text-2xl font-serif text-white tracking-tight mb-2">Create a Password</h2>
-                            <p className="text-white/60 text-sm font-sans">Secure your account to keep your waitlist credit connected.</p>
+                            <p className="text-white/60 text-sm font-sans">Secure your account to keep your waitlist profile connected.</p>
                         </div>
                         <div>
                             <label className="block font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-2">Password</label>

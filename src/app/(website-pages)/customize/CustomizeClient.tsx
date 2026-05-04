@@ -1595,7 +1595,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                                 </div>
                                 <h3 className="text-2xl font-serif text-white mb-3">Build saved. Check your inbox.</h3>
                                 <p className="text-white/60 font-sans text-sm mb-8 max-w-xs mx-auto leading-relaxed">
-                                    You&apos;re on the DreamPlay Waitlist. We&apos;ll send your $100 credit details with production updates and preorder availability.
+                                    You&apos;re on the DreamPlay Waitlist. We&apos;ll send production updates and preorder availability.
                                 </p>
                                 <button
                                     onClick={() => { setIsSaveModalOpen(false); setSaveSuccess(false); setSaveEmail(""); }}

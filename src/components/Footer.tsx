@@ -45,7 +45,7 @@ export default function Footer() {
       setSuccess(true);
       localStorage.setItem("dp_user_email", email);
       if (res.id) localStorage.setItem("dp_subscriber_id", res.id);
-      alert("You're on the DreamPlay Waitlist. Your $100 credit details will be sent by email.");
+      alert("You're on the DreamPlay Waitlist. We'll send updates by email.");
 
     } catch (error) {
       console.error("Subscription failed", error);

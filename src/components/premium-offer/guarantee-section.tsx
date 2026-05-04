@@ -180,7 +180,7 @@ export function GuaranteeSection() {
                   You&apos;re on the list!
                 </h3>
                 <p className="text-white/60 font-sans text-sm mb-8 max-w-xs mx-auto leading-relaxed">
-                  We&apos;ll email your $100 credit details with production updates,
+                  We&apos;ll email production updates,
                   preorder availability, and launch details.
                 </p>
                 <button
