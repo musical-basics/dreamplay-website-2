@@ -94,8 +94,8 @@ export function GuaranteeSection() {
 
             <div className="mt-12 flex flex-col gap-4 sm:flex-row">
               <a
-                href="/customize"
-                onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
+                href="https://shop.dreamplaypianos.com/"
+                onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "https://shop.dreamplaypianos.com/" } })}
                 className="group flex items-center justify-center gap-2 border border-foreground bg-foreground px-8 py-4 font-sans text-xs uppercase tracking-widest text-background transition-colors hover:bg-foreground/90"
               >
                 Reserve Now

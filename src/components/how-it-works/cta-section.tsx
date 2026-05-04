@@ -43,7 +43,7 @@ export function CtaSection({ hiddenProducts = [] }: { hiddenProducts?: string[] 
                     </p>
 
                     <a
-                        href="/customize"
+                        href="https://shop.dreamplaypianos.com/"
                         className="group mt-10 inline-flex items-center justify-center gap-2 border border-white/30 bg-white px-10 py-4 font-sans text-xs uppercase tracking-widest text-black transition-all hover:bg-white/90 rounded-xl"
                         style={{
                             backdropFilter: 'blur(12px)',

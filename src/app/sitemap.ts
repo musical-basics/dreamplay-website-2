@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/why-narrow', priority: 0.8, changeFrequency: 'monthly' as const },
         { path: '/better-practice', priority: 0.7, changeFrequency: 'monthly' as const },
         { path: '/customize', priority: 0.8, changeFrequency: 'weekly' as const },
+        { path: '/shop', priority: 0.9, changeFrequency: 'weekly' as const },
         { path: '/extended-offer', priority: 0.7, changeFrequency: 'weekly' as const },
         { path: '/dreamplay-pro', priority: 0.8, changeFrequency: 'weekly' as const },
         { path: '/production-timeline', priority: 0.5, changeFrequency: 'monthly' as const },
@@ -31,10 +32,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: '/blog', priority: 0.7, changeFrequency: 'weekly' as const },
     ];
 
-    return corePages.map(({ path, priority, changeFrequency }) => ({
+    const pages = corePages.map(({ path, priority, changeFrequency }) => ({
         url: `${baseUrl}${path}`,
         lastModified: now,
         changeFrequency,
         priority,
     }));
+
+    return [
+        ...pages,
+        {
+            url: 'https://shop.dreamplaypianos.com',
+            lastModified: now,
+            changeFrequency: 'weekly' as const,
+            priority: 0.9,
+        },
+    ];
 }

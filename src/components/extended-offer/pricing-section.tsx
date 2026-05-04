@@ -207,7 +207,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
 
               {/* CTA */}
               <a
-                href="/customize"
+                href="https://shop.dreamplaypianos.com/"
                 className={`mt-8 group flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest transition-all rounded-xl ${tier.highlight
                   ? "border-white/30 bg-white text-black hover:bg-white/90"
                   : "border-white/30 bg-white text-black hover:bg-white/90"

@@ -108,7 +108,7 @@ export async function subscribeToNewsletter(payload: SubscribePayload): Promise<
                     }
                 }
 
-                const discountCheckoutUrl = `https://dreamplaypianos.com/customize?discount=${discountCode}`;
+                const discountCheckoutUrl = `https://shop.dreamplaypianos.com/?discount=${discountCode}`;
 
                 const emailHtml = isShippingLead
                     ? `

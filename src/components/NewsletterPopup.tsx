@@ -51,9 +51,9 @@ export default function NewsletterPopup() {
         const initPopups = () => {
             console.log('[PopupDebug] initPopups() called');
 
-            // Disable all popups on /customize — user is in checkout flow
-            if (window.location.pathname === '/customize') {
-                console.log('[PopupDebug] SKIPPED: on /customize page');
+            // Disable all popups on commerce surfaces.
+            if (window.location.pathname === '/customize' || window.location.pathname === '/shop') {
+                console.log('[PopupDebug] SKIPPED: on commerce page');
                 return;
             }
 

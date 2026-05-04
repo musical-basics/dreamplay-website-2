@@ -56,8 +56,8 @@ export function StickyHeader() {
 
           {/* CTA */}
           <a
-            href="/customize"
-            onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
+            href="https://shop.dreamplaypianos.com/"
+            onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "https://shop.dreamplaypianos.com/" } })}
             className="group flex items-center gap-2 bg-white px-5 py-2 font-sans text-[10px] uppercase tracking-widest text-black transition-colors hover:bg-white/90 md:text-xs"
           >
             Pre-Order Now

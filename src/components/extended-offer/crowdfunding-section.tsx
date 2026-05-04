@@ -149,7 +149,7 @@ export function CrowdfundingSection() {
           {/* CTAs */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
             <a
-              href="/customize"
+              href="https://shop.dreamplaypianos.com/"
               className="inline-block bg-white px-8 py-3 text-center text-xs font-sans font-medium uppercase tracking-widest text-black transition-colors hover:bg-white/90 md:text-sm"
             >
               Pre-Order Now

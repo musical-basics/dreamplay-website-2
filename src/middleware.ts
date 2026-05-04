@@ -10,6 +10,8 @@ export async function middleware(request: NextRequest) {
 
     const url = request.nextUrl;
     const pathname = url.pathname;
+    const hostname = request.headers.get("host")?.split(":")[0] || "";
+    const isShopHost = hostname === "shop.dreamplaypianos.com";
 
     // Skip Journey Engine for API routes, admin, and auth paths
     if (pathname.startsWith('/api') || pathname.startsWith('/admin') || pathname.startsWith('/api/auth')) {
@@ -18,6 +20,19 @@ export async function middleware(request: NextRequest) {
 
     // Skip static files
     if (pathname.match(/\.(.*)$/)) {
+        return sessionResponse;
+    }
+
+    // Serve the shop subdomain from the internal /shop route.
+    if (isShopHost) {
+        if (pathname === "/") {
+            const rewriteUrl = request.nextUrl.clone();
+            rewriteUrl.pathname = "/shop";
+            const response = NextResponse.rewrite(rewriteUrl);
+            sessionResponse.cookies.getAll().forEach(c => response.cookies.set(c.name, c.value));
+            return response;
+        }
+
         return sessionResponse;
     }
 

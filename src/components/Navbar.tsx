@@ -10,8 +10,8 @@ import { useABAnalytics } from "@/hooks/use-ab-analytics"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 import { RegisterModal } from "./RegisterModal"
-import { useJourneyCheckout } from "@/hooks/use-journey-checkout"
 import type { User as SupabaseUser } from "@supabase/supabase-js"
+import { SHOP_LINKS } from "@/config/shop-links"
 
 interface NavbarProps {
     forceOpaque?: boolean;
@@ -69,7 +69,6 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
     const lastScrollY = useRef(0)
     const [user, setUser] = useState<SupabaseUser | null>(null)
     const [isRegisterOpen, setIsRegisterOpen] = useState(false)
-    const checkoutPath = useJourneyCheckout("/customize")
 
     useEffect(() => {
         const supabase = createClient()
@@ -133,10 +132,10 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
                     <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                         {/* Logo */}
                         <a
-                            href="/customize"
+                            href="/"
                             onClick={(e) => {
                                 e.preventDefault()
-                                router.push("/customize")
+                                router.push("/")
                             }}
                             className="flex items-center gap-2 cursor-pointer"
                         >
@@ -208,7 +207,7 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
                         <div className="flex items-center gap-4">
                             <Link
                                 onClick={() => trackClick("header", "start_customization")}
-                                href={checkoutPath}
+                                href={SHOP_LINKS.home}
                                 className={`hidden md:flex items-center gap-2 rounded-none px-5 py-2.5 text-sm font-medium transition-all duration-300 ${useDarkText
                                     ? "bg-black border border-black text-white hover:bg-neutral-800"
                                     : "bg-white/5 backdrop-blur-sm border border-white/30 text-white hover:bg-white/15"
@@ -260,7 +259,7 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
                                 <div className="px-1 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">DreamPlay Keyboards</div>
                                 <Link href="/premium-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Our Product</Link>
                                 <Link href="/dreamplay-pro" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>DreamPlay One Pro</Link>
-                                <Link href="/customize" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Discover</Link>
+                                <Link href={SHOP_LINKS.keyboards} className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Shop</Link>
                                 <Link href="/extended-offer" className="py-3 pl-3 text-neutral-600 hover:text-black font-medium border-b border-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Explore</Link>
 
                                 <div className="border-t border-gray-200 my-2" />
@@ -319,7 +318,7 @@ export function Navbar({ forceOpaque = false, darkMode = false, className = "" }
                                     </Link>
                                 )}
                                 <Link
-                                    href={checkoutPath}
+                                    href={SHOP_LINKS.home}
                                     className="mt-4 flex items-center justify-center gap-2 w-full bg-black text-white rounded-none py-3 font-medium"
                                     onClick={() => {
                                         trackClick("header", "start_customization_mobile")

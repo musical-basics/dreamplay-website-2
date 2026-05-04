@@ -194,7 +194,7 @@ export default function WhyNarrowPage() {
           <div className="w-full max-w-[80rem] px-6 text-center pt-24">
             <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-4">Get Started</p>
             <h2 className="font-serif text-4xl md:text-5xl tracking-tight leading-tight text-black mb-8">Don't let your instrument hold you back.</h2>
-            <a href="/customize" className="group inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 font-sans text-xs uppercase tracking-widest transition-colors hover:bg-neutral-800">
+            <a href="https://shop.dreamplaypianos.com/" className="group inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-4 font-sans text-xs uppercase tracking-widest transition-colors hover:bg-neutral-800">
               Configure Yours
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ width: 18, height: 18 }}><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
             </a>

@@ -92,7 +92,7 @@ export function ComparisonTableSection() {
                 {/* CTA */}
                 <div className="mt-12 md:mt-16">
                     <Link
-                        href="/customize"
+                        href="https://shop.dreamplaypianos.com/"
                         className="group inline-flex items-center justify-center gap-2 border border-neutral-900 bg-neutral-900 px-8 py-4 font-sans text-xs uppercase tracking-widest text-white transition-colors hover:bg-neutral-800"
                     >
                         Get Premium Quality for Less

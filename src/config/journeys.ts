@@ -56,7 +56,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         name: 'Premium Offer',
         weight: 100,
         homepage: '/premium-offer',
-        checkout: '/customize',
+        checkout: '/shop',
         announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
         popups: [
             { type: 'pdf', delaySeconds: 12 },
@@ -70,7 +70,7 @@ export const JOURNEY_CONFIGS: JourneyConfig[] = [
         name: 'Intro Offer',
         weight: 0,  // Disabled — all traffic on journey_a (premium-offer)
         homepage: '/intro-offer',
-        checkout: '/customize',
+        checkout: '/shop',
         announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
         popups: [
             { type: 'survey_5off', delaySeconds: 15 },
@@ -93,7 +93,7 @@ export const STANDARD_JOURNEY: JourneyConfig = {
     weight: 0,           // Never randomly assigned
     priceTier: 'standard',
     homepage: '/premium-offer',
-    checkout: '/customize',
+    checkout: '/shop',
     announcementText: 'Founder\'s pricing: Reserve your DreamPlay One for $999 — full MSRP is $1,499. Q4 2026 delivery.',
     popups: [],           // No popups for bots
     // Note: product pricing is hardcoded in CustomizeClient.tsx (PRODUCT_CATALOG)

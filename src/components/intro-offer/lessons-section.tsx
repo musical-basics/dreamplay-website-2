@@ -89,7 +89,7 @@ export function LessonsSection() {
                         </ul>
 
                         <Link
-                            href="/customize"
+                            href="https://shop.dreamplaypianos.com/"
                             className={`mt-6 md:mt-8 inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-neutral-900 text-white text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-105 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                                 }`}
                             style={{ transitionDelay: "800ms" }}

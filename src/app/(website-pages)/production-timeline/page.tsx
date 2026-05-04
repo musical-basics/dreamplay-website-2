@@ -348,7 +348,7 @@ export default function ProductionTimelinePage() {
                                 We estimate our earliest backers will receive their keyboards in <strong className="text-white">October 2026</strong>. Reserve your spot today to be among the first to experience this groundbreaking instrument.
                             </p>
 
-                            <Link href="/customize" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            <Link href="https://shop.dreamplaypianos.com/" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                                 Secure My Allocation
                                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                             </Link>

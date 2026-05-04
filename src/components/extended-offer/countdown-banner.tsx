@@ -49,7 +49,7 @@ export function CountdownBanner() {
 
     return (
         <Link
-            href="/customize"
+            href="https://shop.dreamplaypianos.com/"
             className="group bg-[#050505] border-b border-white/10 py-2.5 text-center flex items-center justify-center gap-2 sm:gap-3 w-full z-50 text-[10px] sm:text-xs text-white/80 uppercase tracking-[0.15em] font-sans font-medium hover:text-white transition-colors"
         >
             <span className="hidden sm:inline">Founder&apos;s Pricing ends in</span>
