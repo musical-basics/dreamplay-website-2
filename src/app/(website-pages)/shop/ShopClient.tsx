@@ -216,7 +216,7 @@ export function ShopClient() {
                         <SectionIntro
                             eyebrow="Bundles"
                             title="The standard bench lives inside the bundles."
-                            body="Premium Bundles include the lower-cost padded bench, plus the matched stand and pedal setup."
+                            body="Premium Bundles include the $80 standard padded bench, plus the matched stand and pedal setup."
                         />
                         <div className="grid gap-5 lg:grid-cols-2">
                             {SHOP_PRODUCTS.filter((product) => product.category === "bundle").map((product) => (
@@ -231,7 +231,7 @@ export function ShopClient() {
                         <SectionIntro
                             eyebrow="Benches"
                             title="A standalone bench upgrade."
-                            body="The hydraulic bench is separate from the lower-cost bundle bench, built for players who want more precise height control."
+                            body="The hydraulic bench is separate from the $80 regular bundle bench, built for players who want more precise height control."
                         />
                         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
                             <div className="border border-neutral-200 bg-neutral-950 p-8 text-white">
@@ -239,10 +239,10 @@ export function ShopClient() {
                                     Two-bench logic
                                 </p>
                                 <h2 className="mb-5 font-serif text-4xl leading-tight">
-                                    Bundle bench for value. Hydraulic bench for posture.
+                                    Regular bench for value. Hydraulic bench for posture.
                                 </h2>
                                 <p className="font-sans text-sm leading-7 text-white/65">
-                                    The Premium Bundle includes the standard padded bench. The hydraulic bench is the more expensive standalone option at $199 for players who want a more adjustable studio seat.
+                                    The Premium Bundle includes the standard $80 padded bench. The hydraulic bench is the standalone $199 upgrade for players who want a more adjustable studio seat.
                                 </p>
                             </div>
                             {SHOP_PRODUCTS.filter((product) => product.category === "bench").map((product) => (

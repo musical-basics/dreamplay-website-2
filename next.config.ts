@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'dreamplaypianos.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'pub-ae162277c7104eb2b558af08104deafc.r2.dev',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85, 90, 95, 100],

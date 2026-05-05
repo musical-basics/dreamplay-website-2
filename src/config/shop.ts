@@ -81,6 +81,13 @@ const bundleImages = [
     "/holiday-sale/images/slot-5-x-stand.png",
 ];
 
+const hydraulicBenchImages = [
+    "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/7a01e084-6c31-4642-9e89-4bcbfa866e76_piano_bench_angle_left.png",
+    "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/780e4cf8-24b2-45ad-a410-056a8a0793b0_piano_bench_angle_right_low.png",
+    "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/f2ba4a98-51d9-4354-be00-c785038dcd9b_piano_bench_front.png",
+    "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/abf3b00e-ef0c-4038-bdf8-7604abe9ad30_piano_bench_angle_right_high.png",
+];
+
 const proImages = [
     "/images/pro/nightmare-black-angled.png",
     "/images/pro/aztec-gold-full.jpg",
@@ -145,7 +152,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         name: "DreamPlay One Premium Bundle",
         eyebrow: "Complete starter setup",
         subtitle: "Keyboard, stand, pedal, standard bench",
-        description: "The easiest complete setup for home practice: DreamPlay One plus the matched essentials, including the lower-cost padded bench.",
+        description: "The easiest complete setup for home practice: DreamPlay One plus the matched essentials, including the $80 standard padded bench.",
         price: 549,
         compareAtPrice: 1499,
         totalPrice: 1099,
@@ -157,7 +164,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         gallery: bundleImages,
         imageAlt: "DreamPlay One with bench and bundle accessories",
         includes: ["DreamPlay One keyboard", "Keyboard stand", "Sustain pedal", "Standard padded bench"],
-        details: ["Best value for first setups", "Lower-cost bench included", "50% now, 50% at delivery"],
+        details: ["Best value for first setups", "$80 standard bench included", "50% now, 50% at delivery"],
         optionGroups: [
             { key: "size", label: "Key Width", options: oneSizes },
             { key: "finish", label: "Finish", options: oneFinishes },
@@ -194,7 +201,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         name: "DreamPlay One Pro Premium Bundle",
         eyebrow: "Flagship ecosystem",
         subtitle: "Pro keyboard, stand, triple pedal, standard bench",
-        description: "DreamPlay One Pro with the matched furniture stand, triple pedal unit, and the lower-cost padded bench included.",
+        description: "DreamPlay One Pro with the matched furniture stand, triple pedal unit, and the $80 standard padded bench included.",
         price: 1999,
         compareAtPrice: 2499,
         paymentNote: "Charged at checkout for preorder.",
@@ -204,7 +211,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         gallery: [proImages[1], proImages[0], bundleImages[1]],
         imageAlt: "DreamPlay One Pro in Aztec Gold",
         includes: ["DreamPlay One Pro 88-key keyboard", "Matched furniture stand", "Triple pedal unit", "Standard padded bench", "DreamPlay Learn app lifetime access"],
-        details: ["Complete Pro setup", "Lower-cost bench included", "Premium finishes"],
+        details: ["Complete Pro setup", "$80 standard bench included", "Premium finishes"],
         optionGroups: [
             { key: "size", label: "Key Width", options: proSizes },
             { key: "finish", label: "Finish", options: proFinishes },
@@ -218,16 +225,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         name: "DreamPlay Hydraulic Bench",
         eyebrow: "Standalone bench upgrade",
         subtitle: "Premium adjustable bench",
-        description: "A sturdier hydraulic bench for players who want finer height control, cleaner posture, and a more permanent studio setup.",
+        description: "A tufted hydraulic adjustable-height bench for players who want finer height control, cleaner posture, and a more permanent studio setup.",
         price: 199,
         pricePrefix: "Standalone",
         paymentNote: "Charged at checkout.",
         delivery: "Ships separately when available",
-        image: "/images/accessories/piano-bench-cushioned-black.jpg",
-        gallery: ["/images/accessories/piano-bench-cushioned-black.jpg", "/images/accessories/piano-bench-bundle.png"],
-        imageAlt: "Black piano bench",
-        includes: ["Hydraulic height adjustment", "Padded seat", "Black studio finish"],
-        details: ["Standalone upgrade", "Not the lower-cost bundle bench", "Best for posture-sensitive practice"],
+        image: hydraulicBenchImages[0],
+        gallery: hydraulicBenchImages,
+        imageAlt: "Black tufted hydraulic piano bench",
+        includes: ["Hydraulic height adjustment levers", "Tufted padded seat", "Twin-leg studio base", "Black studio finish"],
+        details: ["Standalone upgrade", "Not the $80 standard bundle bench", "Best for posture-sensitive practice"],
         optionGroups: [],
         variants: [
             {
