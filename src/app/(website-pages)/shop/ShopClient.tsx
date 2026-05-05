@@ -402,7 +402,6 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
     const [lightboxImage, setLightboxImage] = useState<string | null>(null);
     const selectedVariant = useMemo(() => getSelectedVariant(product, selections), [product, selections]);
     const canAdd = Boolean(selectedVariant?.variantId);
-    const showBenchLogo = product.category === "bench";
 
     const setOption = (key: ShopOptionKey, value: string) => {
         setSelections((current) => ({ ...current, [key]: value }));
@@ -426,7 +425,6 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
                             className="object-contain p-6 transition-transform duration-300 group-hover:scale-[1.02]"
                             sizes="(max-width: 1024px) 100vw, 38vw"
                         />
-                        {showBenchLogo && <BenchLogoOverlay />}
                         <span
                             className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-neutral-200 bg-white/90 text-neutral-950 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
                             aria-hidden="true"
@@ -548,30 +546,12 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
                 </div>
             </div>
         </article>
-        <ImageLightbox image={lightboxImage} alt={product.imageAlt} showBenchLogo={showBenchLogo} onClose={() => setLightboxImage(null)} />
+        <ImageLightbox image={lightboxImage} alt={product.imageAlt} onClose={() => setLightboxImage(null)} />
         </>
     );
 }
 
-function BenchLogoOverlay({ large = false }: { large?: boolean }) {
-    return (
-        <span
-            className={`pointer-events-none absolute left-1/2 top-[47%] z-10 -translate-x-1/2 -translate-y-1/2 opacity-75 drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)] ${large ? "w-[min(220px,18vw)]" : "w-[18%] max-w-32"}`}
-            aria-hidden="true"
-        >
-            <Image
-                src="/images/logos/DreamPlay Logo White.png"
-                alt=""
-                width={420}
-                height={120}
-                className="h-auto w-full"
-                sizes={large ? "220px" : "160px"}
-            />
-        </span>
-    );
-}
-
-function ImageLightbox({ image, alt, showBenchLogo, onClose }: { image: string | null; alt: string; showBenchLogo: boolean; onClose: () => void }) {
+function ImageLightbox({ image, alt, onClose }: { image: string | null; alt: string; onClose: () => void }) {
     useEffect(() => {
         if (!image) return;
 
@@ -614,7 +594,6 @@ function ImageLightbox({ image, alt, showBenchLogo, onClose }: { image: string |
                     sizes="100vw"
                     priority
                 />
-                {showBenchLogo && <BenchLogoOverlay large />}
             </div>
             <button
                 type="button"
