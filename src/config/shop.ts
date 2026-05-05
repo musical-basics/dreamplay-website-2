@@ -46,6 +46,7 @@ export type ShopProduct = {
     optionGroups: ShopOptionGroup[];
     variants: ShopVariant[];
     unavailableMessage?: string;
+    purchasedToday?: number;
 };
 
 const oneSizes: ShopOption[] = [
@@ -156,6 +157,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
             { key: "finish", label: "Finish", options: oneFinishes },
         ],
         variants: buildVariants("solo", oneSizes, oneFinishes),
+        purchasedToday: 6,
     },
     {
         id: "dreamplay-one-bundle",
@@ -182,6 +184,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
             { key: "finish", label: "Finish", options: oneFinishes },
         ],
         variants: buildVariants("full", oneSizes, oneFinishes),
+        purchasedToday: 11,
     },
     {
         id: "dreamplay-one-pro",
@@ -205,6 +208,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
             { key: "finish", label: "Finish", options: proFinishes },
         ],
         variants: buildVariants("pro_solo", proSizes, proFinishes),
+        purchasedToday: 3,
     },
     {
         id: "dreamplay-one-pro-bundle",
@@ -229,6 +233,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
             { key: "finish", label: "Finish", options: proFinishes },
         ],
         variants: buildVariants("pro_full", proSizes, proFinishes),
+        purchasedToday: 4,
     },
     {
         id: "standard-bench",
@@ -257,6 +262,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
                 available: true,
             },
         ],
+        purchasedToday: 5,
     },
     {
         id: "hydraulic-bench",
@@ -285,6 +291,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
                 available: true,
             },
         ],
+        purchasedToday: 7,
     },
 ];
 

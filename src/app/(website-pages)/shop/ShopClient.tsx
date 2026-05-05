@@ -411,7 +411,13 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
 
     return (
         <>
-        <article id={product.anchor} className="scroll-mt-24 border border-neutral-200 bg-white">
+        <article id={product.anchor} className="relative scroll-mt-24 border border-neutral-200 bg-white">
+            {product.purchasedToday && product.purchasedToday > 0 ? (
+                <span className="absolute -top-3 right-6 z-10 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1 font-sans text-[11px] font-semibold text-neutral-700 shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                    {product.purchasedToday} purchased today
+                </span>
+            ) : null}
             <div className="grid min-h-full lg:grid-cols-[0.95fr_1.05fr]">
                 <div className="border-b border-neutral-200 bg-[#f6f6f4] p-5 lg:border-b-0 lg:border-r">
                     <button
