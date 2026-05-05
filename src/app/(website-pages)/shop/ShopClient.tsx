@@ -233,18 +233,20 @@ export function ShopClient() {
                             title="Two black bench options."
                             body="Choose the $80 regular padded bench or the $199 hydraulic upgrade. Both are preorder accessories with an estimated 2-month wait."
                         />
-                        <div className="grid gap-5 lg:grid-cols-3">
-                            <div className="border border-neutral-200 bg-neutral-950 p-8 text-white">
+                        <div className="mb-5 grid gap-6 border border-neutral-200 bg-neutral-950 p-8 text-white md:grid-cols-[0.9fr_1.1fr] md:p-10">
+                            <div>
                                 <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c5a059]">
                                     Two-bench logic
                                 </p>
-                                <h2 className="mb-5 font-serif text-4xl leading-tight">
+                                <h2 className="font-serif text-4xl leading-tight md:text-5xl">
                                     Regular bench for value. Hydraulic bench for posture.
                                 </h2>
-                                <p className="font-sans text-sm leading-7 text-white/65">
-                                    The Premium Bundle includes the standard $80 padded bench. The hydraulic bench is the standalone $199 upgrade for players who want a more adjustable studio seat.
-                                </p>
                             </div>
+                            <p className="font-sans text-sm leading-7 text-white/70 md:self-end md:text-base md:leading-8">
+                                The Premium Bundle includes the standard $80 padded bench. The hydraulic bench is the standalone $199 upgrade for players who want a more adjustable studio seat.
+                            </p>
+                        </div>
+                        <div className="grid gap-5 lg:grid-cols-2">
                             {SHOP_PRODUCTS.filter((product) => product.category === "bench").map((product) => (
                                 <ProductPanel key={product.id} product={product} onAdd={addToCart} />
                             ))}
