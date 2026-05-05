@@ -336,7 +336,7 @@ function Hero({ onCartClick }: { onCartClick: () => void }) {
                             Built for checkout
                         </p>
                         <h2 className="mb-5 font-serif text-4xl leading-tight">
-                            Add everything here. Finish in Shopify checkout.
+                            Here is your cart
                         </h2>
                         <p className="mb-8 font-sans text-sm leading-7 text-neutral-600">
                             The shop cart keeps the buying experience on DreamPlay. When you are ready, we create the Shopify checkout with your selected variants.
