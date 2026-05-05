@@ -494,7 +494,7 @@ export default function DreamPlayProPage() {
                                         <span className="ml-2 font-sans text-sm italic tracking-normal text-white/35">USD</span>
                                     </div>
                                     <p className="mb-10 font-sans text-xs text-white/45">
-                                        Target delivery: {targetDeliveryDate}. Preorder configured through Shopify checkout.
+                                        Target delivery: {targetDeliveryDate}. Preorder configured for checkout.
                                     </p>
 
                                     <ul className="mb-12 space-y-3 font-sans text-sm font-light text-white/70">
@@ -532,7 +532,7 @@ export default function DreamPlayProPage() {
                                         <span className="ml-2 font-sans text-sm italic tracking-normal text-white/35">USD</span>
                                     </div>
                                     <p className="mb-10 font-sans text-xs text-white/45">
-                                        Target delivery: {targetDeliveryDate}. Preorder configured through Shopify checkout.
+                                        Target delivery: {targetDeliveryDate}. Preorder configured for checkout.
                                     </p>
 
                                     <ul className="mb-12 space-y-3 font-sans text-sm font-light text-white/80">
@@ -555,7 +555,7 @@ export default function DreamPlayProPage() {
                         </div>
 
                         <p className="mt-14 text-center font-sans text-[10px] uppercase tracking-[0.25em] text-white/35">
-                            DreamPlay One Pro preorder handoff runs through Shopify checkout
+                            DreamPlay One Pro preorder handoff runs through secure checkout
                         </p>
                     </div>
                 </section>

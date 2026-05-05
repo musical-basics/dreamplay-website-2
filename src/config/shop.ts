@@ -238,7 +238,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
                 available: Boolean(hydraulicBenchVariantId),
             },
         ],
-        unavailableMessage: "Add NEXT_PUBLIC_SHOPIFY_HYDRAULIC_BENCH_VARIANT_ID to enable checkout for this bench.",
+        unavailableMessage: "Checkout for this bench is not available yet.",
     },
 ];
 

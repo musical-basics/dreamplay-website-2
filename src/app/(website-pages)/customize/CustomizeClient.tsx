@@ -1308,7 +1308,7 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
                         </>
                     ) : (
                         <p className="text-center text-xs text-white/40 mt-10 max-w-xl mx-auto leading-relaxed font-sans">
-                            DreamPlay One Pro pricing and package contents match the selected Shopify product. Target delivery is {oneProTargetDeliveryDate}. Taxes, shipping charges, and preorder terms are shown in checkout.
+                            DreamPlay One Pro pricing and package contents match the selected product. Target delivery is {oneProTargetDeliveryDate}. Taxes, shipping charges, and preorder terms are shown in checkout.
                         </p>
                     )}
 

@@ -200,7 +200,7 @@ export function ShopClient() {
                         <SectionIntro
                             eyebrow="Keyboards"
                             title="Choose the instrument first."
-                            body="Each keyboard option maps to the real Shopify variant behind the scenes, while the cart stays here on DreamPlay until checkout."
+                            body="Each keyboard option maps to the correct checkout variant behind the scenes, while the cart stays here on DreamPlay until checkout."
                         />
                         <div className="grid gap-5 lg:grid-cols-2">
                             {SHOP_PRODUCTS.filter((product) => product.category === "keyboard").map((product) => (
@@ -339,7 +339,7 @@ function Hero({ onCartClick }: { onCartClick: () => void }) {
                             Here is your cart
                         </h2>
                         <p className="mb-8 font-sans text-sm leading-7 text-neutral-600">
-                            The shop cart keeps the buying experience on DreamPlay. When you are ready, we create the Shopify checkout with your selected variants.
+                            The shop cart keeps the buying experience on DreamPlay. When you are ready, checkout opens with your selected variants.
                         </p>
                         <div className="flex flex-wrap gap-3">
                             <a
@@ -537,9 +537,9 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
 
 function TrustBand() {
     const items = [
-        { icon: PackageCheck, title: "Variant-accurate", body: "Every selectable keyboard maps to a real Shopify variant." },
+        { icon: PackageCheck, title: "Variant-accurate", body: "Every selectable keyboard maps to the correct checkout variant." },
         { icon: Truck, title: "Delivery clarity", body: "Deposits and preorder timing are shown before checkout." },
-        { icon: ShoppingBag, title: "DreamPlay cart", body: "Cart stays on DreamPlay; checkout happens in Shopify." },
+        { icon: ShoppingBag, title: "DreamPlay cart", body: "Cart stays on DreamPlay until checkout." },
     ];
 
     return (
@@ -613,7 +613,7 @@ function CartDrawer({
                             <ShoppingBag className="mb-4 h-10 w-10 text-neutral-300" />
                             <h2 className="font-serif text-3xl text-neutral-950">Your cart is ready.</h2>
                             <p className="mt-3 max-w-xs font-sans text-sm leading-6 text-neutral-500">
-                                Add a keyboard, bundle, or bench and checkout through Shopify when you are done.
+                                Add a keyboard, bundle, or bench and check out when you are done.
                             </p>
                         </div>
                     ) : (
@@ -676,7 +676,7 @@ function CartDrawer({
                         <span className="text-xl font-semibold text-neutral-950">{formatShopPrice(subtotal)}</span>
                     </div>
                     <p className="mb-4 font-sans text-xs leading-5 text-neutral-500">
-                        Taxes, shipping, and any remaining preorder balances are handled in Shopify checkout or before dispatch.
+                        Taxes, shipping, and any remaining preorder balances are handled at checkout or before dispatch.
                     </p>
                     {discountCodes.length > 0 && (
                         <p className="mb-4 border border-[#c5a059]/40 bg-[#fff8e6] px-3 py-2 font-sans text-xs leading-5 text-neutral-700">
