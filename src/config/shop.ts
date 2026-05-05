@@ -82,13 +82,13 @@ const bundleImages = [
 ];
 
 const standardBenchImages = [
-    "/images/accessories/dreamplay-standard-bench-rail-logo.png",
+    "/images/accessories/dreamplay-standard-bench-gpt-image-2-rail-logo.png",
     "/images/accessories/piano-bench-cushioned-black.jpg",
     "/images/accessories/piano-bench-bundle.png",
 ];
 
 const hydraulicBenchImages = [
-    "/images/accessories/dreamplay-hydraulic-bench-rail-logo.png",
+    "/images/accessories/dreamplay-hydraulic-bench-gpt-image-2-rail-logo.png",
     "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/7a01e084-6c31-4642-9e89-4bcbfa866e76_piano_bench_angle_left.png",
     "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/780e4cf8-24b2-45ad-a410-056a8a0793b0_piano_bench_angle_right_low.png",
     "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/f2ba4a98-51d9-4354-be00-c785038dcd9b_piano_bench_front.png",
