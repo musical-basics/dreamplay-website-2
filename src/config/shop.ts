@@ -81,6 +81,11 @@ const bundleImages = [
     "/holiday-sale/images/slot-5-x-stand.png",
 ];
 
+const standardBenchImages = [
+    "/images/accessories/piano-bench-cushioned-black.jpg",
+    "/images/accessories/piano-bench-bundle.png",
+];
+
 const hydraulicBenchImages = [
     "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/7a01e084-6c31-4642-9e89-4bcbfa866e76_piano_bench_angle_left.png",
     "https://pub-ae162277c7104eb2b558af08104deafc.r2.dev/images/780e4cf8-24b2-45ad-a410-056a8a0793b0_piano_bench_angle_right_low.png",
@@ -94,7 +99,12 @@ const proImages = [
     "/images/pro/built-for-the-player.jpg",
 ];
 
-const hydraulicBenchVariantId = process.env.NEXT_PUBLIC_SHOPIFY_HYDRAULIC_BENCH_VARIANT_ID || "";
+const standardBenchVariantId = "53410025865530";
+const hydraulicBenchVariantId = "53410025963834";
+
+const benchColorOptions: ShopOptionGroup[] = [
+    { key: "finish", label: "Color", options: [{ label: "Black", value: "Black" }] },
+];
 
 function buildVariants(
     tier: keyof typeof VARIANT_MAP,
@@ -219,6 +229,34 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         variants: buildVariants("pro_full", proSizes, proFinishes),
     },
     {
+        id: "standard-bench",
+        anchor: "standard-bench",
+        category: "bench",
+        name: "DreamPlay Standard Bench",
+        eyebrow: "Regular bench",
+        subtitle: "Black padded bench",
+        description: "The standard black padded bench used in the Premium Bundles, available as its own preorder accessory.",
+        price: 80,
+        pricePrefix: "Standalone",
+        paymentNote: "Preorder today. Estimated 2-month wait before dispatch.",
+        delivery: "Estimated 2-month preorder wait",
+        image: standardBenchImages[0],
+        gallery: standardBenchImages,
+        imageAlt: "Black padded piano bench",
+        includes: ["Standard padded seat", "Black studio finish", "Bundle-matched bench design"],
+        details: ["Black only", "Included in Premium Bundles", "Estimated 2-month wait"],
+        optionGroups: benchColorOptions,
+        variants: [
+            {
+                id: "standard-bench-black",
+                title: "Black",
+                variantId: standardBenchVariantId,
+                options: { finish: "Black" },
+                available: true,
+            },
+        ],
+    },
+    {
         id: "hydraulic-bench",
         anchor: "hydraulic-bench",
         category: "bench",
@@ -228,24 +266,23 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         description: "A tufted hydraulic adjustable-height bench for players who want finer height control, cleaner posture, and a more permanent studio setup.",
         price: 199,
         pricePrefix: "Standalone",
-        paymentNote: "Charged at checkout.",
-        delivery: "Ships separately when available",
+        paymentNote: "Preorder today. Estimated 2-month wait before dispatch.",
+        delivery: "Estimated 2-month preorder wait",
         image: hydraulicBenchImages[0],
         gallery: hydraulicBenchImages,
         imageAlt: "Black tufted hydraulic piano bench",
         includes: ["Hydraulic height adjustment levers", "Tufted padded seat", "Twin-leg studio base", "Black studio finish"],
-        details: ["Standalone upgrade", "Not the $80 standard bundle bench", "Best for posture-sensitive practice"],
-        optionGroups: [],
+        details: ["Black only", "Not the $80 standard bundle bench", "Best for posture-sensitive practice"],
+        optionGroups: benchColorOptions,
         variants: [
             {
-                id: "hydraulic-bench-default",
-                title: "Default",
+                id: "hydraulic-bench-black",
+                title: "Black",
                 variantId: hydraulicBenchVariantId,
-                options: {},
-                available: Boolean(hydraulicBenchVariantId),
+                options: { finish: "Black" },
+                available: true,
             },
         ],
-        unavailableMessage: "Checkout for this bench is not available yet.",
     },
 ];
 

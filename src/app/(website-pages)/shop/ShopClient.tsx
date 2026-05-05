@@ -230,10 +230,10 @@ export function ShopClient() {
                     <div className="mx-auto max-w-[1500px]">
                         <SectionIntro
                             eyebrow="Benches"
-                            title="A standalone bench upgrade."
-                            body="The hydraulic bench is separate from the $80 regular bundle bench, built for players who want more precise height control."
+                            title="Two black bench options."
+                            body="Choose the $80 regular padded bench or the $199 hydraulic upgrade. Both are preorder accessories with an estimated 2-month wait."
                         />
-                        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+                        <div className="grid gap-5 lg:grid-cols-3">
                             <div className="border border-neutral-200 bg-neutral-950 p-8 text-white">
                                 <p className="mb-4 font-sans text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c5a059]">
                                     Two-bench logic
@@ -364,7 +364,7 @@ function Hero({ onCartClick }: { onCartClick: () => void }) {
                         {[
                             ["$499", "DreamPlay One deposit"],
                             ["$549", "Premium Bundle deposit"],
-                            ["$199", "Hydraulic bench"],
+                            ["$80-$199", "Bench options"],
                         ].map(([value, label]) => (
                             <div key={label} className="border-r border-white/10 p-5 last:border-r-0">
                                 <p className="font-serif text-3xl">{value}</p>
