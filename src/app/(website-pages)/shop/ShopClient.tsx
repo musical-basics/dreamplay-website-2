@@ -7,6 +7,7 @@ import {
     ArrowRight,
     Check,
     ChevronDown,
+    Maximize2,
     Minus,
     PackageCheck,
     Plus,
@@ -398,6 +399,7 @@ function SectionIntro({ eyebrow, title, body }: { eyebrow: string; title: string
 function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (product: ShopProduct, variant: ShopVariant) => void }) {
     const [selections, setSelections] = useState<Partial<Record<ShopOptionKey, string>>>(() => getDefaultSelections(product));
     const [activeImage, setActiveImage] = useState(product.image);
+    const [lightboxImage, setLightboxImage] = useState<string | null>(null);
     const selectedVariant = useMemo(() => getSelectedVariant(product, selections), [product, selections]);
     const canAdd = Boolean(selectedVariant?.variantId);
 
@@ -406,18 +408,30 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
     };
 
     return (
+        <>
         <article id={product.anchor} className="scroll-mt-24 border border-neutral-200 bg-white">
             <div className="grid min-h-full lg:grid-cols-[0.95fr_1.05fr]">
                 <div className="border-b border-neutral-200 bg-[#f6f6f4] p-5 lg:border-b-0 lg:border-r">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-white">
+                    <button
+                        type="button"
+                        onClick={() => setLightboxImage(activeImage)}
+                        className="group relative block aspect-[4/3] w-full overflow-hidden bg-white text-left"
+                        aria-label={`Enlarge ${product.name} image`}
+                    >
                         <Image
                             src={activeImage}
                             alt={product.imageAlt}
                             fill
-                            className="object-contain p-6"
+                            className="object-contain p-6 transition-transform duration-300 group-hover:scale-[1.02]"
                             sizes="(max-width: 1024px) 100vw, 38vw"
                         />
-                    </div>
+                        <span
+                            className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-neutral-200 bg-white/90 text-neutral-950 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                            aria-hidden="true"
+                        >
+                            <Maximize2 className="h-4 w-4" />
+                        </span>
+                    </button>
                     {product.gallery.length > 1 && (
                         <div className="mt-3 grid grid-cols-3 gap-2">
                             {product.gallery.map((image) => (
@@ -532,6 +546,64 @@ function ProductPanel({ product, onAdd }: { product: ShopProduct; onAdd: (produc
                 </div>
             </div>
         </article>
+        <ImageLightbox image={lightboxImage} alt={product.imageAlt} onClose={() => setLightboxImage(null)} />
+        </>
+    );
+}
+
+function ImageLightbox({ image, alt, onClose }: { image: string | null; alt: string; onClose: () => void }) {
+    useEffect(() => {
+        if (!image) return;
+
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") onClose();
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = originalOverflow;
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [image, onClose]);
+
+    if (!image) return null;
+
+    return (
+        <div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm md:p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Expanded product image"
+        >
+            <button
+                type="button"
+                className="absolute inset-0 cursor-zoom-out"
+                aria-label="Close expanded image"
+                onClick={onClose}
+            />
+            <div className="relative z-10 h-full w-full max-w-6xl">
+                <Image
+                    src={image}
+                    alt={alt}
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                    priority
+                />
+            </div>
+            <button
+                type="button"
+                onClick={onClose}
+                className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center bg-white text-neutral-950 shadow-lg transition-colors hover:bg-neutral-200 md:right-8 md:top-8"
+                aria-label="Close expanded image"
+            >
+                <X className="h-5 w-5" />
+            </button>
+        </div>
     );
 }
 
