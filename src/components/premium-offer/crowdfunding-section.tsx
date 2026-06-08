@@ -33,8 +33,8 @@ export function CrowdfundingSection() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
           <a
-            href="https://shop.dreamplaypianos.com/"
-            onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "https://shop.dreamplaypianos.com/" } })}
+            href="/customize"
+            onClick={() => logEvent("homepage_ab_cta_click", { path: "/premium-offer", metadata: { variant: "premium-offer", destination: "/customize" } })}
             className="inline-block bg-white px-8 py-3 text-center text-xs font-sans uppercase tracking-widest text-black transition-colors hover:bg-white/90 md:text-sm"
           >
             Pre-Order Now

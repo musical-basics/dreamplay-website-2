@@ -163,7 +163,7 @@ export default function DreamPlayProPage() {
 
                             <div className="flex flex-wrap gap-3">
                                 <Link
-                                    href="https://shop.dreamplaypianos.com/#dreamplay-one-pro"
+                                    href="/customize?product=pro"
                                     className="bg-white px-7 py-4 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-[#c5a059] hover:text-neutral-950"
                                 >
                                     Reserve DreamPlay One Pro
@@ -508,7 +508,7 @@ export default function DreamPlayProPage() {
                                 </div>
 
                                 <Link
-                                    href="https://shop.dreamplaypianos.com/#dreamplay-one-pro"
+                                    href="/customize?product=pro"
                                     className="block border border-white/30 py-4 text-center font-sans text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-neutral-950"
                                 >
                                     Reserve Standard
@@ -546,7 +546,7 @@ export default function DreamPlayProPage() {
                                 </div>
 
                                 <Link
-                                    href="https://shop.dreamplaypianos.com/#dreamplay-one-pro-bundle"
+                                    href="/customize?product=pro"
                                     className="block bg-[#c5a059] py-4 text-center font-sans text-xs font-bold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-white"
                                 >
                                     Reserve Bundle
@@ -575,7 +575,7 @@ export default function DreamPlayProPage() {
 
                         <div className="flex flex-wrap gap-3">
                             <Link
-                                href="https://shop.dreamplaypianos.com/#dreamplay-one-pro"
+                                href="/customize?product=pro"
                                 className="bg-white px-7 py-4 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-neutral-950 transition hover:bg-[#c5a059]"
                             >
                                 Start reservation

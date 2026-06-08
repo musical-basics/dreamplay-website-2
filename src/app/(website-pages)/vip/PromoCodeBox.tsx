@@ -33,7 +33,7 @@ export default function PromoCodeBox() {
                 <p className="mb-8 font-sans text-[10px] leading-relaxed text-white/35">{WAITLIST_OFFER_TERMS}</p>
             )}
             <Link
-                href="https://shop.dreamplaypianos.com/"
+                href="/customize"
                 className="group inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 font-sans text-xs uppercase tracking-widest font-bold w-full transition-colors hover:bg-white/90"
             >
                 Configure My Piano

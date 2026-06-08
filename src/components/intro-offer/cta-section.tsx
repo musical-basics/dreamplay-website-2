@@ -101,7 +101,7 @@ export function CTASection() {
 
                     <Link
                         onClick={() => trackClick("cta_section", "start_customization")}
-                        href="https://shop.dreamplaypianos.com/"
+                        href="/customize"
                         className={`inline-flex items-center gap-3 bg-white text-neutral-900 rounded-full px-10 py-5 text-lg font-medium hover:bg-neutral-100 hover:scale-105 transition-all duration-500 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                     >
                         Configure Yours

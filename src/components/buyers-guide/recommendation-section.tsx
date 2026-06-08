@@ -215,7 +215,7 @@ export function RecommendationSection({ profile }: RecommendationSectionProps) {
 
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Button size="lg" className="rounded-full px-8" asChild>
-                                    <Link href="https://shop.dreamplaypianos.com/#dreamplay-one">
+                                    <Link href="/customize?product=one">
                                         Reserve Now
                                         <ArrowRight className="ml-2 w-4 h-4" />
                                     </Link>
@@ -320,7 +320,7 @@ export function RecommendationSection({ profile }: RecommendationSectionProps) {
                         <p className="text-sm text-muted-foreground mb-3">{recommendation.alternative2.name}</p>
                         <p className="text-muted-foreground text-sm mb-4">{recommendation.alternative2.reason}</p>
                         <Button size="sm" className="rounded-full" asChild>
-                            <Link href="https://shop.dreamplaypianos.com/#bundles">
+                            <Link href="/customize">
                                 View Bundle
                                 <ArrowRight className="ml-2 w-3 h-3" />
                             </Link>

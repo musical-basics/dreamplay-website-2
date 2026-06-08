@@ -20,7 +20,7 @@ export function FoundersClosingBlock() {
                 </p>
 
                 <Link
-                    href="https://shop.dreamplaypianos.com/"
+                    href="/customize"
                     className="group inline-flex items-center justify-center gap-2 bg-white px-8 py-4 font-sans text-xs uppercase tracking-widest font-bold text-black transition-colors hover:bg-white/90"
                 >
                     Secure My Allocation

@@ -192,7 +192,7 @@ export function PricingSection({ hiddenProducts = [] }: { hiddenProducts?: strin
 
               {/* CTA */}
               <a
-                href="https://shop.dreamplaypianos.com/"
+                href="/customize"
                 className="mt-8 flex items-center justify-center gap-2 border px-6 py-4 text-center font-sans text-xs uppercase tracking-widest border-background/30 text-background/80 hover:border-background hover:bg-background/10 transition-colors"
               >
                 Reserve Now

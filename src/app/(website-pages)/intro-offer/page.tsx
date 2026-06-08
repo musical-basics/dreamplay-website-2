@@ -1104,7 +1104,7 @@ export default function IntroOfferPage() {
                     <div className="relative z-10 text-center px-6">
                         <h2 className="font-serif text-3xl md:text-5xl text-white mb-8">Ready to take the next step?</h2>
                         <Link
-                            href="https://shop.dreamplaypianos.com/"
+                            href="/customize"
                             className="inline-flex items-center gap-3 bg-white px-12 py-6 font-sans text-sm uppercase tracking-widest text-black hover:bg-white/90 transition-colors"
                         >
                             Order Your DreamPlay One <ArrowRight className="w-5 h-5" />

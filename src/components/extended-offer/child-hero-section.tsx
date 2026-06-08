@@ -129,7 +129,7 @@ export function ChildUpgradePath() {
 
                 <div className="mt-8">
                     <a
-                        href="https://shop.dreamplaypianos.com/"
+                        href="/customize"
                         className="group inline-flex items-center gap-2 bg-neutral-900 px-8 py-4 font-sans text-xs uppercase tracking-widest text-white transition-colors hover:bg-neutral-800"
                     >
                         Start with DS5.5

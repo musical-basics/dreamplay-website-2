@@ -44,7 +44,7 @@ export function HeroSection() {
 
                     <Link
                         onClick={() => trackClick("hero_section", "start_customization")}
-                        href="https://shop.dreamplaypianos.com/"
+                        href="/customize"
                         className={`inline-flex items-center gap-3 bg-white text-neutral-900 rounded-full px-8 py-4 text-base font-medium hover:bg-neutral-100 transition-all duration-1000 delay-300 hover:scale-105 hover:shadow-xl ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                             }`}
                     >
