@@ -260,6 +260,17 @@ export default function ProductionTimelinePage() {
                 { src: "/images/factory-pictures/testing.jpg", caption: "The \u2018Key Life Test Machine\u2019 running durability cycles to validate decades of use." },
                 { src: "/images/factory-pictures/keybeds.jpeg", caption: "Fully assembled DS5.5 and DS6.0 keybeds side-by-side, awaiting final enclosure." }
             ]
+        },
+        {
+            date: "June 2026",
+            title: "First Full Prototype Build",
+            description: "The first complete prototype enters the build at our factory. This validation unit is intentionally built at a slightly larger scale, giving our engineers the room they need to prove out every core system — the key action, the sensor array, the internal electronics and the control boards — before committing them to the final narrow-key dimensions. A working prototype is expected by the end of July, with playable video to follow in August.",
+            images: [
+                { src: "/images/product-updates/june-2026-prototype-keybed.jpg", caption: "The first prototype keybed on the bench this month." },
+                { src: "/images/product-updates/june-2026-render-front.jpg", caption: "Current front design render with the full-length LED guide array." },
+                { src: "/images/product-updates/june-2026-render-wood.jpg", caption: "Design render exploring a premium wood-finish enclosure." },
+                { src: "/images/product-updates/june-2026-render-front-alt.jpg", caption: "Front elevation render of the DreamPlay One." }
+            ]
         }
     ];
 
@@ -342,10 +353,10 @@ export default function ProductionTimelinePage() {
                             <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-blue-400 font-bold mb-4">Present Day</p>
                             <h2 className="font-serif text-3xl md:text-5xl font-semibold mb-6">The Final Validation Phase.</h2>
                             <p className="font-sans text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mb-10">
-                                We are in the final stages of completing our production-ready prototype. With all premium components sourced and custom machinery fully calibrated, our manufacturing team is prepared to bring the DreamPlay One to life with its inaugural prototype units.
+                                Right now, our factory is building the first full prototype — a validation unit that proves out the key action, sensors and electronics before final tooling. We expect a working prototype by the end of July, with playable video to follow in August, a final funding campaign in September, and official manufacturing beginning in November 2026.
                             </p>
                             <p className="font-sans text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto mb-10">
-                                We estimate our earliest backers will receive their keyboards in <strong className="text-white">October 2026</strong>. Reserve your spot today to be among the first to experience this groundbreaking instrument.
+                                Based on this timeline, we estimate our earliest backers will receive their keyboards in <strong className="text-white">January 2027</strong>. Reserve your spot today to be among the first to experience this groundbreaking instrument.
                             </p>
 
                             <Link href="/customize" className="group inline-flex items-center justify-center gap-3 border border-white bg-white px-8 py-4 font-sans text-xs font-bold uppercase tracking-widest text-black transition-all hover:bg-neutral-200 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.1)]">

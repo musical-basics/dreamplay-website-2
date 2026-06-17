@@ -59,7 +59,14 @@ export default async function MyReservationPage() {
                     {/* Production Timeline */}
                     <div className="border border-white/10 bg-white/[0.03] p-8 md:p-10 mb-12">
                         <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">Production Status</p>
-                        <h2 className="font-serif text-2xl text-white mb-10">Your DreamPlay One Timeline</h2>
+                        <h2 className="font-serif text-2xl text-white mb-6">Your DreamPlay One Timeline</h2>
+
+                        {/* Estimated delivery highlight */}
+                        <div className="border border-amber-400/30 bg-amber-400/[0.06] px-6 py-5 mb-10">
+                            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber-300/80 mb-1">Estimated Delivery</p>
+                            <p className="font-serif text-2xl text-white">January 2027</p>
+                            <p className="font-sans text-xs text-white/40 mt-2">The first full prototype is being built now. We expect a working prototype by the end of July, with official manufacturing beginning in November 2026.</p>
+                        </div>
 
                         <div className="space-y-0">
                             {/* Stage 1 */}
@@ -89,8 +96,8 @@ export default async function MyReservationPage() {
                                 </div>
                                 <div className="pb-8">
                                     <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/50 mb-1">Stage 2 — In Progress</p>
-                                    <h3 className="font-sans font-bold text-white text-sm">Steel Tooling &amp; Molds</h3>
-                                    <p className="font-sans text-xs text-white/40 mt-1">Currently casting the custom 15/16th keys.</p>
+                                    <h3 className="font-sans font-bold text-white text-sm">Prototype &amp; Validation</h3>
+                                    <p className="font-sans text-xs text-white/40 mt-1">Building the first full prototype to validate the key action, sensors and electronics. Working prototype expected end of July 2026, with video to follow in August.</p>
                                 </div>
                             </div>
 
@@ -103,9 +110,9 @@ export default async function MyReservationPage() {
                                     <div className="w-px h-full bg-white/10 min-h-[48px]" />
                                 </div>
                                 <div className="pb-8">
-                                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/20 mb-1">Stage 3 — Pending</p>
-                                    <h3 className="font-sans font-bold text-white/50 text-sm">Final Assembly</h3>
-                                    <p className="font-sans text-xs text-white/30 mt-1">Quality assurance and final instrument assembly.</p>
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/20 mb-1">Stage 3 — Pending · Targeted November 2026</p>
+                                    <h3 className="font-sans font-bold text-white/50 text-sm">Manufacturing &amp; Final Assembly</h3>
+                                    <p className="font-sans text-xs text-white/30 mt-1">Official manufacturing begins, followed by quality assurance and final instrument assembly.</p>
                                 </div>
                             </div>
 
@@ -117,7 +124,7 @@ export default async function MyReservationPage() {
                                     </div>
                                 </div>
                                 <div>
-                                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/20 mb-1">Stage 4 — Target: Q4 2026</p>
+                                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-amber-300/60 mb-1">Stage 4 — Estimated: January 2027</p>
                                     <h3 className="font-sans font-bold text-white/50 text-sm">Shipping &amp; Delivery</h3>
                                     <p className="font-sans text-xs text-white/30 mt-1">Your DreamPlay One arrives at your door.</p>
                                 </div>
