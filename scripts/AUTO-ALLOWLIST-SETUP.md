@@ -4,7 +4,21 @@ Goal: every new DreamPlay order automatically adds the buyer's email to the
 `buyer_emails` allowlist, which gates the `/my-reservation` buyer portal. No more
 manual CSV imports.
 
-## What's already built (in this repo)
+## STATUS: ✅ LIVE (activated 2026-06-17)
+
+- **App:** "DreamPlay Website Admin" (client id `7b6a1362…`) on
+  `dreamplay-pianos.myshopify.com`, scopes include `read_orders` + `read_customers`.
+  (NOT the "Email Engine" app `5b955b92…`, which only has price-rule scopes.)
+- **Webhooks registered:** `ORDERS_CREATE` (`gid://shopify/WebhookSubscription/2008667488570`)
+  and `ORDERS_PAID` (`…2008667521338`) → `https://www.dreamplaypianos.com/api/webhooks/shopify/orders`.
+- **`SHOPIFY_WEBHOOK_SECRET`** set in Vercel (project `dreamplay-pianos`) = the
+  DreamPlay Website Admin app client secret, which signs app-registered webhooks.
+- **DB:** backfill + `service_role` INSERT/UPDATE grant applied; `buyer_emails` = 76 rows.
+- **Verified end-to-end:** a signed probe payload returned 200 and inserted the row.
+
+The steps below are the original setup record / how to re-do it on another store.
+
+## What's built (in this repo)
 
 - **Webhook handler:** [`src/app/api/webhooks/shopify/orders/route.ts`](../src/app/api/webhooks/shopify/orders/route.ts)
   HMAC-verifies the request, extracts the buyer email, and idempotently upserts
