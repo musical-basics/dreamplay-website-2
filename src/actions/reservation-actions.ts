@@ -260,7 +260,7 @@ const CONFIRMATION_COPY: Record<ReservationDecision, { subject: string; headline
                 the first production run is secure. We\'re grateful for your continued trust.
             </p>
             <p style="margin: 0 0 16px; color: #444; line-height: 1.6;">
-                DreamPlay One is on track for <strong>Q4 2026</strong> delivery. We\'ll keep you updated
+                DreamPlay One is on track for <strong>January 2027</strong> delivery. We\'ll keep you updated
                 as we hit major milestones: tooling, assembly, and delivery.
             </p>
         `,

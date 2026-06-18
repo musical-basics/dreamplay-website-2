@@ -38,10 +38,10 @@ const OPTIONS: {
         label: "Keep My Reservation",
         eyebrow: "Option 2",
         description:
-            "Your reservation stays active. DreamPlay One is on track for Q4 2026 delivery. Your spot is protected, your Founder's pricing is locked, and we'll keep you updated every step of the way.",
+            "Your reservation stays active. DreamPlay One is on track for January 2027 delivery. Your spot is protected, your Founder's pricing is locked, and we'll keep you updated every step of the way.",
         cta: "Keep My Reservation",
         confirmationMessage:
-            "Your reservation is confirmed. You're still on the list for Q4 2026. We'll be in touch as production progresses.",
+            "Your reservation is confirmed. Your estimated delivery is January 2027. We'll be in touch as production progresses.",
         dark: true,
         accent: "white",
     },
@@ -179,8 +179,8 @@ export default function ReservationDecisionModule({
                 </p>
                 <p className="font-sans text-sm text-white/70 leading-relaxed max-w-2xl">
                     Building a new acoustic digital piano keyboard from scratch has taken longer than any of us
-                    anticipated. We've been honest with ourselves — the revised delivery target is{" "}
-                    <strong className="text-white">Q4 2026</strong>. We deeply value your trust and early
+                    anticipated. We've been honest with ourselves, and the revised delivery target is{" "}
+                    <strong className="text-white">January 2027</strong>. We deeply value your trust and early
                     support, and we want to make sure you have a clear choice about what happens next.
                 </p>
             </div>
