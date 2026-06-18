@@ -90,12 +90,12 @@ export default function JuneUpdatePage() {
                 {/* ═══ WHAT WE'RE BUILDING ═══ */}
                 <section className="max-w-3xl mx-auto px-6 mb-20">
                     <AnimatedSection>
-                        <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-6">A validation prototype, built oversized on purpose.</h2>
+                        <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-6">Real DS6.0 keys. Internals built oversized on purpose.</h2>
                         <p className="font-sans text-base md:text-lg text-white/60 leading-relaxed mb-5">
-                            This first unit is an engineering validation prototype, intentionally built at a slightly larger scale than the final keyboard. Building it oversized first lets our engineers prove out every core system — the key action, the sensor array, the internal electronics and the control boards — with room to measure, adjust and verify.
+                            To be clear about what this is: the keys themselves are the real, final DS6.0 size — exactly the narrow keys you reserved. The keys are not changing. What we have deliberately built larger is everything inside.
                         </p>
                         <p className="font-sans text-base md:text-lg text-white/60 leading-relaxed">
-                            Once those systems are proven, we commit them to the final narrow-key dimensions you reserved. It is the difference between rushing a product and building one worthy of the DreamPlay name.
+                            By scaling up the internals — the circuit boards, the sensor array and the electronics — for this first prototype, our engineers get the room they need to probe, measure and validate every core system, including the key action, before we condense it all into the slim final enclosure. Prove it works first, then miniaturize it. That is the difference between rushing a product and building one worthy of the DreamPlay name.
                         </p>
                     </AnimatedSection>
                 </section>

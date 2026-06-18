@@ -264,7 +264,7 @@ export default function ProductionTimelinePage() {
         {
             date: "June 2026",
             title: "First Full Prototype Build",
-            description: "The first complete prototype enters the build at our factory. This validation unit is intentionally built at a slightly larger scale, giving our engineers the room they need to prove out every core system — the key action, the sensor array, the internal electronics and the control boards — before committing them to the final narrow-key dimensions. A working prototype is expected by the end of July, with playable video to follow in August.",
+            description: "The first complete prototype enters the build at our factory. The keys are the real, final DS6.0 size — what we have deliberately built larger is everything inside. By scaling up the internals (circuit boards, sensor array and electronics) for this first unit, our engineers get the room they need to prove out every core system, including the key action, before condensing it all into the slim final enclosure. A working prototype is expected by the end of July, with playable video to follow in August.",
             images: [
                 { src: "/images/product-updates/june-2026-prototype-keybed.jpg", caption: "The first prototype keybed on the bench this month." },
                 { src: "/images/product-updates/june-2026-render-front.jpg", caption: "Current front design render with the full-length LED guide array." },
