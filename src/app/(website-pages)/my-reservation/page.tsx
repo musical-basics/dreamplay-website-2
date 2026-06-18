@@ -63,7 +63,7 @@ export default async function MyReservationPage() {
 
                         {/* Estimated delivery highlight */}
                         <div className="border border-amber-400/30 bg-amber-400/[0.06] px-6 py-5 mb-10">
-                            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber-300/80 mb-1">Estimated Delivery</p>
+                            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-amber-300/80 mb-1">Estimated Ship Date</p>
                             <p className="font-serif text-2xl text-white">January 2027</p>
                             <p className="font-sans text-xs text-white/40 mt-2">The first full prototype is being built now. We expect a working prototype by the end of July, with official manufacturing beginning in November 2026.</p>
                         </div>
