@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ReservationDecisionModule from "./ReservationDecisionModule";
 import ReservationPageClient from "./ReservationPageClient";
 import { getReservationDecision, isBuyer } from "@/actions/reservation-actions";
+import { getLatestOrderForEmail, sizeLabel } from "@/lib/shopify/admin";
 
 export const metadata = {
     title: "My Reservation | DreamPlay Pianos",
@@ -28,6 +29,10 @@ export default async function MyReservationPage() {
     // Fetch existing decision server-side
     const existingDecision = await getReservationDecision(user.id);
 
+    // Pull the buyer's actual order config (size/finish) live from Shopify so the
+    // page shows what they ordered — no more guessing from generic milestone copy.
+    const order = user.email ? await getLatestOrderForEmail(user.email) : null;
+
     return (
         <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-white/20">
             <Navbar forceOpaque={true} darkMode={true} className="border-b border-white/10 bg-[#050505] backdrop-blur-md" />
@@ -45,6 +50,50 @@ export default async function MyReservationPage() {
                         </h1>
                         <p className="font-sans text-sm text-white/40">{user.email}</p>
                     </div>
+
+                    {/* ── Your Order (live from Shopify) ── */}
+                    {order && order.items.length > 0 && (
+                        <div className="border border-white/10 bg-white/[0.03] p-8 md:p-10 mb-12">
+                            <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-white/50 mb-6">
+                                Your Order · {order.orderName}
+                            </p>
+                            <div className="space-y-4">
+                                {order.items.map((item, i) => (
+                                    <div
+                                        key={i}
+                                        className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-white/5 pb-4 last:border-0 last:pb-0"
+                                    >
+                                        <h3 className="font-serif text-xl text-white">{item.title}</h3>
+                                        <div className="flex flex-wrap gap-x-6 gap-y-1 font-sans text-sm text-white/60">
+                                            {item.size && (
+                                                <span>
+                                                    Size:{" "}
+                                                    <span className="text-white">
+                                                        {item.size}
+                                                        {sizeLabel(item.size) ? ` (${sizeLabel(item.size)})` : ""}
+                                                    </span>
+                                                </span>
+                                            )}
+                                            {item.finish && (
+                                                <span>
+                                                    Finish: <span className="text-white">{item.finish}</span>
+                                                </span>
+                                            )}
+                                            {item.quantity > 1 && (
+                                                <span>
+                                                    Qty: <span className="text-white">{item.quantity}</span>
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <p className="font-sans text-xs text-white/30 mt-6">
+                                This is the configuration on file for your reservation. If anything looks off,{" "}
+                                <a href="/contact" className="underline hover:text-white/60">contact us</a>.
+                            </p>
+                        </div>
+                    )}
 
                     {/* ── Reservation Decision Module ── */}
                     <ReservationDecisionModule
@@ -82,7 +131,7 @@ export default async function MyReservationPage() {
                                 <div className="pb-8">
                                     <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/30 mb-1">Stage 1 — Complete</p>
                                     <h3 className="font-sans font-bold text-white text-sm">Design &amp; Prototyping</h3>
-                                    <p className="font-sans text-xs text-white/40 mt-1">Finalized the patented 15/16th key design and acoustic profiles.</p>
+                                    <p className="font-sans text-xs text-white/40 mt-1">Finalized the patented 7/8 and 15/16 key designs and acoustic profiles.</p>
                                 </div>
                             </div>
 

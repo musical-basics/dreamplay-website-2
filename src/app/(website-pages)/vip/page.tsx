@@ -74,7 +74,7 @@ export default async function VIPPage() {
                                     <div className="pb-8">
                                         <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/30 mb-1">Stage 1 — Complete</p>
                                         <h4 className="font-sans font-bold text-white text-sm">Design &amp; Prototyping</h4>
-                                        <p className="font-sans text-xs text-white/40 mt-1">Finalized the patented 15/16th key design and acoustic profiles.</p>
+                                        <p className="font-sans text-xs text-white/40 mt-1">Finalized the patented 7/8 and 15/16 key designs and acoustic profiles.</p>
                                     </div>
                                 </div>
 
