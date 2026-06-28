@@ -539,10 +539,24 @@ export default function CustomizeClient({ urls, hiddenProducts }: CustomizeClien
         setAppState(prev => ({ ...prev, selectedTier: tierId }));
 
         if (['full', 'reservation', 'reserve50', 'solo', 'pro_solo', 'pro_full'].includes(tierId)) {
+            // Never silently default the variant. The customer must explicitly pick a
+            // size and finish so the Shopify order always matches what they chose —
+            // otherwise scrolling straight to Reserve would lock in DS6.0 / Black by
+            // accident (the cause of mis-sized orders).
+            if (!appState.size) {
+                alert('Please choose your key size before reserving.');
+                scrollToSection(2);
+                return;
+            }
+            if (!appState.color) {
+                alert('Please choose your finish before reserving.');
+                scrollToSection(3);
+                return;
+            }
             const size = appState.product === 'pro' && appState.size === 'DS6.5'
                 ? 'DS6.0'
-                : appState.size || 'DS6.0';
-            const color = appState.color || (appState.product === 'pro' ? 'Nightmare Black' : 'Black');
+                : appState.size;
+            const color = appState.color;
 
             // Variant lookup: journey product variantId > VARIANT_MAP[tier][size][color]
             const exactVariantId = VARIANT_MAP[tierId]?.[size]?.[color] || "";
