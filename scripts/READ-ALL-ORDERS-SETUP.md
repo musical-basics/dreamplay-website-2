@@ -12,7 +12,7 @@ older returns empty — even when the customer record shows the order exists.
 Verified 2026-06-28 against `dreamplay-pianos.myshopify.com`:
 
 - Token scopes today: `read_customers, write_orders, write_products, write_publications`.
-  `write_orders` already allows editing — the **only** thing missing is `read_all_orders`.
+  `read_all_orders` (added 2026-06-28) lets the API *see* old orders.
 - Oldest order the API can see: **#1107 (2026-04-30)**; only **11** orders visible total.
 - Customer **Junko Takei** (`junklavier257@gmail.com`, `gid://shopify/Customer/9751922344250`)
   shows `numberOfOrders: 1`, but the order is **invisible** to every query (by
@@ -52,18 +52,24 @@ Access** being approved (orders carry PII).
 3. **Add the scope to the app config.**
    Once approved, add `read_all_orders` to the app's requested scopes alongside
    the existing ones (in `shopify.app.toml` `scopes`, or the dashboard
-   configuration). Keep `write_orders` — together they allow read+edit of all
-   orders.
+   configuration).
+
+   ⚠️ **Also add `write_order_edits`** if you want to *edit* line items by script
+   (e.g. swap DS5.5 → DS6.0 via `shopify-edit-order-variant.mjs`). `write_orders`
+   alone is NOT enough — the Order Editing API (`orderEditBegin`) requires the
+   separate `write_order_edits` scope. Unlike `read_all_orders`, it is a
+   **standard scope** (no Shopify approval needed) — just add it and reinstall.
 
 4. **Reinstall / re-consent on the store.**
    Managed-install tokens only carry the scopes consented **at install time**, so
    a version/config bump alone is not enough. **Uninstall and reinstall** the
    "DreamPlay Website Admin" app on `dreamplay-pianos.myshopify.com` (or run the
-   managed-install/re-auth flow) so the token picks up `read_all_orders`.
+   managed-install/re-auth flow) so the token picks up the new scopes.
 
-   ⚠️ Reinstalling rotates the app client secret and therefore the webhook
-   signing secret. If the secret changes, update `SHOPIFY_WEBHOOK_SECRET` in
-   Vercel and re-register the order webhooks — see
+   Note: in practice (verified on the 2026-06-28 `read_all_orders` reinstall) the
+   app **client secret did NOT change**, so `.env.local` / `SHOPIFY_WEBHOOK_SECRET`
+   needed no update. If a reinstall ever does rotate the secret, update
+   `SHOPIFY_WEBHOOK_SECRET` in Vercel and re-register the order webhooks — see
    [`AUTO-ALLOWLIST-SETUP.md`](./AUTO-ALLOWLIST-SETUP.md).
 
 5. **Verify the scope landed.**
