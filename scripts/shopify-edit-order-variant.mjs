@@ -180,3 +180,22 @@ const commit = await gql(`
 if (commit.orderEditCommit.userErrors?.length) throw new Error(JSON.stringify(commit.orderEditCommit.userErrors));
 
 console.log(`\n✅ Committed. Order ${commit.orderEditCommit.order?.name} now has ${TO} (${color}). Customer notified: ${NOTIFY}`);
+
+// Verify against CURRENT quantities/totals. Note: Order.lineItems[].quantity is
+// the immutable *originally-ordered* qty — after an edit the old line still shows
+// there at its original qty (and the raw total looks doubled). The truth is in
+// `currentQuantity` and `currentTotalPriceSet`. Always confirm with those.
+const verify = await gql(`
+  query($id: ID!) {
+    order(id: $id) {
+      displayFinancialStatus
+      currentTotalPriceSet { shopMoney { amount currencyCode } }
+      totalOutstandingSet { shopMoney { amount } }
+      totalRefundedSet { shopMoney { amount } }
+      lineItems(first: 20) { edges { node { variantTitle currentQuantity } } }
+    }
+  }`, { id: order.id });
+const vo = verify.order;
+const active = vo.lineItems.edges.map((e) => e.node).filter((n) => n.currentQuantity > 0);
+console.log(`   current state: ${vo.displayFinancialStatus}  total $${vo.currentTotalPriceSet.shopMoney.amount}  outstanding $${vo.totalOutstandingSet.shopMoney.amount}  refunded $${vo.totalRefundedSet.shopMoney.amount}`);
+console.log(`   active line(s): ${active.map((n) => `${n.variantTitle} x${n.currentQuantity}`).join(", ") || "(none)"}`);
